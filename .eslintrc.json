@@ -1,0 +1,10 @@
+{
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended", "prettier"],
+  "plugins": ["unused-imports", "prettier"],
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "react/display-name": "off",
+    "unused-imports/no-unused-imports": "error",
+    "prettier/prettier": "error"
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "page": {
+    "config": {
+      "hostObject": {
+        "domain": "newhelp",
+        "slug": "home"
+      },
+      "style": {
+        "fontFamily": "Arial"
+      }
+    },
+    "header": {
+      "style": {
+        "columnGrid": "row",
+        "marginBottom": "0",
+        "backgroundColor": "Colors.bgGray300"
+      },
+      "children": [
+        {
+          "meta": {
+            "metadataid": "1679971477585122",
+            "metadatacode": "HP_MAIN_MENU",
+            "metatypeid": "200101010000016"
+          },
+          "type": "list",
+          "body": {
+            "gap": "6"
+          },
+          "itemStyle": {
+            "borderRadius": "6"
+          },
+          "showFields": [
+            {
+              "position": "1",
+              "rendertype": "image",
+              "rowItemCount": "col-10",
+              "containerStyle": {},
+              "style": {
+                "color": "Colors.TEXT_COLOR",
+                "fontSize": "FontSize[12]",
+                "fontFamily": "Fonts.nunitoMedium"
+              }
+            },
+            {
+              "position": "1",
+              "rendertype": "text",
+              "side": "body",
+              "rowItemCount": "col-6",
+              "containerStyle": {},
+              "style": {
+                "color": "Colors.TEXT_COLOR",
+                "fontSize": "FontSize[12]",
+                "fontFamily": "Fonts.nunitoMedium"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "body": {
+      "chidren": [
+        {
+          "rowItemCount": "col-9",
+          "chidren": [
+            {
+              "rowItemCount": "col-12",
+              "children": [
+                {
+                  "meta": {
+                    "metadataid": "1679971477585122",
+                    "metadatacode": "HP_MAIN_MENU",
+                    "metatypeid": "200101010000016"
+                  },
+                  "widgetName": "",
+                  "type": "card",
+                  "itemCount": 4,
+                  "rowItemCount": "col-4",
+                  "body": {
+                    "gap": "4"
+                  },
+                  "itemStyle": {
+                    "borderRadius": "6px",
+                    "backgroundColor": "red",
+                    "colors": ["#$hjghj", "#giug"]
+                  },
+                  "showFields": [
+                    {
+                      "position": "1",
+                      "rendertype": "text",
+                      "rowItemCount": "col-6",
+                      "containerStyle": {},
+                      "style": {
+                        "color": "Colors.TEXT_COLOR",
+                        "fontSize": "FontSize[12]",
+                        "fontFamily": "Fonts.nunitoMedium"
+                      }
+                    },
+                    {
+                      "position": "2",
+                      "rendertype": "text",
+                      "side": "body",
+                      "rowItemCount": "col-6",
+                      "containerStyle": {},
+                      "style": {
+                        "color": "Colors.TEXT_COLOR",
+                        "fontSize": "FontSize[12]",
+                        "fontFamily": "Fonts.nunitoMedium"
+                      }
+                    },
+                    {
+                      "position": "3",
+                      "rendertype": "text",
+                      "side": "body",
+                      "rowItemCount": "col-6",
+                      "containerStyle": {},
+                      "style": {
+                        "color": "Colors.TEXT_COLOR",
+                        "fontSize": "FontSize[12]",
+                        "fontFamily": "Fonts.nunitoMedium"
+                      }
+                    },
+                    {
+                      "position": "4",
+                      "rendertype": "description",
+                      "side": "body",
+                      "rowItemCount": "col-6",
+                      "containerStyle": {},
+                      "style": {
+                        "color": "Colors.TEXT_COLOR",
+                        "fontSize": "FontSize[12]",
+                        "fontFamily": "Fonts.nunitoMedium",
+                        "linecapi": 2
+                      }
+                    }
+                  ]
+                },
+                {
+                  "meta": {
+                    "metadataid": "1679971477585122",
+                    "metadatacode": "HP_MAIN_MENU",
+                    "metatypeid": "200101010000016"
+                  },
+                  "widgetName": "",
+                  "type": "chart",
+                  "itemCount": 4,
+                  "rowItemCount": "col-4",
+                  "body": {
+                    "gap": "4"
+                  },
+                  "itemStyle": {
+                    "borderRadius": "6px",
+                    "backgroundColor": "red",
+                    "colors": ["#$hjghj", "#giug"]
+                  },
+                  "showFields": [
+                    {
+                      "position": "1",
+                      "rendertype": "chart",
+                      "side": "body",
+                      "rowItemCount": "col-12",
+                      "containerStyle": {},
+                      "style": {},
+                      "chartoption": {}
+                    }
+                  ]
+                },
+                {
+                  "meta": {
+                    "metadataid": "1679971477585122",
+                    "metadatacode": "HP_MAIN_MENU",
+                    "metatypeid": "200101010000016"
+                  },
+                  "widgetName": "",
+                  "type": "chart",
+                  "itemCount": 4,
+                  "rowItemCount": "col-4",
+                  "body": {
+                    "gap": "4"
+                  },
+                  "itemStyle": {
+                    "borderRadius": "6px",
+                    "backgroundColor": "red",
+                    "colors": ["#$hjghj", "#giug"]
+                  },
+                  "showFields": [
+                    {
+                      "position": "1",
+                      "rendertype": "chart",
+                      "side": "body",
+                      "rowItemCount": "col-12",
+                      "containerStyle": {},
+                      "style": {},
+                      "chartoption": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "rowItemCount": "col-12",
+              "children": []
+            }
+          ]
+        },
+        {
+          "rowItemCount": "col-3",
+          "children": []
+        }
+      ]
+    },
+    "footer": {
+      "children": []
+    }
+  }
+}

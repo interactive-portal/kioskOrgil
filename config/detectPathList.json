@@ -1,0 +1,9 @@
+[
+  {
+    "hostname": "localhost:3000",
+    "renderStatic": {
+      "buildPathList": [["home"], ["category"], ["262626"], ["test", "test2"]],
+      "toStaticSiteSlug": [{ "slug": "product/detaaaa", "query": "filterid" }]
+    }
+  }
+]

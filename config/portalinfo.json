@@ -1,0 +1,31 @@
+{
+  "titleTemplate": "%s - Cloud ",
+  "description": "Cloud ERP-д тавтай морил",
+  "domain": [
+    {
+      "domain": "nation",
+      "logo": "",
+      "title": "Community Nation"
+    },
+    {
+      "domain": "help",
+      "logo": "",
+      "title": "help.veritech.mn"
+    },
+    {
+      "domain": "hr",
+      "logo": "",
+      "title": "hr.veritech.mn"
+    },
+    {
+      "domain": "developer",
+      "logo": "",
+      "title": "developer.interactive.mn"
+    },
+    {
+      "domain": "localgov",
+      "logo": "",
+      "title": "localgov.veritech.mn"
+    }
+  ]
+}
