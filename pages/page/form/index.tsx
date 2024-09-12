@@ -41,7 +41,7 @@ const Form = () => {
     },
   });
   const i = router.query;
-  console.log("iiiiiiiiiii", i);
+  // console.log("iiiiiiiiiii", i);
 
   const onSubmit = async (data: any) => {
     setProcessParam(data); // Ensure data is correctly set here
@@ -56,7 +56,7 @@ const Form = () => {
       if (res.data?.status === "success") {
         setLoading(false);
         router.push({
-          pathname: "/kiosk/sell",
+          pathname: "/page/sell",
           query: {
             i: router.query?.i,
             c: res?.data?.result?.id,
@@ -145,7 +145,7 @@ const Form = () => {
         <RenderWidgetProcess
           dialog={false}
           listConfig={{
-            metadataid: "17241567187681",
+            metadataid: "1726115747829573",
             otherattr: settings,
           }}
           // 1641266492517411
