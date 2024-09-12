@@ -20,7 +20,7 @@ const Home = () => {
     },
     {
       pageName: "ҮНИЙН МЭДЭЭЛЭЛ",
-      path: "/page/price",
+      path: "/price",
       bgColor: "#A68B5C",
       textColor: "#ffffff",
     },
