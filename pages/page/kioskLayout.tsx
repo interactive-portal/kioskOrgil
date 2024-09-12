@@ -5,7 +5,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   //max-w-[1080px]
   return (
     <div
-      className="w-screen  h-screen flex flex-col relative"
+      className="w-screen  max-w-[1080px] h-screen flex flex-col relative"
       style={{
         backgroundImage: "url(/images/home1.png)",
         backgroundRepeat: "repeat",
