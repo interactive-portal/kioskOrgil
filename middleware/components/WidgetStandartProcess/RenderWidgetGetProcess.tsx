@@ -2,12 +2,12 @@ import RenderNotice from "@/components/common/Notice/RenderNotice";
 import { WidgetUniversalWrapper } from "@/components/common/engineBox/Wrapper/WidgetUniversalWrapper";
 import useWidgetConfigSWR from "@/middleware/dataHook/useWidgetConfigSWR";
 import useWidgetGetProcessSWR from "@/middleware/dataHook/useWidgetGetProcessSWR";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
-import { toBoolean } from "util/helper";
-import { prepareC009GetProcessData } from "util/widgetHelper";
+import { toBoolean } from "@/util/helper";
+import { prepareC009GetProcessData } from "@/util/widgetHelper";
 
 type PropsType = {
   listConfig: any;

@@ -5,6 +5,8 @@
     "@next/next/no-img-element": "off",
     "react/display-name": "off",
     "unused-imports/no-unused-imports": "error",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
   }
 }

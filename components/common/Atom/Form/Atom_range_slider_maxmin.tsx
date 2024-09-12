@@ -1,5 +1,5 @@
 import { Slider } from "antd";
-import FormMetaContext from "context/Meta/FormMetaContext";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
 import { FC, useContext, useState } from "react";
 import NumberFormat from "react-number-format";
 import { twMerge } from "tailwind-merge";

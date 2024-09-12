@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 // import RenderMolecule from "@molecule/RenderMolecule";
-import WidgetWithId from "middleware/components/WidgetStandart/WidgetWithId";
 import useSWR from "swr";
 import _ from "lodash";
 import { useRouter } from "next/router";
@@ -11,7 +10,7 @@ import { CKEditor } from "ckeditor4-react";
 import { htmlDecode } from "@/util/helper";
 // import useCallProcess from "@/middleware/components/dataHook/useCallProcess";
 import SideBar from "./sidebar";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import fetchJson from "@/lib/fetchJson";
 // import QRCode from "react-qr-code";
 
@@ -19,7 +18,6 @@ import { QRCode } from "react-qrcode-logo";
 import WidgetWrapperContext from "@/components/common/engineBox/Wrapper/WidgetUniversalWrapper";
 import BlockDiv from "@/components/common/Block/BlockDiv";
 import RenderAtom from "@/components/common/Atom/RenderAtom";
-import HelpComment from "@/components/project/help/helpComment";
 import FileViewType from "./fileViewType";
 import DataLoader from "@/components/dataLoader";
 import Image from "next/image";
@@ -418,12 +416,7 @@ const SingleKnowLedge = () => {
           <div className="h-8 bg-[#f3f4f6]"></div>
 
           <div id="comment" className=" bg-white mt-6 px-4 ">
-            <div className=" ">
-              <HelpComment
-                setCommentCount={setCommentCount}
-                commentcount={commentcount}
-              />
-            </div>
+            <div className=" "></div>
           </div>
         </div>
         <div className="md:col-span-2 lg:col-span-3 xl:col-span-2 3xl:col-span-2 pl-4 py-4">

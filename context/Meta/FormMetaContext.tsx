@@ -6,7 +6,7 @@ import { notification } from "antd";
 import axios from "axios";
 import { decode } from "html-entities";
 import parseHtml from "html-react-parser";
-import fetchJson from "lib/fetchJson";
+import fetchJson from "@/lib/fetchJson";
 import _ from "lodash";
 import Router from "next/router";
 import ChangeEventInput from "@/util/ChangeEventInput";

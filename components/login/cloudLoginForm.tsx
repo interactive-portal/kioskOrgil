@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { parseBoolInt, encrypt } from "util/helper";
+import { parseBoolInt, encrypt } from "@/util/helper";
 import axios from "axios";
 import { signIn, signOut, useSession } from "next-auth/react";
 import moment from "moment";
-import fetchJson from "lib/fetchJson";
+import fetchJson from "@/lib/fetchJson";
 import { AtomInput, AtomButton } from "@/components/common/Atom";
 // import router from "next/router";
 import { notification } from "antd";

@@ -1,10 +1,10 @@
-import FormMetaContext from "context/Meta/FormMetaContext";
-import fetchJson from "lib/fetchJson";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
+import fetchJson from "@/lib/fetchJson";
 import _, { isEmpty } from "lodash";
 import { FC, useContext, useEffect, useState } from "react";
 import Select from "react-select";
 import { twMerge } from "tailwind-merge";
-import { fieldDisableEnable, fieldHideShow, getAtomValue } from "util/helper";
+import { fieldDisableEnable, fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
 
 type PropsType = {

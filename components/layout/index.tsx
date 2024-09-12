@@ -7,11 +7,8 @@ import _ from "lodash";
 import type { GetServerSideProps } from "next";
 import { motion, AnimatePresence } from "framer-motion";
 
-import Custom404 from "@/pages/404";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-import Header from "../common/default/header";
-import HelpHeader from "../project/help/helpHeader";
 import useWidgetData from "../common/engineBox/util/useWidgetData";
 
 type LayoutProps = {
@@ -30,11 +27,7 @@ export default function Layout({ children }: LayoutProps) {
   // console.log("children.props :>> ", children.props);
   // return <>dddd</>;
   if (props.notFound == true) {
-    return (
-      <>
-        <Custom404 />
-      </>
-    );
+    return <>{/* <Custom404 /> */}</>;
   }
 
   const { meta_bp_layout_section } = props || {};

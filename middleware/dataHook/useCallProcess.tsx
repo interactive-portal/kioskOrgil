@@ -3,7 +3,7 @@ import callApi from "./callApi";
 import usePrepareStandard from "./usePrepareStandard";
 import JSON5 from "json5";
 import callApiPost from "./callApiPost";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 
 export default function useCallProcess() {
   const cloudContext = useCloud();

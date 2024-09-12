@@ -1,4 +1,4 @@
-import { usePage } from "hooks/use-page";
+import { usePage } from "@/hooks/use-page";
 import _ from "lodash";
 import { useEffect } from "react";
 
@@ -7,7 +7,7 @@ export default function usePageRender({
 }: {
   rawWidgetList: any;
 }) {
-  const pageContext = usePage();
+  const pageContext: any = usePage();
 
   useEffect(() => {
     if (

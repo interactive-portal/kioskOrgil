@@ -4,8 +4,8 @@ import { notification } from "antd";
 import axios from "axios";
 import { decode } from "html-entities";
 import parseHtml from "html-react-parser";
-import fetchJson from "lib/fetchJson";
-import { jsonParse } from "util/jsonParse";
+import fetchJson from "@/lib/fetchJson";
+import { jsonParse } from "@/util/jsonParse";
 import { getRowItems, isEmpty, isObject, searchJsonValueGet } from "./helper";
 
 export function changeLabelName(

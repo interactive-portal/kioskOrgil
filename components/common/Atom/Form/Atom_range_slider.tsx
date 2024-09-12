@@ -1,5 +1,5 @@
 import { Slider } from "antd";
-import FormMetaContext from "context/Meta/FormMetaContext";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
 import _ from "lodash";
 import { FC, useContext } from "react";
 import useSWR from "swr";

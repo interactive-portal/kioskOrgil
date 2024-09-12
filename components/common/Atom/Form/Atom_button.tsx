@@ -1,4 +1,4 @@
-import FormMetaContext from "context/Meta/FormMetaContext";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
 import { FC, useContext } from "react";
 import { twMerge } from "tailwind-merge";
 import { fieldHideShow } from "@/util/helper";
@@ -55,7 +55,7 @@ const Atom_button: FC<PropsType> = ({
         // // setImageToken(res?.result.image);
         // // setValue(res?.result?.value);
         // router.push({
-        //   pathname: "/kiosk/extend/userinfo",
+        //   pathname: "/page/extend/userinfo",
         //   query: {
         //     c: res?.result?.customerId,
         //   },

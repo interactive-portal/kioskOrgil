@@ -5,12 +5,9 @@ import { FC } from "react";
 import _ from "lodash";
 import type { GetServerSideProps } from "next";
 import { motion, AnimatePresence } from "framer-motion";
-import Custom404 from "@/pages/404";
 
 import useWidgetData from "@/components/common/engineBox/util/useWidgetData";
 import dynamic from "next/dynamic";
-import Header from "@/components/common/default/header";
-import HelpHeader from "../project/help/helpHeader";
 
 type NavbarProps = {
   options?: any;

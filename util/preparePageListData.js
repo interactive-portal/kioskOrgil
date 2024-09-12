@@ -10,11 +10,11 @@ import { jsonParse } from "@/util/helper";
 
 const prepareWithBody = async (thisPageConfig) => {
   const thisPageNemgoo = jsonParse(thisPageConfig["layoutnemgoo"]);
-  const thisPageLayout = thisPageNemgoo?.layout;
+  const thiskioskLayout = thisPageNemgoo?.layout;
 
   // Мастер хуудас буюу Parent байгаа эсэх
   if (_.isEmpty(thisPageConfig?.layouthdr))
-    return [thisPageConfig, thisPageLayout];
+    return [thisPageConfig, thiskioskLayout];
 
   const masterPageConfig = thisPageConfig?.layouthdr || {};
   // console.log("🚀 ~ prepareWithBody ~ masterPageConfig", masterPageConfig);
@@ -25,12 +25,12 @@ const prepareWithBody = async (thisPageConfig) => {
   // });
 
   const masterPageNemgoo = jsonParse(masterPageConfig.layoutnemgoo);
-  const masterPageLayout = masterPageNemgoo?.layout;
+  const masterkioskLayout = masterPageNemgoo?.layout;
 
-  findBodyAndUpdate(masterPageLayout, "body", thisPageLayout);
+  findBodyAndUpdate(masterkioskLayout, "body", thiskioskLayout);
 
-  // var bodySection = _.find(masterPageLayout, { sectionCode: "body" });
-  // console.log("bodySection :>> ", masterPageLayout);
+  // var bodySection = _.find(masterkioskLayout, { sectionCode: "body" });
+  // console.log("bodySection :>> ", masterkioskLayout);
 
   return [
     {
@@ -41,7 +41,7 @@ const prepareWithBody = async (thisPageConfig) => {
         readyHostname: jsonParse(thisPageConfig.hostname),
       },
     },
-    masterPageLayout,
+    masterkioskLayout,
   ];
 };
 

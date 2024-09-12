@@ -90,7 +90,7 @@ const DatePickerModal: FC<PropsType> = ({
             // placement="bottomLeft"
             format={dateFormat}
             open={datePicker}
-            onSelect={() => setDatePicker(false)}
+            // onSelect={() => setDatePicker(false)}
             onOpenChange={() => setDatePicker(!datePicker)}
             onChange={onChange}
             style={{

@@ -24,19 +24,13 @@ export default function sectionTitle() {
         <RenderAtom
           item={{ value: data?.name }}
           renderType="title"
-          customClassName={
-            "text-[#585858] font-medium text-4xl mb-2" ||
-            data?.titleClass ||
-            "text-lg"
-          }
+          customClassName={"text-[#585858] font-medium text-4xl mb-2"}
           // customStyle={atomStyle}
         />
         <RenderAtom
           item={{ value: data?.subtitle }}
           renderType="text"
-          customClassName={
-            "text-[#585858]  text-base" || data?.titleSubClass || "text-sm "
-          }
+          customClassName={"text-[#585858]"}
           // customStyle={atomStyle}
         />
       </div>

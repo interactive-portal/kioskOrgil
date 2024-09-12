@@ -1,5 +1,5 @@
 import { DatePicker } from "antd";
-import FormMetaContext from "context/Meta/FormMetaContext";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
 import moment from "moment";
 import "moment/locale/mn";
 import { FC, useContext } from "react";

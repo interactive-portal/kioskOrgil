@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { useRouter } from "next/router";
-import { toBoolean } from "util/helper";
+import { toBoolean } from "@/util/helper";
 
 import { useEffect, useState } from "react";
 import useCallExternalAPI from "@/middleware/dataHook/useCallExternalAPI";

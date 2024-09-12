@@ -2,7 +2,7 @@ import { FC, useState, useMemo, useContext } from "react";
 import { fieldHideShow } from "@/util/helper";
 import _ from "lodash";
 import RowsItem from "./RowsItem";
-import FormMetaContext from "context/Meta/FormMetaContext";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
 
 type PropsType = {
   pathConfig: any;

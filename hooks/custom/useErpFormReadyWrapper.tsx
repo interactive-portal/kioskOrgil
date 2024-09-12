@@ -1,6 +1,6 @@
 import useCallProcess from "@/middleware/dataHook/useCallProcess";
 import useWidgetConfigSWR from "@/middleware/dataHook/useWidgetConfigSWR";
-import { usePage } from "hooks/use-page";
+import { usePage } from "@/hooks/use-page";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,7 +24,7 @@ export default function useErpFormReadyWrapper({
   };
   setFormModalConfig?: any;
 }) {
-  const pageContext = usePage();
+  const pageContext: any = usePage();
   const hookForm = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",

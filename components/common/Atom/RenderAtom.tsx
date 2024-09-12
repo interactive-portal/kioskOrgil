@@ -6,7 +6,7 @@ import { useToggle } from "react-use";
 import WidgetWrapperContext from "@/components/common/engineBox/Wrapper/WidgetUniversalWrapper";
 
 // import useResponsiveBreakpoint from "@customhook/useResponsiveBreakpoint";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import _ from "lodash";
 import useResponsiveBreakpoint from "@/hooks/custom/useResponsiveBreakpoint";
 import {

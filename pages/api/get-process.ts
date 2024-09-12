@@ -1,5 +1,5 @@
 import { getProcessData } from "@/service/serverFunctions";
-import { jsonParse } from "util/jsonParse";
+import { jsonParse } from "@/util/jsonParse";
 import { prepareApiStandard } from "@/util/prepareApiStandard";
 // import usePrepareStandard from "@/middleware/dataHook/usePrepareStandard";
 

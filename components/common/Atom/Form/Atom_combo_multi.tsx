@@ -1,5 +1,5 @@
-import FormMetaContext from "context/Meta/FormMetaContext";
-import fetchJson from "lib/fetchJson";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
+import fetchJson from "@/lib/fetchJson";
 import _ from "lodash";
 import { FC, useContext, useEffect, useState } from "react";
 import Select from "react-select";

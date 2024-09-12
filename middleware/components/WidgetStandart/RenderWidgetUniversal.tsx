@@ -1,6 +1,6 @@
 import { WidgetUniversalWrapper } from "@/components/common/engineBox/Wrapper/WidgetUniversalWrapper";
 import RenderNotice from "@/components/common/Notice/RenderNotice";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import _ from "lodash";
 import useWidgetDataSWR from "@/middleware/dataHook/useWidgetDataSWR";
 import { useRouter } from "next/router";

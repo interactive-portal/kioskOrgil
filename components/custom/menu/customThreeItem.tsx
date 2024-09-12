@@ -5,7 +5,7 @@ import { Tooltip } from "antd";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { FC } from "react";
-import { jsonParse, renderPositionType } from "util/helper";
+import { jsonParse, renderPositionType } from "@/util/helper";
 
 type PropsTypeItem = {
   item: any;

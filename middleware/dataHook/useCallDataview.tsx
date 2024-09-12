@@ -1,4 +1,4 @@
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import _ from "lodash";
 import callApi from "./callApi";
 import usePrepareStandard from "./usePrepareStandard";

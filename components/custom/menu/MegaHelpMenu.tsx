@@ -1,6 +1,6 @@
 import { FC, useContext, useState, useEffect } from "react";
 import _ from "lodash";
-import { listToTree } from "util/helper";
+import { listToTree } from "@/util/helper";
 import { Modal } from "antd";
 import MegaHelpPopover from "./megaHelpPopover";
 import MegaSub from "./megaSub";

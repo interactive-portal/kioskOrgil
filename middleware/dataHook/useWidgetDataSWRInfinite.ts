@@ -1,5 +1,5 @@
 import { prepareQueryString } from "@/util/widgetHelper";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import _ from "lodash";
 import useSWRInfinite from "swr/infinite";
 import * as prepareSWR from "@/util/prepareSWR";

@@ -1,4 +1,4 @@
-import detectPathList from "config/detectPathList.json";
+import detectPathList from "@/config/detectPathList.json";
 
 // Main cases
 

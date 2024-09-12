@@ -1,4 +1,4 @@
-import { jsonParse } from "util/jsonParse";
+import { jsonParse } from "@/util/jsonParse";
 import { getProcessData } from "@/service/serverFunctions";
 
 export const config = {

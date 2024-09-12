@@ -4,9 +4,9 @@ import { FC } from "react";
 
 // import DebugWidget from "@/components/cloud/Custom/Default/DebugWidget";
 // import { WidgetUniversalWrapper } from "@/engineBox/Wrapper/WidgetUniversalWrapper";
-import { useCloud } from "hooks/use-cloud";
-import { jsonParse, toBoolean } from "util/helper";
-import { replaceTemplateV2 } from "util/widgetHelper";
+import { useCloud } from "@/hooks/use-cloud";
+import { jsonParse, toBoolean } from "@/util/helper";
+import { replaceTemplateV2 } from "@/util/widgetHelper";
 import WidgetUniversalWrapper from "@/components/common/engineBox/Wrapper/WidgetUniversalWrapper";
 
 type PropsType = {

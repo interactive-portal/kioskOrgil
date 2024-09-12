@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import Link from "next/link";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import { useSession } from "next-auth/react";
 import WidgetWrapperContext from "@/components/common/engineBox/Wrapper/WidgetUniversalWrapper";
 

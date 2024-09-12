@@ -1,11 +1,10 @@
-import { roboto } from "@/styles/fonts";
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="en" className="scroll-smooth md:scroll-auto">
+    <Html lang="en">
       <Head />
-      <body className={`${roboto.className}`}>
+      <body className="antialiased">
         <Main />
         <NextScript />
       </body>

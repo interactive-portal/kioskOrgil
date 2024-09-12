@@ -1,161 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/*
-@font-face {
-  font-family: AG;
-  src: url(../public/icon/webfonts/AGBenguiatMon.woff.ttf);
-} */
-
-@import url("https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Inconsolata:wght@200..900&display=swap");
-.baskervville-sc-regular {
-  font-family: "Baskervville SC", serif;
-  font-weight: 700;
-  font-style: normal;
-}
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --size: 75px;
-  --clr-bg: #272324;
-  --clr1: #699bf7;
-  --clr2: #0db6fe;
-  --clr3: #9a2385;
-  --clr4: #d648c9;
-  --clr5: #49e9fa;
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: #0a0a0a;
+    --foreground: #ededed;
   }
-} */
-
-html {
-  height: 100%;
-  box-sizing: border-box;
-  touch-action: manipulation;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --scroll-behavior: smooth !important;
-  scroll-behavior: smooth !important;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  /* background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
-  background: black;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.main {
-  min-height: calc(100vh - 220px);
-}
-
-.htmltext table {
-  border-collapse: collapse;
-  border: 1px solid;
-}
-.htmltext table th,
-td {
-  border: 1px solid;
-  padding: 8px 15px;
-}
-.htmltext table td img {
-  width: auto !important;
-  margin: 0;
-}
-.htmltext ol {
-  /* color: #585858 !important; */
-  list-style-type: decimal;
-  font-size: 16px !important;
-  padding-left: 20px;
-}
-
-.htmltext {
-  display: inline-block;
-}
-.htmltext ul {
-  /* color: #585858 !important; */
-  list-style-type: revert-layer;
-  font-size: 16px !important;
-  padding-left: 20px;
-}
-
-.htmltext span p {
-  font-size: 16px !important;
-  font-family: "Roboto", sans-serif !important;
-}
-.htmltext p {
-  font-size: 16px !important;
-  /* font-family: "Roboto sans-serif " !important; */
-}
-
-.htmltext span {
-  font-size: 16px !important;
-  font-family: "Roboto", sans-serif !important;
-  /* font-family: "Roboto sans-serif " !important; */
-}
-
-.htmltext img {
-  max-width: 100% !important;
-  width: inherit !important;
-  margin: 20px 0;
-}
-
-.htmltext div {
-  font-size: 16px !important;
-  margin: 10px 0px;
-}
-
-.text-lg {
-  font-size: 16px !important;
-}
-
-.htmltext,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: 0.625rem;
-}
-
-/* .submenu .submenu ul li div::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    background: #5c5c58;
-    border-radius: 86px;
-    position: relative;
-    left: -7px;
-    top: 0;
-  } */
-
-.submenu .submenu ul {
-  padding-left: 15px;
-}
-
-.singlesidebar .vmenu .li:first-child div {
-  /* border-radius: 20px 0px 0px 0px;
-  bac */
-  background: #585858;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
 .spinner {

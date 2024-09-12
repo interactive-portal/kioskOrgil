@@ -1,4 +1,4 @@
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import { prepareQueryCriteriaV2 } from "@/components/common/engineBox/util/urlHelper";
 import _ from "lodash";
 import { toBoolean } from "@/util/helper";

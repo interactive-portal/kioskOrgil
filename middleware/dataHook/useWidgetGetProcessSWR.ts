@@ -1,5 +1,5 @@
 import { jsonParse, toBoolean } from "@/util/helper";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import _ from "lodash";
 import { useMemo } from "react";
 import useSWR from "swr";

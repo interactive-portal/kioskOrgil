@@ -1,4 +1,4 @@
-import FormMetaContext from "context/Meta/FormMetaContext";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
 import { useTranslation } from "react-i18next";
 import { FC, useContext } from "react";
 import { twMerge } from "tailwind-merge";

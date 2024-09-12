@@ -1,5 +1,5 @@
 import React, { FC, useContext } from "react";
-import FormMetaContext from "context/Meta/FormMetaContext";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
 import { LoadingOutlined } from "@ant-design/icons";
 
 type PropsType = {

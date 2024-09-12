@@ -1,6 +1,6 @@
 import { useToggle } from "react-use";
 import { Image } from "antd";
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import _ from "lodash";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";

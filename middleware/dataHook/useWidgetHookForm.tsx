@@ -1,5 +1,5 @@
 import toBoolean from "@/lib/booleanFunction";
-import { useHookForm } from "hooks/use-form";
+import { useHookForm } from "@/hooks/use-form";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";

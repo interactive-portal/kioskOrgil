@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 // import RenderField from "@/middleware/components/WidgetForm/RenderField";
 import _ from "lodash";
-import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import {
   Atom_string,
   Atom_file,
@@ -15,10 +14,6 @@ type PropsType = {
 
 const PrepareData: FC<PropsType> = ({ type, options }) => {
   let dataValue = type;
-
-  const onChange = (checkedValues: CheckboxValueType[]) => {
-    console.log("checked = ", checkedValues);
-  };
 
   if (dataValue == "multicheck") {
     dataValue = `multicheck`;

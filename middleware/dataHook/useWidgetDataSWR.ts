@@ -1,4 +1,4 @@
-import { useCloud } from "hooks/use-cloud";
+import { useCloud } from "@/hooks/use-cloud";
 import _ from "lodash";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";

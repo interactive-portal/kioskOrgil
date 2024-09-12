@@ -1,10 +1,10 @@
 import * as ExpressionFuntions from "./expressionFunctions";
-import * as Expression from "util/expression";
+import * as Expression from "@/util/expression";
 import {
   expressionConvert,
   removeCommentsExpression,
   convertFunctionToExpression,
-} from "util/expression";
+} from "@/util/expression";
 import { functionNameReplace, isEmpty, isObject } from "./helper";
 
 const {

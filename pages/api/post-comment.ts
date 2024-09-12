@@ -1,5 +1,5 @@
 import { getProcessData, postComment } from "@/service/serverFunctions";
-import { jsonParse } from "util/jsonParse";
+import { jsonParse } from "@/util/jsonParse";
 
 const getProcess = async (req: any, res: any) => {
   const metaName: string = req?.query?.metaName || "metaProd";

@@ -1,4 +1,4 @@
-import { usePage } from "hooks/use-page";
+import { usePage } from "@/hooks/use-page";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ export default function WidgetWithId({
   readyItem?: any;
   widgetnemgooReady?: any;
 }) {
-  const pageContext = usePage();
+  const pageContext: any = usePage();
   const router = useRouter();
   const [myWidgetConfig, setMyWidgetConfig]: any = useState({});
   // console.log("🚀 ~ myWidgetConfig:", myWidgetConfig);

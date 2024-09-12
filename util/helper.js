@@ -1613,3 +1613,9 @@ export function hexToRgba(hex, alpha) {
 
   return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
 }
+
+export function numberWithCommas(number, fix) {
+  var newval = parseFloat(Math.round(number * 100) / 100).toFixed(fix);
+
+  return newval.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
