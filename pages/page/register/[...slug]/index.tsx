@@ -55,7 +55,8 @@ export default Page;
 
 export async function getServerSideProps(context: any) {
   const pathname = _.split(context?.query.slug, "category=");
-  const URL = process.env.url;
+  const URL = process.env.url || "https://kiosk.veritech.mn/";
+
   const criteria = JSON.stringify({
     filterItemTypeId: [
       {
