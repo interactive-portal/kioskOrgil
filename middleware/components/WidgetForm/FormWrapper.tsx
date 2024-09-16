@@ -37,14 +37,14 @@ const FormWrapper: FC<PropsType> = ({ children, title, dialog, settings }) => {
         </div>
         {processConfig?.actiontype !== "view" &&
           processExpression?.saveBtn !== "hide" && (
-            <div className="flex justify-end w-full mt-4">
+            <div className="flex justify-end w-full mt-4 px-6 rounded-full">
               <button
                 type="submit"
                 disabled={loadingForm}
                 style={{
                   backgroundColor: loadingForm ? "#8d9eff" : "",
                 }}
-                className={`focus:outline-none w-full sm:w-auto  cursor-pointer bg-[#699BF7] transition duration-150 ease-in-out defaultBtn hover:bg-blue-700 rounded-lg text-white px-8 py-3 text-sm ${customOptions?.submitButtonClass}`}
+                className={`focus:outline-none w-full sm:w-auto  cursor-pointer bg-[#699BF7] transition duration-150 ease-in-out defaultBtn hover:bg-blue-700 rounded-full text-white px-8 py-4  ${customOptions?.submitButtonClass}`}
               >
                 {loadingForm && <LoadingOutlined />}{" "}
                 {loadingForm

@@ -7,7 +7,6 @@ import Title from "@/components/common/Title";
 
 const Register = () => {
   const router = useRouter();
-  const { userdata } = router.query;
 
   const criteria = JSON.stringify({
     classificationname: [
@@ -23,9 +22,6 @@ const Register = () => {
   `);
 
   const readyData = data ? data?.result : [];
-
-  Cookies.set("customer", { customerId: "1587024272980" });
-
   const groupByData = _.chain(readyData)
     .groupBy("classificationname")
     .map((items, key) => ({
@@ -34,8 +30,9 @@ const Register = () => {
     }))
     .value();
 
-  const handleItemClick = (id: string) => {
-    router.push(`/page/register/category=${id}`);
+  const handleItemClick = (item: any) => {
+    localStorage?.setItem("product", JSON.stringify(item));
+    router.push(`/page/register/category=${item?.id}`);
   };
 
   return (
@@ -50,7 +47,7 @@ const Register = () => {
             {group.items.map((item) => (
               <div
                 key={item.id}
-                onClick={() => handleItemClick(item.id)}
+                onClick={() => handleItemClick(item)}
                 className="rounded-full text-[64px] xs:text-[30px] py-5 xs:px-6 cursor-pointer obtn"
               >
                 {item.itemtypename}

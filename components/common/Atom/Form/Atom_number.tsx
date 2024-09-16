@@ -4,6 +4,8 @@ import NumberFormat, { NumericFormat } from "react-number-format";
 import { twMerge } from "tailwind-merge";
 import { fieldDisableEnable, fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
+import Amount from "./amount";
+import Price from "./price";
 
 type PropsType = {
   config: any;
@@ -27,7 +29,31 @@ const Atom_number: FC<PropsType> = ({
     formDataInitData,
     handleChangeContext,
     processConfig,
+    validData,
   } = useContext(FormMetaContext);
+
+  if (config.paramname == "amount")
+    return (
+      <>
+        <Amount
+          config={config}
+          sectionConfig={sectionConfig}
+          className={className}
+          rowIndex={rowIndex}
+        />
+      </>
+    );
+  if (config.paramname == "price")
+    return (
+      <>
+        <Price
+          config={config}
+          sectionConfig={sectionConfig}
+          className={className}
+          rowIndex={rowIndex}
+        />
+      </>
+    );
 
   const handlerChange = (e: any) => {
     handleChangeContext({
@@ -80,7 +106,9 @@ const Atom_number: FC<PropsType> = ({
           placeholder={config?.placeholdername}
           style={{ ...style }}
           className={twMerge(
-            `rounded border-gray-400 focus:ring-0 focus:border-black text-right ${className}`
+            `rounded border-gray-400 focus:ring-0 focus:border-black text-right ${className}  ${
+              validData[config.paramname] ? ` border-red-500 border` : ``
+            }`
           )}
           onValueChange={handlerChange}
           fixedDecimalScale={false}

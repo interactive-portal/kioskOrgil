@@ -44,7 +44,7 @@ const Atom_button: FC<PropsType> = ({
 
       if (res?.status == "success") {
         handleChangeContext({
-          name: config.paramrealpath,
+          name: "image",
           value: res?.result?.value,
         });
 
@@ -121,7 +121,7 @@ const Atom_button: FC<PropsType> = ({
 
         <span
           // type="button"
-          // name={config.paramrealpath}
+          data-attr={config.paramrealpath}
           style={{ ...style }}
           className={twMerge(
             "transition duration-150 ease-in-out hover:bg-gray-600 rounded text-white px-6 py-4 text-sm mx-auto",

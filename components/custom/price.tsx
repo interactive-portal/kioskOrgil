@@ -1,11 +1,8 @@
-import RenderAtom from "@/components/common/Atom/RenderAtom";
-// import { AtomIcon, AtomTag } from "@components/common/Atom";
-import AtomIcon from "@/components/common/Atom/atomIcon";
-import AtomTag from "@/components/common/Atom/atomTag";
 import _, { orderBy } from "lodash";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { jsonParse, numberWithCommas, renderPositionType } from "@/util/helper";
+import { usePathname, useSearchParams } from "next/navigation";
 
 type PropsTypeItem = {
   data?: any;
@@ -14,11 +11,20 @@ type PropsTypeItem = {
 const Price: FC<PropsTypeItem> = ({ data }) => {
   const group: any = _.orderBy(data, ["saleprice"], ["asc"]);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  console.log("dddddddd :>> ", group);
+  const price = searchParams.get("price");
 
-  const handleItemClick = (id: string) => {
-    router.push(`/page/register/category=${id}`);
+  // console.log("price :>> ", price);
+
+  const handleItemClick = (item: any) => {
+    localStorage?.setItem("price", JSON.stringify(item));
+    router.push({
+      pathname: "/page/form",
+      query: {
+        price: item.id,
+      },
+    });
   };
 
   const getGridClasses = (itemsCount: any) => {
@@ -38,15 +44,18 @@ const Price: FC<PropsTypeItem> = ({ data }) => {
           className={`flex justify-center hover:bg-opacity-70 `}
         >
           <button
-            className={`flex justify-center text-[36px] leading-[48px]  uppercase rounded-full bg-white/30 px-16 py-1 text-center`}
-            onClick={() =>
-              router.push({
-                pathname: "/page/form",
-                query: {
-                  i: item.id,
-                },
-              })
-            }
+            className={`flex justify-center text-[36px] leading-[48px]  uppercase rounded-full  px-16 py-1 text-center hover:bg-[#a68b5c] ${
+              item?.id == price ? "bg-[#a68b5c]" : "bg-white/30"
+            }`}
+            onClick={() => handleItemClick(item)}
+            // onClick={() =>
+            //   router.push({
+            //     pathname: pathname,
+            //     query: {
+            //       i: item.id,
+            //     },
+            //   })
+            // }
           >
             {item.durationtype} <br /> {numberWithCommas(item.saleprice)}₮
           </button>

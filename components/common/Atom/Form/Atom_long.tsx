@@ -4,6 +4,8 @@ import { twMerge } from "tailwind-merge";
 import { getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
 import NumberFormat, { NumericFormat } from "react-number-format";
+import Amount from "./amount";
+import Price from "./price";
 type PropsType = {
   config: any;
   className: any;
@@ -38,6 +40,29 @@ const Atom_long: FC<PropsType> = ({
   };
 
   if (config?.columnwidth) style = { ...style }; //width: parseInt(config?.columnwidth, 10)
+
+  if (config.paramname == "amount")
+    return (
+      <>
+        <Amount
+          config={config}
+          sectionConfig={sectionConfig}
+          className={className}
+          rowIndex={rowIndex}
+        />
+      </>
+    );
+  if (config.paramname == "price")
+    return (
+      <>
+        <Price
+          config={config}
+          sectionConfig={sectionConfig}
+          className={className}
+          rowIndex={rowIndex}
+        />
+      </>
+    );
 
   return (
     <>
@@ -90,6 +115,7 @@ const Atom_long: FC<PropsType> = ({
               ` rounded border-gray-400 focus:ring-0 focus:border-black text-left ${className} ${
                 config.iconname && "pl-10"
               }
+                 ${validData[config.paramname] ? ` border-red-500 border` : ``}
 			  ${config?.labelname == "" && "w-full"}
 			  `
             )}

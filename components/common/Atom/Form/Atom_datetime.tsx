@@ -28,11 +28,11 @@ const Atom_datetime: FC<PropsType> = ({
     formDataInitData,
     handleChangeContext,
     processConfig,
+    validData,
   } = useContext(FormMetaContext);
 
   const handlerChangeSelectDate = (dateString: any) => {
     const { paramrealpath } = config;
-
     handleChangeContext({
       name: paramrealpath,
       value: moment(dateString).format("YYYY-MM-DD HH:mm") + ":00",
@@ -78,10 +78,14 @@ const Atom_datetime: FC<PropsType> = ({
               //     "YYYY-MM-DD HH:mm"
               //   )
               // }
-              className={twMerge(`rounded ${className}`)}
+              className={twMerge(
+                `rounded ${className}  ${
+                  validData[config.paramname] ? ` border-red-500 border` : ``
+                }`
+              )}
               showToday={true}
               onOk={handlerChangeSelectDate}
-              style={{ ...style, width: "180px", height: 42 }}
+              style={{ ...style, width: "180px", height: 38 }}
               disabled={fieldDisableEnable(config, processExpression)}
             />
           )}

@@ -1353,7 +1353,7 @@ export function validateForm(fdata, processConfig) {
       item["paramrealpath"].indexOf(".") === -1 &&
       !fdata[item["paramrealpath"]]
     ) {
-      validateArr[item["paramrealpath"]] = "required";
+      validateArr[item["paramrealpath"]] = true;
     }
   });
 

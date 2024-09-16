@@ -1,5 +1,7 @@
 import { FC } from "react";
 import RenderField from "@/middleware/components/WidgetForm/RenderField";
+import DataLoader from "@/components/dataLoader";
+import Skeleton from "@/components/common/Skeleton/Skeleton";
 
 type PropsType = {
   processConfig: any;
@@ -23,6 +25,12 @@ const Header: FC<PropsType> = ({
   // console.log("Dddddddddddddf   header", header);
   // console.log("Dddddddddddddf   processParams", processParams);
 
+  if (!header)
+    return (
+      <>
+        <Skeleton type="loading" />
+      </>
+    );
   return processConfig ? (
     <div className={`grid gap-8 grid-cols-2 px-6`}>
       {header?.map((item: any, index: number) => {

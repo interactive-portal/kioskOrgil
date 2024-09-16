@@ -41,7 +41,7 @@ const CheckUser: FC<PropsType> = ({ setOpenModal }) => {
     setContentType("opencamera");
     var ws = new WebSocket(`${process.env.NEXT_PUBLIC_FACECAMERA_URL}`);
 
-    // setOpenModal(true);
+    setOpenModal(true);
 
     ws.onopen = function () {
       ws.send('{"action":"GetPerson"}');
@@ -93,7 +93,7 @@ const CheckUser: FC<PropsType> = ({ setOpenModal }) => {
           <div className="flex flex-col items-center justify-center gap-y-[50px] mx-[20px]">
             <img
               src="/images/Face_id_white.png"
-              className="w-[366px] h-[366px] mt-4"
+              className="w-[366px] h-[366px] mt-4 bg-slate-500"
               //   onClick={() => setOpenLogin(true)}
             />
             <span className="text-white text-[36px] text-center px-10">
@@ -174,17 +174,17 @@ const CheckUser: FC<PropsType> = ({ setOpenModal }) => {
         );
       default:
         return (
-          <div className="flex flex-col items-center justify-center gap-y-[50px] mx-[100px]">
+          <div className="flex flex-col items-center justify-center gap-y-[50px] mx-[100px] text-black">
             <img
               src="/images/Face_id_white.png"
               className="w-[366px] h-[366px] mt-4"
               //   onClick={() => setOpenLogin(true)}
             />
-            <span className="text-white text-[36px] text-center px-10">
+            <span className=" text-[36px] text-center px-10">
               ЦАРАЙГАА ТАНИУЛЖ СУНГАЛТАА ҮРГЭЛЖЛҮҮНЭ ҮҮ!
             </span>
             <button
-              className="text-[64px] text-[#525050] bg-white rounded-[87px] w-full py-10 mx-10"
+              className="text-[64px] text-[#525050] rounded-[87px] w-full py-10 mx-10"
               onClick={() => clickCamera()}
             >
               SCAN

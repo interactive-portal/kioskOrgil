@@ -3,11 +3,6 @@ import { FC, useContext } from "react";
 import { twMerge } from "tailwind-merge";
 import { fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
-import ContractType from "./ContractType";
-import StateRegNumber from "./StateRegNumber";
-import ItemId from "./itemId";
-import Amount from "./amount";
-import Price from "./price";
 type PropsType = {
   config: any;
   className?: any;
@@ -17,7 +12,7 @@ type PropsType = {
   sectionConfig?: any;
 };
 
-const Atom_string: FC<PropsType> = ({
+const ContractType: FC<PropsType> = ({
   config,
   className,
   labelClassName,
@@ -29,75 +24,22 @@ const Atom_string: FC<PropsType> = ({
     processExpression,
     formDataInitData,
     handleChangeContext,
-    processConfig,
     validData,
+    processConfig,
   } = useContext(FormMetaContext);
-  // const { t } = useTranslation("translation");
+
+  const itemParent =
+    (localStorage.getItem("product") &&
+      JSON.parse(localStorage.getItem("product") || "")) ||
+    {};
+
   const handlerChange = (e: any) => {
     handleChangeContext({
       name: config.paramrealpath,
-      value: e.currentTarget.value,
+      value: itemParent?.id,
       rowIndex,
     });
   };
-
-  const handlerBlur = (e: any) => {};
-  if (config?.columnwidth) style = { ...style };
-
-  if (config.paramname == "itemId")
-    return (
-      <>
-        <ItemId
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-          rowIndex={rowIndex}
-        />
-      </>
-    );
-  if (config.paramname == "amount")
-    return (
-      <>
-        <Amount
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-          rowIndex={rowIndex}
-        />
-      </>
-    );
-  if (config.paramname == "price")
-    return (
-      <>
-        <Price
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-          rowIndex={rowIndex}
-        />
-      </>
-    );
-  if (config.paramname == "contractTypeId")
-    return (
-      <>
-        <ContractType
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-          rowIndex={rowIndex}
-        />
-      </>
-    );
-  if (config.paramname == "stateRegNumber")
-    return (
-      <>
-        <StateRegNumber
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-        />
-      </>
-    );
 
   return (
     <div
@@ -144,28 +86,18 @@ const Atom_string: FC<PropsType> = ({
             className={twMerge(
               ` rounded border-gray-400 text-[14px] focus:ring-0  ${className}  ${
                 config.iconname && "pl-10"
-              }   ${validData[config.paramname] ? ` border-red-500 border` : ``}
+              }
               ${config?.labelname == "" && "w-full"}
               `
             )}
             style={{ ...style }}
             placeholder={config?.placeholdername}
             data-path={config.paramrealpath}
-            value={getAtomValue(
-              config,
-              formDataInitData,
-              processConfig,
-              rowIndex
-            )}
+            // value={itemParent?.id}
+            defaultValue={itemParent?.id}
             // disabled={fieldDisableEnable(config, processExpression)}
             onChange={handlerChange}
-            onBlur={(e) => handlerBlur(e)}
           />
-          {/* <span className="text-red-400 pl-1  absolute -left-4  z-40">
-						{config.isrequired == "1" && "*"}
-					</span> */}
-
-          {/* {validData[config.paramname] ? <>ddddd</> : ``} */}
         </div>
       )}
       {config.isEmpty && <span>{config.errorText}</span>}
@@ -173,4 +105,4 @@ const Atom_string: FC<PropsType> = ({
   );
 };
 
-export default Atom_string;
+export default ContractType;

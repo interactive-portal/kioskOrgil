@@ -21,7 +21,7 @@ const Page = (props: any) => {
 
   const getGridClasses = (itemsCount: any) => {
     if (itemsCount > 3) {
-      return "grid-cols-2";
+      return "grid-cols-3";
     }
     return "grid-cols-3";
   };

@@ -29,6 +29,7 @@ const Atom_date: FC<PropsType> = ({
     formDataInitData,
     handleChangeContext,
     processConfig,
+    validData,
   } = useContext(FormMetaContext);
   // console.log("date", config);
   if (config?.columnwidth)
@@ -43,6 +44,8 @@ const Atom_date: FC<PropsType> = ({
     });
   };
 
+  let nowDate = moment();
+  // console.log("nowDate :>> ", nowDate);
   return (
     <>
       <div
@@ -76,7 +79,7 @@ const Atom_date: FC<PropsType> = ({
             id={config.paramrealpath}
             // placeholder="Огноо сонгох"
             placeholder={config?.placeholdername || "Огноо сонгох"}
-            // defaultValue={moment("2020-01-01", "YYYY-MM-DD")}
+            // defaultValue={nowDate.format("YYYY-MM-DD")}
             // moment(
             //   getAtomValue(
             //     config,
@@ -86,11 +89,15 @@ const Atom_date: FC<PropsType> = ({
             //   ),
             // ) ||
             // className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black  ant-input-lg rounded-none"
-            className={twMerge(`rounded  border-gray-400 ${className} `)}
+            className={twMerge(
+              `rounded  border-gray-400 ${className}   ${
+                validData[config.paramname] ? ` border-red-500 border` : ``
+              }`
+            )}
             showToday={true}
             onChange={handlerChangeSelectDate}
             // style={{ ...style, width: "165px", height: 42 }}
-            style={{ ...style, height: 42 }}
+            style={{ ...style, height: 40 }}
             disabled={fieldDisableEnable(config, processExpression)}
           />
         )}

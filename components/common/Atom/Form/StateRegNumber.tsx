@@ -1,13 +1,8 @@
 import FormMetaContext from "@/context/Meta/FormMetaContext";
-import { FC, useContext } from "react";
+import { FC, useContext, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
-import ContractType from "./ContractType";
-import StateRegNumber from "./StateRegNumber";
-import ItemId from "./itemId";
-import Amount from "./amount";
-import Price from "./price";
 type PropsType = {
   config: any;
   className?: any;
@@ -17,7 +12,7 @@ type PropsType = {
   sectionConfig?: any;
 };
 
-const Atom_string: FC<PropsType> = ({
+const StateRegNumber: FC<PropsType> = ({
   config,
   className,
   labelClassName,
@@ -29,76 +24,40 @@ const Atom_string: FC<PropsType> = ({
     processExpression,
     formDataInitData,
     handleChangeContext,
-    processConfig,
     validData,
+    processConfig,
   } = useContext(FormMetaContext);
-  // const { t } = useTranslation("translation");
+
+  const itemParent =
+    (localStorage.getItem("product") &&
+      JSON.parse(localStorage.getItem("product") || "")) ||
+    {};
+  const [error, setError] = useState<any>();
+
   const handlerChange = (e: any) => {
     handleChangeContext({
       name: config.paramrealpath,
-      value: e.currentTarget.value,
+      value: itemParent?.id,
       rowIndex,
     });
   };
 
-  const handlerBlur = (e: any) => {};
-  if (config?.columnwidth) style = { ...style };
+  const handlerKey = (e: any) => {
+    var key = e.key;
+    var regex =
+      /^[АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмноөпрстуүфхцчшщъыьэюя][АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмноөпрстуүфхцчшщъыьэюя][0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[0-9]{2}$/;
+    // console.log("regexValue :>> ", regexValue);
 
-  if (config.paramname == "itemId")
-    return (
-      <>
-        <ItemId
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-          rowIndex={rowIndex}
-        />
-      </>
-    );
-  if (config.paramname == "amount")
-    return (
-      <>
-        <Amount
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-          rowIndex={rowIndex}
-        />
-      </>
-    );
-  if (config.paramname == "price")
-    return (
-      <>
-        <Price
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-          rowIndex={rowIndex}
-        />
-      </>
-    );
-  if (config.paramname == "contractTypeId")
-    return (
-      <>
-        <ContractType
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-          rowIndex={rowIndex}
-        />
-      </>
-    );
-  if (config.paramname == "stateRegNumber")
-    return (
-      <>
-        <StateRegNumber
-          config={config}
-          sectionConfig={sectionConfig}
-          className={className}
-        />
-      </>
-    );
-
+    if (config?.paramrealpath == "stateRegNumber") {
+      if (!regex.test(key)) {
+        setError("Регистрээ зөв оруулна уу латин үсгээр  Жич :АБ12121212");
+        e.preventDefault();
+      } else {
+        setError("");
+      }
+    }
+  };
+  console.log("error :>> ", error);
   return (
     <div
       className={`${
@@ -149,23 +108,14 @@ const Atom_string: FC<PropsType> = ({
               `
             )}
             style={{ ...style }}
+            pattern="/^[АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмноөпрстуүфхцчшщъыьэюя][АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмноөпрстуүфхцчшщъыьэюя][0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[0-9]{2}$/u"
             placeholder={config?.placeholdername}
             data-path={config.paramrealpath}
-            value={getAtomValue(
-              config,
-              formDataInitData,
-              processConfig,
-              rowIndex
-            )}
+            // value={itemParent?.id}
+            onKeyPress={(e) => handlerKey(e)}
             // disabled={fieldDisableEnable(config, processExpression)}
             onChange={handlerChange}
-            onBlur={(e) => handlerBlur(e)}
           />
-          {/* <span className="text-red-400 pl-1  absolute -left-4  z-40">
-						{config.isrequired == "1" && "*"}
-					</span> */}
-
-          {/* {validData[config.paramname] ? <>ddddd</> : ``} */}
         </div>
       )}
       {config.isEmpty && <span>{config.errorText}</span>}
@@ -173,4 +123,4 @@ const Atom_string: FC<PropsType> = ({
   );
 };
 
-export default Atom_string;
+export default StateRegNumber;
