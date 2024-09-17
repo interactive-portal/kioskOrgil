@@ -34,13 +34,13 @@ const StateRegNumber: FC<PropsType> = ({
     {};
   const [error, setError] = useState<any>();
 
-  const handlerChange = (e: any) => {
-    handleChangeContext({
-      name: config.paramrealpath,
-      value: itemParent?.id,
-      rowIndex,
-    });
-  };
+  // const handlerChange = (e: any) => {
+  //   handleChangeContext({
+  //     name: config.paramrealpath,
+  //     value: itemParent?.id,
+  //     rowIndex,
+  //   });
+  // };
 
   const handlerKey = (e: any) => {
     var key = e.key;
@@ -57,7 +57,7 @@ const StateRegNumber: FC<PropsType> = ({
       }
     }
   };
-  console.log("error :>> ", error);
+  // console.log("error :>> ", error);
   return (
     <div
       className={`${
@@ -73,7 +73,6 @@ const StateRegNumber: FC<PropsType> = ({
           ? "hidden"
           : fieldHideShow(config, processExpression) && "hidden"
       }`}
-      data-Type={config?.datatype}
     >
       <Atom_label
         // labelName={t(config.labelname)}

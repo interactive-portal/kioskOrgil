@@ -40,12 +40,12 @@ const Atom_button: FC<PropsType> = ({
 
     ws.onmessage = function (event) {
       var res = JSON.parse(event.data);
-      // console.log("resresssssss", res);
+      console.log("resresssssss", res);
 
       if (res?.status == "success") {
         handleChangeContext({
           name: "image",
-          value: res?.result?.value,
+          value: res?.result?.image,
         });
 
         // setLoading(true);
@@ -60,7 +60,8 @@ const Atom_button: FC<PropsType> = ({
         //     c: res?.result?.customerId,
         //   },
         // });
-        ws.send('{"action":"close"}');
+
+        // ws.send('{"action":"close"}');
       } else {
         // setContentType("error");
         console.log("erss :>> ");

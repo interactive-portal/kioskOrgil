@@ -33,7 +33,7 @@ const IremId: FC<PropsType> = ({
       JSON.parse(localStorage.getItem("price") || "")) ||
     {};
 
-  console.log("itemParent :>> ", itemParent);
+  // console.log("itemParent :>> ", itemParent);
   const handlerChange = (e: any) => {
     handleChangeContext({
       name: config.paramrealpath,

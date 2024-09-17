@@ -1,5 +1,5 @@
 import FormMetaContext from "@/context/Meta/FormMetaContext";
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { fieldHideShow, getAtomValue, numberWithCommas } from "@/util/helper";
 import Atom_label from "./Atom_label";
@@ -28,19 +28,24 @@ const Amount: FC<PropsType> = ({
     processConfig,
   } = useContext(FormMetaContext);
 
-  const itemParent =
-    (localStorage.getItem("price") &&
-      JSON.parse(localStorage.getItem("price") || "")) ||
-    {};
+  let [userData, setUserData] = useState<any>({});
 
-  // console.log("itemParent :>> ", itemParent);
-  const handlerChange = (e: any) => {
-    handleChangeContext({
-      name: config.paramrealpath,
-      value: itemParent?.saleprice,
-      rowIndex,
-    });
-  };
+  useEffect(() => {
+    const itemParent =
+      (localStorage.getItem("price") &&
+        JSON.parse(localStorage.getItem("price") || "")) ||
+      {};
+
+    if (itemParent) {
+      setUserData(itemParent);
+
+      handleChangeContext({
+        name: config.paramrealpath,
+        value: itemParent?.saleprice,
+        rowIndex,
+      }); // Set user data
+    }
+  }, []);
 
   return (
     <div
@@ -57,7 +62,6 @@ const Amount: FC<PropsType> = ({
           ? "hidden"
           : fieldHideShow(config, processExpression) && "hidden"
       }`}
-      data-Type={config?.datatype}
     >
       <Atom_label
         // labelName={t(config.labelname)}
@@ -94,10 +98,10 @@ const Amount: FC<PropsType> = ({
             style={{ ...style }}
             placeholder={config?.placeholdername}
             data-path={config.paramrealpath}
-            // value={itemParent?.id}
-            defaultValue={numberWithCommas(itemParent.saleprice)}
+            value={numberWithCommas(userData?.saleprice)}
+            // defaultValue={userData?.saleprice}
             // disabled={fieldDisableEnable(config, processExpression)}
-            onChange={handlerChange}
+            // onChange={handlerChange}
           />
         </div>
       )}

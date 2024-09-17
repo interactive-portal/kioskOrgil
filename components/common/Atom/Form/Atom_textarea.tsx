@@ -70,7 +70,7 @@ const Atom_textarea: FC<PropsType> = ({
             }`
           )}
           style={{
-            ...style,
+            // ...style,
             minHeight: 40,
             borderRadius: "80px",
             width: parseInt(config.columnwidth, 10),

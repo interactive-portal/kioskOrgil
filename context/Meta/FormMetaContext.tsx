@@ -49,8 +49,25 @@ export const FormMetaContextProvider: FC<PropsType> = ({
   const [lookUpData, setLookUpData] = useState({});
   const [loadingForm, setLoadingForm] = useState(false);
   const [checkContext, setCheckContext] = useState(false);
+  const [product, setProduct] = useState<any>();
+  const [price, setPrice] = useState<any>();
 
   useEffect(() => {
+    const itemParent =
+      localStorage.getItem("product") &&
+      JSON.parse(localStorage.getItem("product") || "");
+
+    const prodPrice =
+      localStorage.getItem("price") &&
+      JSON.parse(localStorage.getItem("price") || "");
+
+    if (itemParent) {
+      setProduct(itemParent);
+    }
+    if (prodPrice) {
+      setPrice(prodPrice);
+    }
+
     if (formInitData) setFormDataInitData(formInitData);
     if (checkContext) setFormDataInitData(checkContext);
   }, [formInitData, checkContext]);
@@ -131,42 +148,58 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     e.preventDefault();
     setLoadingForm(true);
 
-    const formdata = mergedFormData ? mergedFormData : formDataInitData;
+    let defaulData = {
+      contractTypeId: product?.id,
+      itemId: price?.id,
+      price: price?.saleprice,
+      amount: price?.saleprice,
+    };
+    let formdata = mergedFormData ? mergedFormData : formDataInitData;
+    if (processConfig.metadatacode == "kioskContractMainDV") {
+      formdata = {
+        ...formDataInitData,
+        ...defaulData,
+      };
+    }
+
     const valid = validateForm(formdata, processConfig);
+
+    // console.log(`formDataInitData save:: `, formdata);
 
     if (valid) {
       setValidData(valid);
     }
 
     if (!Object.keys(valid).length) {
-      // console.log(`formDataInitData save:: `, formdata)
       let resExp = "";
 
-      if (resExp) {
-        const { data } = await axios.post(`/api/post-process`, {
-          processcode: processConfig.metadatacode,
-          parameters: formdata,
-        });
+      console.log(`formDataInitData save:: `, formdata);
 
-        if (data.status === "success") {
-          if (processConfig.metadatacode.toLowerCase() === "clcreateuser_001") {
-            notification.success({ message: "Амжилттай бүртгэгдлээ" });
-            Router.push("/");
-          } else if (!isCustomMsg) {
-            notification.success({ message: "Амжилттай хадгалагдлаа" });
-          }
-          setLoadingForm(false);
-        } else {
-          notification.warning({
-            message: "Алдаа гарлаа!",
-            description: parseHtml(decode(data.text)),
-          });
-          setLoadingForm(false);
-        }
-        return data;
+      const { data } = await axios.post(`/api/post-process`, {
+        processcode: processConfig.metadatacode,
+        parameters: formdata,
+      });
+
+      if (data.status === "success") {
+        // if (processConfig.metadatacode.toLowerCase() === "clcreateuser_001") {
+        //   notification.success({ message: "Амжилттай бүртгэгдлээ" });
+        //   Router.push("/");
+        // } else if (!isCustomMsg) {
+        //   notification.success({ message: "Амжилттай хадгалагдлаа" });
+        // }
+
+        console.log("object :>> ", data);
+
+        setLoadingForm(false);
       } else {
+        console.log("object :>> ", data);
+        notification.warning({
+          message: "Алдаа гарлаа!",
+          description: parseHtml(decode(data)),
+        });
         setLoadingForm(false);
       }
+      return data;
     } else {
       notification.warning({
         message: "Заавал бөглөх талбаруудыг бөглөнө үү!",

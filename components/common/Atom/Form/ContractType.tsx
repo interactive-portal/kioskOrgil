@@ -1,5 +1,5 @@
 import FormMetaContext from "@/context/Meta/FormMetaContext";
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
@@ -28,18 +28,24 @@ const ContractType: FC<PropsType> = ({
     processConfig,
   } = useContext(FormMetaContext);
 
-  const itemParent =
-    (localStorage.getItem("product") &&
-      JSON.parse(localStorage.getItem("product") || "")) ||
-    {};
+  let [userData, setUserData] = useState<any>();
 
-  const handlerChange = (e: any) => {
+  useEffect(() => {
+    const itemParent =
+      (localStorage.getItem("product") &&
+        JSON.parse(localStorage.getItem("product") || "")) ||
+      {};
+
     handleChangeContext({
       name: config.paramrealpath,
       value: itemParent?.id,
       rowIndex,
     });
-  };
+
+    if (itemParent) {
+      setUserData(itemParent);
+    }
+  }, []);
 
   return (
     <div
@@ -56,7 +62,6 @@ const ContractType: FC<PropsType> = ({
           ? "hidden"
           : fieldHideShow(config, processExpression) && "hidden"
       }`}
-      data-Type={config?.datatype}
     >
       <Atom_label
         // labelName={t(config.labelname)}
@@ -93,10 +98,9 @@ const ContractType: FC<PropsType> = ({
             style={{ ...style }}
             placeholder={config?.placeholdername}
             data-path={config.paramrealpath}
-            // value={itemParent?.id}
-            defaultValue={itemParent?.id}
+            value={userData?.itemtypename}
             // disabled={fieldDisableEnable(config, processExpression)}
-            onChange={handlerChange}
+            // onChange={handlerChange}
           />
         </div>
       )}
