@@ -39,6 +39,7 @@ const Atom_combo: FC<PropsType> = ({
   const getLookUpData = async (i: any, item: any) => {
     // console.log("groupconfigparampath :>> ", config);
     let params = {};
+
     if (config?.groupconfigparampath) {
       params = config?.groupconfigparampath
         .toLowerCase()
@@ -60,6 +61,17 @@ const Atom_combo: FC<PropsType> = ({
           obj[param] = field;
           return obj;
         }, {});
+    }
+    // console.log("formDataInitData :>> ", formDataInitData);
+    if (config.paramrealpath == "districtId") {
+      params = {
+        cityId: formDataInitData["cityId"],
+      };
+    }
+    if (config.paramrealpath == "streetId") {
+      params = {
+        districtId: formDataInitData["districtId"],
+      };
     }
 
     const criteria = {
