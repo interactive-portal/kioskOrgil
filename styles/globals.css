@@ -135,7 +135,7 @@ textarea.kiosk {
 }
 
 .kiosk {
-  background: #d9d9d94f;
+  background: #d9d9d94f !important;
   border-radius: 50px !important;
   color: white !important;
   font-size: 28px;

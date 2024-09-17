@@ -2,10 +2,11 @@ import { DatePicker } from "antd";
 import FormMetaContext from "@/context/Meta/FormMetaContext";
 import moment from "moment";
 import "moment/locale/mn";
-import { FC, useContext } from "react";
+import { FC, useContext, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { fieldDisableEnable, fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
+import EndDate from "./endDate";
 
 type PropsType = {
   config: any;
@@ -34,8 +35,32 @@ const Atom_date: FC<PropsType> = ({
   // console.log("date", config);
   if (config?.columnwidth)
     style = { ...style, width: parseInt(config?.columnwidth, 10) };
+
+  const itemParent =
+    (localStorage.getItem("price") &&
+      JSON.parse(localStorage.getItem("price") || "")) ||
+    {};
+  const [duration, setDuration] = useState(parseFloat(itemParent.durationtype));
+
+  if (config.paramname == "endDate")
+    return (
+      <EndDate
+        config={config}
+        sectionConfig={sectionConfig}
+        className={className}
+        rowIndex={rowIndex}
+      />
+    );
+
   const handlerChangeSelectDate = (e: any, dateString: any) => {
     const { paramrealpath } = config;
+
+    let d = new Date(dateString);
+    d.setMonth(d.getMonth() + duration);
+
+    if (paramrealpath == "startDate") {
+      localStorage?.setItem("enddate", d.toLocaleDateString("fr-CA"));
+    }
 
     handleChangeContext({
       name: paramrealpath,
@@ -45,7 +70,6 @@ const Atom_date: FC<PropsType> = ({
   };
 
   let nowDate = moment();
-  // console.log("nowDate :>> ", nowDate);
   return (
     <>
       <div

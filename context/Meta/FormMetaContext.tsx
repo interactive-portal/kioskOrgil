@@ -153,6 +153,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       itemId: price?.id,
       price: price?.saleprice,
       amount: price?.saleprice,
+      endDate: localStorage.getItem("enddate"),
     };
     let formdata = mergedFormData ? mergedFormData : formDataInitData;
     if (processConfig.metadatacode == "kioskContractMainDV") {
@@ -164,7 +165,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 
     const valid = validateForm(formdata, processConfig);
 
-    // console.log(`formDataInitData save:: `, formdata);
+    console.log(`formDataInitData save:: `, formdata);
 
     if (valid) {
       setValidData(valid);
@@ -173,7 +174,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     if (!Object.keys(valid).length) {
       let resExp = "";
 
-      console.log(`formDataInitData save:: `, formdata);
+      // console.log(`formDataInitData save:: `, formdata);
 
       const { data } = await axios.post(`/api/post-process`, {
         processcode: processConfig.metadatacode,
