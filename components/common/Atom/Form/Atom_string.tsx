@@ -82,6 +82,15 @@ const Atom_string: FC<PropsType> = ({
           rowIndex={rowIndex}
         />
       );
+    case "stateRegNumber":
+      return (
+        <StateRegNumber
+          config={config}
+          sectionConfig={sectionConfig}
+          className={className}
+          rowIndex={rowIndex}
+        />
+      );
     default:
       return (
         <div

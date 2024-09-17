@@ -38,10 +38,6 @@ const EndDate: FC<PropsType> = ({
   //   }
   // }, []);
 
-  let [userData, setUserData] = useState<any>();
-
-  console.log("item :>> ", userData);
-
   return (
     <div
       className={`${
