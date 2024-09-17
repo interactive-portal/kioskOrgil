@@ -112,7 +112,6 @@ const StateRegNumber: FC<PropsType> = ({
             // value={itemParent?.id}
             // onKeyPress={(e) => handlerKey(e)}
             // disabled={fieldDisableEnable(config, processExpression)}
-            onChange={handlerChange}
           />
         </div>
       )}
