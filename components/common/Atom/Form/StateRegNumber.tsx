@@ -108,11 +108,10 @@ const StateRegNumber: FC<PropsType> = ({
               `
             )}
             style={{ ...style }}
-            pattern="/^[АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмноөпрстуүфхцчшщъыьэюя][АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмноөпрстуүфхцчшщъыьэюя][0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[0-9]{2}$/u"
             placeholder={config?.placeholdername}
             data-path={config.paramrealpath}
             // value={itemParent?.id}
-            onKeyPress={(e) => handlerKey(e)}
+            // onKeyPress={(e) => handlerKey(e)}
             // disabled={fieldDisableEnable(config, processExpression)}
             onChange={handlerChange}
           />
