@@ -7,14 +7,28 @@ type PropsType = {
   settings?: any;
   children?: any;
   dialog?: any;
+  setResult?: any;
   title?: string;
 };
 
-const FormWrapper: FC<PropsType> = ({ children, title, dialog, settings }) => {
-  const { handleSubmitContext, processConfig, processExpression, loadingForm } =
-    useContext(FormMetaContext);
+const FormWrapper: FC<PropsType> = ({
+  children,
+  title,
+  dialog,
+  settings,
+  setResult,
+}) => {
+  const {
+    handleSubmitContext,
+    processConfig,
+    processExpression,
+    loadingForm,
+    resultForm,
+  } = useContext(FormMetaContext);
   const customSettings = settings?.widgetnemgoo;
   const customOptions = settings?.widgetnemgooReady;
+
+  // console.log("resultForm :>> ", resultForm);
 
   return (
     <div
@@ -42,9 +56,9 @@ const FormWrapper: FC<PropsType> = ({ children, title, dialog, settings }) => {
                 type="submit"
                 disabled={loadingForm}
                 style={{
-                  backgroundColor: loadingForm ? "#8d9eff" : "",
+                  backgroundColor: loadingForm ? "#A68B5C" : "",
                 }}
-                className={`focus:outline-none w-full sm:w-auto  cursor-pointer bg-[#699BF7] transition duration-150 ease-in-out defaultBtn hover:bg-blue-700 rounded-full text-white px-8 py-4  ${customOptions?.submitButtonClass}`}
+                className={`focus:outline-none w-full sm:w-auto  cursor-pointer bg-[#A68B5C] transition duration-150 ease-in-out defaultBtn hover:bg-opacity-70 rounded-full text-white px-8 py-4  ${customOptions?.submitButtonClass}`}
               >
                 {loadingForm && <LoadingOutlined />}{" "}
                 {loadingForm

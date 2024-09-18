@@ -15,6 +15,7 @@ import useSWR from "swr";
 type PropsType = {
   listConfig: any;
   dialog?: any;
+  setResult?: any;
   headerType?: any;
 };
 
@@ -23,6 +24,7 @@ const { TabPane } = Tabs;
 const RenderWidgetProcess: FC<PropsType> = ({
   listConfig,
   dialog,
+  setResult,
   headerType,
 }) => {
   // const { userData } = useUser();
@@ -89,6 +91,7 @@ const RenderWidgetProcess: FC<PropsType> = ({
         dialog={dialog}
         title={`${processConfigState?.result?.metadataname || ""}`}
         settings={listConfig?.otherattr}
+        setResult={setResult}
       >
         <Header
           header={header}

@@ -21,6 +21,7 @@ type PropsContextType = {
   handleClickContext?: any;
   handleSubmitContext?: any;
   validData?: any;
+  resultForm?: any;
   lookUpData?: any;
   handleLookUpData?: any;
   processExpression?: any;
@@ -50,6 +51,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
   const [loadingForm, setLoadingForm] = useState(false);
   const [checkContext, setCheckContext] = useState(false);
   const [product, setProduct] = useState<any>();
+  const [resultForm, setResultForm] = useState<any>();
   const [price, setPrice] = useState<any>();
 
   useEffect(() => {
@@ -191,11 +193,12 @@ export const FormMetaContextProvider: FC<PropsType> = ({
         //   notification.success({ message: "Амжилттай хадгалагдлаа" });
         // }
 
+        notification.success({ message: "Амжилттай бүртгэгдлээ" });
         console.log("object :>> ", data);
-
+        setResultForm(data);
         setLoadingForm(false);
       } else {
-        console.log("object :>> ", data);
+        setResultForm(data);
         notification.warning({
           message: "Алдаа гарлаа!",
           description: parseHtml(decode(data)),
@@ -204,6 +207,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       }
       return data;
     } else {
+      setResultForm(valid);
       notification.warning({
         message: "Заавал бөглөх талбаруудыг бөглөнө үү!",
         description: Object.keys(valid).join(", "),
@@ -250,6 +254,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     handleLookUpData,
     processExpression,
     loadingForm,
+    resultForm,
     setLoadingForm,
   };
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import BlockDiv from "@/components/common/Block/BlockDiv";
-import { useContext } from "react";
-import WidgetWrapperContext from "@/components/common/engineBox/Wrapper/WidgetUniversalWrapper";
 import _ from "lodash";
 import { useForm, FormProvider } from "react-hook-form";
 import Text from "@/components/project/riverclub/v1/bioinput/atom/text";
@@ -22,12 +20,13 @@ import { useSearchParam } from "react-use";
 import { notification } from "antd";
 import RenderWidgetProcess from "@/middleware/components/WidgetForm/RenderWidgetProcess";
 import Title from "@/components/common/Title";
+import FormMetaContext from "@/context/Meta/FormMetaContext";
 
 const Form = () => {
   const router = useRouter();
   const { t } = useTranslation("translate");
   const [processParam, setProcessParam] = useState<any>();
-  const [foreign, setForeign] = useState("");
+  const [formResult, setFormResult] = useState();
   const [birthday, setBirthday] = useState("");
   const [openLogin, setOpenLogin] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -41,7 +40,6 @@ const Form = () => {
     },
   });
   const i = router.query;
-  // console.log("iiiiiiiiiii", i);
 
   const onSubmit = async (data: any) => {
     setProcessParam(data); // Ensure data is correctly set here
@@ -87,7 +85,16 @@ const Form = () => {
   const settings = {
     widgetnemgooReady: {
       labelPosition: "top",
-      submitButtonName: "АНКЕТ НЭМЭХ",
+      submitButtonName: "Хадгалах",
+      submitButtonWrapperClass: "w-full flex ",
+      submitButtonClass: "bg-[#A68B5C] ",
+      formTitleWrapperClass: "hidden ",
+    },
+  };
+  const settings2 = {
+    widgetnemgooReady: {
+      labelPosition: "top",
+      submitButtonName: "Гишүүн нэмэх",
       submitButtonWrapperClass: "w-full flex ",
       submitButtonClass: "bg-[#A68B5C] ",
       formTitleWrapperClass: "hidden ",
@@ -127,29 +134,41 @@ const Form = () => {
     );
   }
 
+  const steps = [
+    {
+      title: "First",
+      content: "First-content",
+    },
+    {
+      title: "Second",
+      content: "Second-content",
+    },
+    {
+      title: "Last",
+      content: "Last-content",
+    },
+  ];
+
   return (
     <Layout>
-      {/* {isSignedIn ? (
-        <div>
-          <p className="uppercase text-[64px] text-white mb-20">
-            УУЧЛААРАЙ ТАНЫ МЭДЭЭЛЭЛ БҮРТГЭГДСЭН БАЙНА. ТА БҮРТГЭЛТЭЙ ГИШҮҮНЭЭР
-            НЭВТЭРНЭ ҮҮ
-          </p>
-        </div>
-      ) : (
-        <> */}
-
       <Title title="АНКЕТ"></Title>
 
       <BlockDiv className="py-2 text-[32px] text-white">
-        <RenderWidgetProcess
+        {/* <RenderWidgetProcess
           dialog={false}
+          // setResult={setFormResult}
           listConfig={{
             metadataid: "1726115747829573",
             otherattr: settings,
           }}
-          // 1641266492517411
-        />
+        /> */}
+        {/* <RenderWidgetProcess
+          dialog={false}
+          listConfig={{
+            metadataid: "17256874307141",
+            otherattr: settings2,
+          }}
+        /> */}
 
         {/* <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
