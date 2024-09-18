@@ -40,7 +40,7 @@ const Atom_button: FC<PropsType> = ({
 
     ws.onmessage = function (event) {
       var res = JSON.parse(event.data);
-      console.log("resresssssss", res);
+      // console.log("resresssssss", res);
 
       if (res?.status == "success") {
         handleChangeContext({
@@ -48,6 +48,7 @@ const Atom_button: FC<PropsType> = ({
           value: res?.result?.image,
         });
 
+        localStorage?.setItem("imgStr", JSON.stringify(res?.result?.value));
         // setLoading(true);
         // setCustomer(res?.result);
         // Cookies.set("customer", res?.result);

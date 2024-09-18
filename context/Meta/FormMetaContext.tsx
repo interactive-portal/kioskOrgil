@@ -155,6 +155,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       price: price?.saleprice,
       amount: price?.saleprice,
       endDate: localStorage.getItem("enddate"),
+      value: localStorage.getItem("imgStr"),
     };
     let formdata = mergedFormData ? mergedFormData : formDataInitData;
     if (processConfig.metadatacode == "kioskContractMainDV") {
