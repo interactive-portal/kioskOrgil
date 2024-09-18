@@ -23,7 +23,7 @@ const RegisterLayout = ({ children, dataSrc }: any) => {
             backgroundSize: "cover",
           }}
         >
-          <span className="text-center w-full"> {dataSrc.title}</span>
+          <span className="text-center w-full"> {dataSrc?.title}</span>
         </div>
         <div className="self-center justify-items-center mx-auto  overflow-hidden w-full mb-20">
           <div className="h-full items-center flex ">
