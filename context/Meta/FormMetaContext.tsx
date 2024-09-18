@@ -149,8 +149,9 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     setLoadingForm(true);
 
     let defaulData = {
-      contractTypeId: product?.id,
-      itemId: price?.id,
+      contractTypeId: price?.contracttypeid,
+      durationTypeId: price?.durationtypeid,
+      itemId: price?.itemid,
       price: price?.saleprice,
       amount: price?.saleprice,
       endDate: localStorage.getItem("enddate"),

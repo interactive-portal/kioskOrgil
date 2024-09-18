@@ -133,7 +133,7 @@ const Atom_button: FC<PropsType> = ({
         >
           <img
             src="/images/Face_id_white.png"
-            className="md:max-w-[82px] md:max-h-[82px] xs:max-w-[40px] mx-auto"
+            className="w-[35px] py-2 mx-auto"
           />
           {/* {config.labelname} */}
         </span>
