@@ -33,7 +33,7 @@ const StateRegNumber: FC<PropsType> = ({
   const handlerChange = (e: any) => {
     handleChangeContext({
       name: config.paramrealpath,
-      value: "",
+      value: e.currentTarget.value,
       rowIndex,
     });
   };
