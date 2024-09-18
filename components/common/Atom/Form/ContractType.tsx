@@ -98,7 +98,7 @@ const ContractType: FC<PropsType> = ({
             style={{ ...style }}
             placeholder={config?.placeholdername}
             data-path={config.paramrealpath}
-            value={userData?.itemtypename}
+            value={userData?.itemtypename || userData?.name}
             // disabled={fieldDisableEnable(config, processExpression)}
             // onChange={handlerChange}
           />

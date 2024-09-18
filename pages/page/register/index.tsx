@@ -34,27 +34,25 @@ const Register = () => {
     localStorage?.setItem("product", JSON.stringify(item));
     router.push(`/page/register/category=${item?.id}`);
   };
+  console.log("readyData :>> ", readyData);
 
   return (
     <Layout>
       <div className=" flex flex-col gap-y-10 ">
         <Title title="БҮРТГЭЛ"></Title>
-        {groupByData.map((group) => (
-          <div
-            key={group.classificationname}
-            className="w-4/5 mx-auto flex flex-col gap-6 text-center  px-4"
-          >
-            {group.items.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => handleItemClick(item)}
-                className="rounded-full text-[64px] xs:text-[30px] py-5 xs:px-6 cursor-pointer obtn"
-              >
-                {item.itemtypename}
-              </div>
-            ))}
-          </div>
-        ))}
+        {/* {readyData.map((group) => ( */}
+        <div className="w-4/5 mx-auto flex flex-col gap-6 text-center  px-4">
+          {readyData.map((item: any) => (
+            <div
+              key={item.id}
+              onClick={() => handleItemClick(item)}
+              className="rounded-full text-[64px] xs:text-[30px] py-5 xs:px-6 cursor-pointer obtn"
+            >
+              {item?.itemtypename || item?.name}
+            </div>
+          ))}
+        </div>
+        {/* ))} */}
       </div>
     </Layout>
   );
