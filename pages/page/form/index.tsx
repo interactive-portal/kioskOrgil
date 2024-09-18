@@ -123,7 +123,7 @@ const Form = () => {
   };
 
   useEffect(() => {
-    checkIfSignedIn();
+    // checkIfSignedIn();
   }, []);
 
   if (loading) {
@@ -154,14 +154,14 @@ const Form = () => {
       <Title title="АНКЕТ"></Title>
 
       <BlockDiv className="py-2 text-[32px] text-white">
-        {/* <RenderWidgetProcess
+        <RenderWidgetProcess
           dialog={false}
           // setResult={setFormResult}
           listConfig={{
             metadataid: "1726115747829573",
             otherattr: settings,
           }}
-        /> */}
+        />
         {/* <RenderWidgetProcess
           dialog={false}
           listConfig={{
