@@ -41,7 +41,7 @@ const Register = () => {
       <div className=" flex flex-col gap-y-10 ">
         <Title title="БҮРТГЭЛ"></Title>
         {/* {readyData.map((group) => ( */}
-        <div className="w-4/5 mx-auto flex flex-col gap-6 text-center  px-4">
+        <div className="w-4/5 mx-auto flex flex-col gap-6 text-center px-4">
           {readyData.map((item: any) => (
             <div
               key={item.id}

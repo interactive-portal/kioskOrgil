@@ -92,7 +92,7 @@ const ContractType: FC<PropsType> = ({
               ` rounded border-gray-400 text-[14px] focus:ring-0  ${className}  ${
                 config.iconname && "pl-10"
               }
-              ${config?.labelname == "" && "w-full"}
+              ${config?.labelname == "" && "w-full "}
               `
             )}
             style={{ ...style }}
