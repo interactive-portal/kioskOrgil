@@ -183,8 +183,8 @@ const OpenCamera: FC<PropsType> = ({
               //   onClick={() => setOpenLogin(true)}
             />
             <span className="text-white text-[36px] text-center px-10">
-              ЦАРАЙГАА ТАНИУЛСНААР БҮРТГЭЛ ДУУСНА. ЦААШИД КЛУБ НЭВТРЭХДЭЭ ЦАРАЙ
-              ТАНИУЛЖ НЭВТРЭХ ТУЛ ЗААВРЫГ АНХААРАЛТАЙ ДАГААРАЙ.
+              ЦАРАЙГАА ТАНИУЛСНААР БҮРТГЭЛ ДУУСНА. ЦААШИД КЛУБ НЭВТРЭХДЭЭ
+              ЦАРАЙff ТАНИУЛЖ НЭВТРЭХ ТУЛ ЗААВРЫГ АНХААРАЛТАЙ ДАГААРАЙ.
             </span>
             <button
               className="text-[64px] text-[#525050] bg-white rounded-[87px] w-full py-10 mx-10"

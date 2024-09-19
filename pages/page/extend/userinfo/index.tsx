@@ -45,7 +45,7 @@ const UserInfo = () => {
     filterContractId: [
       {
         operator: "=",
-        operand: contractData[0]?.contractid,
+        operand: "17266428064893",
       },
     ],
   });

@@ -29,7 +29,7 @@ const Page = (props: any) => {
   return (
     <>
       <RegisterLayout dataSrc={groupByData[0]}>
-        {groupByData.map((group, index) => (
+        {groupByData?.map((group, index) => (
           <div
             className="flex flex-col  text-white uppercase py-2 text-start"
             key={index}

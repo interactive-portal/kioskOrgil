@@ -181,7 +181,7 @@ const CheckUser: FC<PropsType> = ({ setOpenModal }) => {
               //   onClick={() => setOpenLogin(true)}
             />
             <span className=" text-[36px] text-center px-10">
-              ЦАРАЙГАА ТАНИУЛЖ СУНГАЛТАА ҮРГЭЛЖЛҮҮНЭ ҮҮ!
+              ЦАРАЙГАА ТАНИУЛЖ СУНГАЛТАА ҮРГЭЛЖЛҮҮНЭ ҮҮ!f
             </span>
             <button
               className="text-[64px] text-[#525050] rounded-[87px] w-full py-10 mx-10"
