@@ -9,38 +9,40 @@ const Ebarimt = () => {
   const [view, setView] = useState("default");
 
   const renderDefaultView = () => (
-    <div className="mt-[350px]">
-      <p className="text-[90px] text-[#A68B5C]">e-barimt</p>
-      <button
-        className="h-[174px] w-[844px] bg-white text-[#525050] rounded-full text-[64px] mt-[80px]"
-        onClick={() => setView("payment")}
-      >
-        ХУВЬ ХҮН
-      </button>
-      <button
-        className="h-[174px] w-[844px] bg-white text-[#525050] rounded-full text-[64px] mt-[50px]"
-        onClick={() => setView("organization")}
-      >
-        БАЙГУУЛЛАГА
-      </button>
-    </div>
+    <>
+      <Title title="e-barimt төрөл"></Title>
+      <div className=" flex gap-6">
+        <button
+          className="h-[174px] bg-white text-[#525050] rounded-full text-[64px] w-full"
+          onClick={() => setView("payment")}
+        >
+          ХУВЬ ХҮН
+        </button>
+        <button
+          className="h-[174px]  bg-white text-[#525050] rounded-full text-[64px] w-full"
+          onClick={() => setView("organization")}
+        >
+          БАЙГУУЛЛАГА
+        </button>
+      </div>
+    </>
   );
 
   const renderOrganizationView = () => (
     <div className="mt-[150px]">
-      <p className="text-[90px] text-[#A68B5C] mb-[100px]">E-barimt</p>
+      <Title title="e-barimt"></Title>
       <div>
         <div>
           <p className="text-white text-[46px] text-start px-10 ">
             БАЙГУУЛЛАГЫН РЕГИСТЕР
           </p>
-          <input className="bg-[#D9D9D94D] border text-white border-white min-h-[118px] rounded-full px-10 text-[48px] w-[788px]" />
+          <input className="bg-[#D9D9D94D] border text-white border-white min-h-[118px] rounded-full px-10 text-[48px] w-full" />
         </div>
         <div>
           <p className="text-white text-[46px] text-start px-10 mt-[50px]">
             БАЙГУУЛЛАГЫН НЭР
           </p>
-          <input className="bg-[#D9D9D94D] text-white border border-white min-h-[118px] rounded-full px-10 text-[48px]  w-[788px]" />
+          <input className="bg-[#D9D9D94D] text-white border border-white min-h-[118px] rounded-full px-10 text-[48px]  w-full" />
         </div>
       </div>
 
@@ -56,7 +58,7 @@ const Ebarimt = () => {
   const renderPaymentView = () => (
     <div className="flex flex-col">
       <button
-        className="h-[174px]  bg-white rounded-full text-[#525050] text-[64px] mt-[80px] uppercase"
+        className="h-[174px]  bg-white rounded-full text-[#525050] text-[64px] uppercase"
         onClick={() => setView("card")}
       >
         Карт
@@ -95,15 +97,16 @@ const Ebarimt = () => {
   return (
     <Layout>
       <div className="mx-auto  flex flex-col py-6 px-6">
-        <Title title="ТӨЛБӨР ТӨЛӨХ"></Title>
-        {renderPaymentView()}
+        {view === "default" && renderDefaultView()}
+        {view === "organization" && renderOrganizationView()}
+        {view === "payment" && renderPaymentView()}
+        {view === "receipt" && renderReceiptView()}
+        {view === "card" && renderCardReceiptView()}
+
+        {view === "qpay" && <Qpay />}
       </div>
-      {view === "default" && renderDefaultView()}
-      {view === "organization" && renderOrganizationView()}
-      {view === "payment" && renderPaymentView()}
-      {view === "receipt" && renderReceiptView()}
-      {view === "card" && renderCardReceiptView()}
-      {view === "qpay" && <Qpay onPaymentSuccess={handleQpayPayment} />}
+
+      {/* {view === "qpay" && <Qpay onPaymentSuccess={handleQpayPayment} />} */}
     </Layout>
   );
 };

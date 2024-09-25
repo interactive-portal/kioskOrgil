@@ -60,7 +60,11 @@ const KioskFormWrapper: FC<PropsType> = ({
           className="box-footer flex py-6 w-full  gap-2 px-8  cursor-pointer "
           onClick={handleSubmitTerms}
         >
-          <span className="w-10 h-10 border rounded border-white  inline "></span>
+          <span
+            className={` w-10 h-10 border rounded border-white  inline  ${
+              termsValue == true ? "bg-[#A68B5C]" : ""
+            }`}
+          ></span>
           {/* <div className="w-10 h10 rounded border border-[#67748E] inline-block"></div> */}
           <span className="text-white text-[20px] pt-2">
             Би үйлчилгээний нөхцөл болон нууцлалын бодлогыг зөвшөөрч байна.
