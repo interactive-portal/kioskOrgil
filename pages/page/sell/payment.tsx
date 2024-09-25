@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../kioskLayout";
 import Qpay from "@/components/project/riverclub/v1/qpay/qpay";
 import { useRouter } from "next/navigation";
@@ -7,10 +7,41 @@ import Title from "@/components/common/Title";
 const Ebarimt = () => {
   const router = useRouter();
   const [view, setView] = useState("default");
+  const LOCAL_STORAGE_KEY = "orderInfo";
+
+  const [order, setOrder] = useState<any>();
+
+  // const itemParent =
+  //   (localStorage.getItem("item") &&
+  //     JSON.parse(localStorage.getItem("item") || "")) ||
+  //   {};
+
+  // console.log("itemParent :>> ", itemParent);
+
+  useEffect(() => {
+    const orderData = localStorage.getItem("orderInfo");
+    if (orderData) setOrder(localStorage.getItem("orderInfo"));
+    // console.log("object :>> ", localStorage.getItem("orderInfo"));
+  }, [order]);
+
+  const jsonData = order ? JSON.parse(order) : {};
+
+  if (!jsonData)
+    return (
+      <>
+        <Layout>
+          <Title title="not order info "></Title>
+        </Layout>
+      </>
+    );
+  // console.log("order :>> ", jsonData);
+
+  const handleQpayPayment = async () => {
+    setView("receipt");
+  };
 
   const renderDefaultView = () => (
     <>
-      <Title title="e-barimt төрөл"></Title>
       <div className=" flex gap-6">
         <button
           className="h-[174px] bg-white text-[#525050] rounded-full text-[64px] w-full"
@@ -78,15 +109,6 @@ const Ebarimt = () => {
     </div>
   );
 
-  const itemParent =
-    (localStorage.getItem("price") &&
-      JSON.parse(localStorage.getItem("price") || "")) ||
-    {};
-
-  const handleQpayPayment = async () => {
-    setView("receipt");
-  };
-
   const renderReceiptView = () => (
     <div className="min-h-[900px] flex items-center justify-center mt-[250px]">
       <p className="text-white text-[64px]">ТА ТӨЛБӨРИЙН БАРИМТАА АВНА УУ!</p>
@@ -107,7 +129,7 @@ const Ebarimt = () => {
         {view === "payment" && renderPaymentView()}
         {view === "receipt" && renderReceiptView()}
         {view === "card" && renderCardReceiptView()}
-        {view === "qpay" && <Qpay item={itemParent} />}
+        {view === "qpay" && <Qpay item={jsonData} />}
       </div>
 
       {/* {view === "qpay" && <Qpay onPaymentSuccess={handleQpayPayment} />} */}

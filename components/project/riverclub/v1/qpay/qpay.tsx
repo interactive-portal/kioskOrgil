@@ -37,39 +37,25 @@ export default function Qpay({
 
   // console.log("item :>> ", item);
 
-  const orderid = item.itemid;
-  const salesorder = item.itemid;
+  const orderid = item.contractcode;
+  const salesorder = item.contractcode;
   const deadline = Date.now() + 1000 * 60 * 15;
-
-  const sdmSalesOrderPaymentDtl = {
-    paymentTypeId: "24",
-    paymentDate: "2024",
-    amt: 100,
-  };
-
-  const parameters = {
-    id: salesorder,
-    wfmStatusId: "1642050656876633",
-    sdmSalesOrderPaymentDtl,
-  };
 
   const qpayInfoData = async () => {
     let params = {
       sender_invoice_no: orderid,
-      invoice_receiver_code: item?.id,
-      invoice_description: orderid,
+      invoice_receiver_code: item?.contractcode,
+      invoice_description: item?.contracttypename,
       storeId: "1574647073339",
-      amount: Number(item?.saleprice),
+      amount: Number(item?.amount),
       callback_url: "http://localhost:4000/",
     };
     console.log("params qpay", params);
     const { data } = await axios.post(`/api/post-process`, {
       processcode: "QPAY_V2_CREATEINVOICE_SIMPLE",
-
       parameters: params,
     });
 
-    console.log("data :>> ", data);
     if (data.status == "success") {
       setDatasrc(data.result);
       qpayMutate();

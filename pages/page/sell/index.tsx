@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Pay from "./payment";
 import Title from "@/components/common/Title";
+import _ from "lodash";
 
 const Sell = () => {
   const [item, setItem] = useState<any>();
@@ -24,113 +25,43 @@ const Sell = () => {
   const router = useRouter();
   const date = moment().format("YYYY-MM-DD");
   const cid = router.query?.id;
-  const criteria = JSON.stringify({
-    id: [
-      {
-        operator: "=",
-        operand: router.query?.i,
-      },
-    ],
-  });
-
-  // reportTemplate дуудах
-  const printOptions = {
-    lang: {
-      mn: "",
-      en: "",
-    },
-    ishtml: 1,
-    print_options: {
-      numberOfCopies: "1",
-      isPrintNewPage: "1",
-      isSettingsDialog: "0",
-      isShowPreview: "1",
-      isPrintPageBottom: "0",
-      isPrintPageRight: "0",
-      pageOrientation: "portrait",
-      isPrintSaveTemplate: "1",
-      paperInput: "portrait",
-      pageSize: "a4",
-      printType: "1col",
-      templatemetaid: templateId,
-      templateIds: templateId,
-    },
-  };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  if (!cid)
-    return (
-      <>
-        {" "}
-        <Layout>
-          <div className="mx-auto  flex flex-col py-6 px-10">
-            <Title title="Гэрээ үүсээгүй байна"></Title>
-          </div>
-        </Layout>
-      </>
-    );
 
   const fetchData = async () => {
+    const params = JSON.stringify({
+      id: cid,
+    });
+
     const result = await fetchJson(
-      `/api/get-data?metaid=1701156148201731&criteria=${criteria}`
+      `/api/get-process?command=fitKioskContractDtlData_GET_004&parameters=${params}`
     );
     if (result?.status == "success") {
-      const readydata = result?.result?.[0];
-      setItem(readydata);
-      const param = {
-        contracttypeid: readydata?.contracttypeid,
-        contractTotalAmount: readydata?.saleprice,
-        customerId: router.query?.c,
-        durationTypeId: readydata?.monthid,
-        startDate: date,
-        itemId: readydata?.id,
-        price: readydata?.saleprice,
-        amount: readydata?.saleprice,
-      };
       const res = await axios.post(`/api/post-process`, {
-        processcode: "fitKioskCreateContract_DV_001",
-        parameters: param,
+        processcode: "fitKioskContractIsConfirm_DV_001",
+        parameters: {
+          id: contractId,
+          isComfirm: "1",
+        },
       });
-      if (res?.data?.status == "success") {
-        setTemplateId(res?.data?.result?.templateId);
-        setContractId(res?.data?.result?.id);
-        setLoading(false);
-      }
+
+      localStorage.setItem("orderInfo", JSON.stringify(result.result));
+      setItem(result.result);
     }
   };
 
-  const checkContract = async () => {
-    setLoading(true);
-    const res = await axios.post(`/api/post-process`, {
-      processcode: "fitKioskContractIsConfirm_DV_001",
-      parameters: {
-        id: contractId,
-        isComfirm: "1",
-      },
-    });
-    if (res?.data?.status == "success") {
-      setLoading(false);
-      if (res?.data?.result?.isConfirm !== "0") {
-        setNextButtonView(true);
-      }
+  useEffect(() => {
+    if (!cid) {
+      return;
     }
-  };
+    fetchData();
+  }, [cid]);
 
-  // if (loading) {
-  //   return (
-  //     <Layout>
-  //       <Spin fullscreen size="large" />
-  //     </Layout>
-  //   );
-  // }
-
-  const itemParent =
-    (localStorage.getItem("price") &&
-      JSON.parse(localStorage.getItem("price") || "")) ||
-    {};
+  if (!item) {
+    return (
+      <Layout>
+        <Spin fullscreen size="large" />
+      </Layout>
+    );
+  }
 
   // console.log("itemParent :>> ", itemParent);
 
@@ -139,28 +70,26 @@ const Sell = () => {
       <Layout>
         <div className="mx-auto  flex flex-col py-4 px-10">
           <Title title="ТӨЛБӨР ТӨЛӨХ"></Title>
-
-          {/* {content()} */}
           <div className="flex flex-col gap-y-10 text-start mt-[50px] px-10">
             <div className="flex flex-col gap-y-4 text-white">
               <label className="text-[48px] mt-20">Үйлчилгээний төрөл</label>
               <input
                 className="bg-[#D9D9D94D] border border-white min-h-[98px] rounded-[60px] px-10 text-[48px]"
-                value={item?.itemname || itemParent?.name}
+                value={item?.contracttypename}
               />
             </div>
             <div className="flex flex-col gap-y-4 text-white">
               <label className="text-[48px]">Үнийн дүн</label>
               <input
                 className="bg-[#D9D9D94D] border border-white min-h-[98px] rounded-[60px] px-10 text-[48px]"
-                value={item?.saleprice || itemParent?.saleprice}
+                value={item?.amount}
               />
             </div>
             <div className="flex flex-col gap-y-4 text-white">
               <label className="text-[48px]">Хугацаа</label>
               <input
                 className="bg-[#D9D9D94D] border border-white min-h-[98px] rounded-[60px] px-10 text-[48px]"
-                value={item?.monthname || itemParent?.durationtype}
+                value={item?.month}
               />
             </div>
           </div>
