@@ -8,6 +8,11 @@ import { fieldDisableEnable, fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
 import EndDate from "./endDate";
 
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(customParseFormat);
+
 type PropsType = {
   config: any;
   className: any;
@@ -33,6 +38,10 @@ const Atom_date: FC<PropsType> = ({
     validData,
   } = useContext(FormMetaContext);
   // console.log("date", config);
+
+  const dateFormat = "YYYY-MM-DD";
+  let nowDate = moment().format("YYYY-MM-DD");
+
   if (config?.columnwidth)
     style = { ...style, width: parseInt(config?.columnwidth, 10) };
 
@@ -69,7 +78,6 @@ const Atom_date: FC<PropsType> = ({
     });
   };
 
-  let nowDate = moment();
   return (
     <>
       <div
@@ -103,7 +111,7 @@ const Atom_date: FC<PropsType> = ({
             id={config.paramrealpath}
             // placeholder="Огноо сонгох"
             placeholder={config?.placeholdername || "Огноо сонгох"}
-            // defaultValue={nowDate.format("YYYY-MM-DD")}
+            defaultValue={dayjs(nowDate, dateFormat)}
             // moment(
             //   getAtomValue(
             //     config,

@@ -188,8 +188,10 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       if (data.status === "success") {
         notification.success({ message: "Амжилттай бүртгэгдлээ" });
         console.log("object :>> ", data);
+
         setResultForm(data);
         setLoadingForm(false);
+        window.location.href = "/page/sell/pay";
       } else {
         setResultForm(data);
         notification.warning({

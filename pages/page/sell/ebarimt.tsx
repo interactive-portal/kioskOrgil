@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../kioskLayout";
 import Qpay from "@/components/project/riverclub/v1/qpay/qpay";
 import { useRouter } from "next/navigation";
+import Title from "@/components/common/Title";
 
 const Ebarimt = () => {
   const router = useRouter();
@@ -53,8 +54,7 @@ const Ebarimt = () => {
   );
 
   const renderPaymentView = () => (
-    <div className="mt-[300px]">
-      <p className="text-[90px] text-[#A68B5C]">ТӨЛБӨР ТӨЛӨХ </p>
+    <div className="flex flex-col">
       <button
         className="h-[174px] w-[844px] bg-white rounded-full text-[#525050] text-[64px] mt-[80px] uppercase"
         onClick={() => setView("card")}
@@ -94,7 +94,10 @@ const Ebarimt = () => {
 
   return (
     <Layout>
-      {renderPaymentView()}
+      <div className="mx-auto  flex flex-col py-6 px-6">
+        <Title title="ТӨЛБӨР ТӨЛӨХ"></Title>
+        {renderPaymentView()}
+      </div>
       {/* {view === "default" && renderDefaultView()}
       {view === "organization" && renderOrganizationView()}
       {view === "payment" && renderPaymentView()}

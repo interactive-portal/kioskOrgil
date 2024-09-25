@@ -22,7 +22,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
           <span>СЕРИАЛ ДУГААР</span>
           <span className="bg-[#d9d9d94f] text-white px-6 py-2 rounded-3xl">
             {/* {user[0]?.customername} */}
-            {data.serialnumber || "--"}
+            {data.serialnumber || data.contractcode || "--"}
           </span>
         </div>
         <div className="flex justify-between flex-col gap-y-2 ">
@@ -59,7 +59,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
           <span>ЭХЛЭХ ДУУСАХ ОГНОО</span>
           <span className="bg-[#d9d9d94f] text-white px-6 py-2 rounded-3xl">
             {moment(data?.startdate).format("YYYY-MM-DD")} /<> </>
-            {moment(data?.endate).format("YYYY-MM-DD")}
+            {moment(data?.enddate).format("YYYY-MM-DD")}
           </span>
         </div>
       </div>

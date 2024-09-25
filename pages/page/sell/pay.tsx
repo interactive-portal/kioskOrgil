@@ -5,6 +5,7 @@ import { FC, useState } from "react";
 import Layout from "../kioskLayout";
 import { useRouter } from "next/navigation";
 import Warning from "./warning";
+import Title from "@/components/common/Title";
 
 type PropsType = {
   item?: any;
@@ -162,7 +163,7 @@ const Pay: FC<PropsType> = ({ item, contractId }) => {
             </div>
             <div
               className="bg-[#A68B5C] text-white text-[70px] rounded-[87px]  mt-[200px] py-8"
-              onClick={() => router.push("/page/sell/warning")}
+              onClick={() => router.push("/page/sell/ebarimt")}
             >
               ТӨЛБӨР ТӨЛӨХ
             </div>
@@ -173,8 +174,10 @@ const Pay: FC<PropsType> = ({ item, contractId }) => {
 
   return (
     <Layout>
-      <p className="text-[90px] text-[#A68B5C] ">ТӨЛБӨР ТӨЛӨХ</p>
-      {content()}
+      <div className="mx-auto  flex flex-col py-6 px-6">
+        <Title title="ТӨЛБӨР ТӨЛӨХ"></Title>
+        {content()}
+      </div>
     </Layout>
   );
 };

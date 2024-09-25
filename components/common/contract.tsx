@@ -7,6 +7,14 @@ interface TitleProps {
 }
 
 const ontractItem: React.FC<TitleProps> = ({ data }) => {
+  // console.log("object :>> ", data);
+  // if (!data)
+  //   return (
+  //     <>
+  //       {" "}
+  //       <div className="flex flex-col">no data</div>
+  //     </>
+  //   );
   return (
     <div className="flex flex-col">
       {data?.map((item: any, index: any) => (

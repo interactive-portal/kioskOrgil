@@ -1,5 +1,5 @@
 import Layout from "../kioskLayout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Spin } from "antd";
 import CheckUser from "./checkUser";
 import { useRouter } from "next/router";
@@ -13,6 +13,7 @@ const Extend = () => {
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
   const [loading, setLoading] = useState(false); // State for loading
   const [user, setUser] = useState<any>(); // State for loading
+  const [customerId, setCustomerId] = useState<any>(); // State for loading
   const [err, setErr] = useState<any>(false); // State for loading
   const router = useRouter(); // Next.js router for redirection
 
@@ -42,8 +43,10 @@ const Extend = () => {
         if (data.result.length > 0) {
           setErr(false);
           setUser(data.result);
+          setLoading(false);
         } else {
           // alert("No user found for the given register number.");
+          setLoading(false);
           setErr(true);
         }
       } catch (error) {
@@ -70,7 +73,7 @@ const Extend = () => {
     );
   };
 
-  const clickCamera = () => {
+  const clickCamera = async () => {
     // setContentType("opencamera");
     var ws = new WebSocket(`${process.env.NEXT_PUBLIC_FACECAMERA_URL}`);
 
@@ -85,10 +88,17 @@ const Extend = () => {
       console.log("resresssssss", res);
 
       if (res?.status == "success") {
+        const customerId = res?.result?.customerId;
+
+        // const data = await fetchData(customerId);
+        setCustomerId(customerId);
         setLoading(true);
+        // alert(res?.result);
 
         ws.send('{"action":"Close"}');
       } else {
+        setErr(true);
+
         // setContentType("error");
       }
     };
@@ -107,6 +117,12 @@ const Extend = () => {
       // }
     };
   };
+
+  useEffect(() => {
+    if (customerId) {
+      fetchData(customerId);
+    }
+  }, [customerId]);
 
   return (
     <Layout>
@@ -152,7 +168,7 @@ const Extend = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="lg:py-10 text-[#525050] md:text-[36px] xs:text-[20px] rounded-full w-full pl-20 pr-10"
+              className="lg:py-16 text-[#525050] md:text-[36px] xs:text-[20px] rounded-full w-full pl-20 pr-10"
               placeholder="ХАЙЛТ"
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
@@ -177,7 +193,7 @@ const Extend = () => {
               <p className="md:text-[40px] xs:text-[20px]">ХАЙЛТ</p>
               <img
                 src="/images/Face_id_white.png"
-                className="md:max-w-[80px] md:max-h-[80px] xs:max-w-[40px]"
+                className="md:max-w-[80px] md:max-h-[80px] xs:max-w-[35px]"
               />
             </button>
           </div>

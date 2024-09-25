@@ -35,7 +35,6 @@ const KioskFormWrapper: FC<PropsType> = ({
 
   const handleSubmitTerms = async (e: any) => {
     // e.preventDefault();
-    console.log("e :>> ");
     setModalTerms(true);
   };
 
@@ -61,13 +60,6 @@ const KioskFormWrapper: FC<PropsType> = ({
           className="box-footer flex py-6 w-full  gap-2 px-8  cursor-pointer "
           onClick={handleSubmitTerms}
         >
-          {/* <input
-            type="checkbox"
-            checked={termsValue}
-            className="text-[16px]  appearance- w-[20px] h-[20px] border-2 border-blue-500 rounded-sm"
-            onChange={handleSubmitTerms}
-          /> */}
-
           <span className="w-10 h-10 border rounded border-white  inline "></span>
           {/* <div className="w-10 h10 rounded border border-[#67748E] inline-block"></div> */}
           <span className="text-white text-[20px] pt-2">
