@@ -78,6 +78,11 @@ const Ebarimt = () => {
     </div>
   );
 
+  const itemParent =
+    (localStorage.getItem("price") &&
+      JSON.parse(localStorage.getItem("price") || "")) ||
+    {};
+
   const handleQpayPayment = async () => {
     setView("receipt");
   };
@@ -103,7 +108,7 @@ const Ebarimt = () => {
         {view === "receipt" && renderReceiptView()}
         {view === "card" && renderCardReceiptView()}
 
-        {view === "qpay" && <Qpay />}
+        {view === "qpay" && <Qpay item={itemParent} />}
       </div>
 
       {/* {view === "qpay" && <Qpay onPaymentSuccess={handleQpayPayment} />} */}

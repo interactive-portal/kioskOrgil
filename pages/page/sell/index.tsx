@@ -132,7 +132,7 @@ const Sell = () => {
       JSON.parse(localStorage.getItem("price") || "")) ||
     {};
 
-  console.log("itemParent :>> ", itemParent);
+  // console.log("itemParent :>> ", itemParent);
 
   return (
     <>
