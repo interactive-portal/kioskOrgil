@@ -2,6 +2,11 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+
+  // localStorage.removeItem("price");
+  // localStorage.removeItem("product");
+  // localStorage.removeItem("enddate");
+  // localStorage.removeItem("imgStr");
   //max-w-[1080px]
   return (
     <div
