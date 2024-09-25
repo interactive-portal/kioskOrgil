@@ -107,7 +107,6 @@ const Ebarimt = () => {
         {view === "payment" && renderPaymentView()}
         {view === "receipt" && renderReceiptView()}
         {view === "card" && renderCardReceiptView()}
-
         {view === "qpay" && <Qpay item={itemParent} />}
       </div>
 
