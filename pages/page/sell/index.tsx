@@ -55,9 +55,9 @@ const Sell = () => {
     },
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   const fetchData = async () => {
     const result = await fetchJson(
@@ -105,13 +105,13 @@ const Sell = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <Layout>
-        <Spin fullscreen size="large" />
-      </Layout>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Layout>
+  //       <Spin fullscreen size="large" />
+  //     </Layout>
+  //   );
+  // }
 
   const content = () => {
     switch (contentType) {

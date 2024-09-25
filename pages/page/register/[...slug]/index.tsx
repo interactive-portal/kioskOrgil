@@ -4,10 +4,22 @@ import _ from "lodash";
 import { numberWithCommas } from "@/util/helper";
 import Price from "@/components/custom/price";
 import RegisterLayout from "@/components/orgil/registerLayout";
+import Layout from "../../kioskLayout";
+import Title from "@/components/common/Title";
 
 const Page = (props: any) => {
   const router = useRouter();
   const data = props?.dataSrc || [];
+  if (data.length <= 0)
+    return (
+      <>
+        <Layout>
+          <div className=" flex flex-col gap-y-10 ">
+            <Title title="no data"></Title>
+          </div>
+        </Layout>
+      </>
+    );
 
   const groupByData = _.chain(data)
     .groupBy("name")

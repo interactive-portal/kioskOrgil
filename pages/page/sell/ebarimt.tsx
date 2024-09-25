@@ -71,7 +71,7 @@ const Ebarimt = () => {
         className="uppercase h-[174px] text-[#525050] w-[844px] bg-white rounded-full text-[64px] mt-[50px]"
         onClick={() => setView("qpay")}
       >
-        Q Pay
+        QPay
       </button>
     </div>
   );
@@ -94,11 +94,12 @@ const Ebarimt = () => {
 
   return (
     <Layout>
-      {view === "default" && renderDefaultView()}
+      {renderPaymentView()}
+      {/* {view === "default" && renderDefaultView()}
       {view === "organization" && renderOrganizationView()}
       {view === "payment" && renderPaymentView()}
       {view === "receipt" && renderReceiptView()}
-      {view === "card" && renderCardReceiptView()}
+      {view === "card" && renderCardReceiptView()} */}
       {/* {view === "qpay" && <Qpay onPaymentSuccess={handleQpayPayment} />} */}
     </Layout>
   );

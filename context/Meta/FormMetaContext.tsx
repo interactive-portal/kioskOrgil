@@ -186,13 +186,6 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       });
 
       if (data.status === "success") {
-        // if (processConfig.metadatacode.toLowerCase() === "clcreateuser_001") {
-        //   notification.success({ message: "Амжилттай бүртгэгдлээ" });
-        //   Router.push("/");
-        // } else if (!isCustomMsg) {
-        //   notification.success({ message: "Амжилттай хадгалагдлаа" });
-        // }
-
         notification.success({ message: "Амжилттай бүртгэгдлээ" });
         console.log("object :>> ", data);
         setResultForm(data);
@@ -266,14 +259,3 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 };
 
 export default FormMetaContext;
-
-// function ChangeEventInput(
-//   name: any,
-//   formDataInitDataClone: any,
-//   processConfig: any,
-//   processExpressionClone: any,
-//   setProcessExpression: Dispatch<any>,
-//   setFormExternalData: (payload: any) => Promise<void>
-// ) {
-//   throw new Error("Function not implemented.");
-// }

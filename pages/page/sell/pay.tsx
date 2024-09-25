@@ -122,7 +122,7 @@ const Pay: FC<PropsType> = ({ item, contractId }) => {
                 setContentType("qpay");
               }}
             >
-              q pay
+              Qpay
             </div>
           </div>
         );
