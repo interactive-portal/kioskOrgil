@@ -3,6 +3,7 @@ import Layout from "../kioskLayout";
 import Qpay from "@/components/project/riverclub/v1/qpay/qpay";
 import { useRouter } from "next/navigation";
 import Title from "@/components/common/Title";
+import SocialPay from "@/components/project/riverclub/v1/qpay/socailpay";
 
 const Ebarimt = () => {
   const router = useRouter();
@@ -10,13 +11,6 @@ const Ebarimt = () => {
   const LOCAL_STORAGE_KEY = "orderInfo";
 
   const [order, setOrder] = useState<any>();
-
-  // const itemParent =
-  //   (localStorage.getItem("item") &&
-  //     JSON.parse(localStorage.getItem("item") || "")) ||
-  //   {};
-
-  // console.log("itemParent :>> ", itemParent);
 
   useEffect(() => {
     const orderData = localStorage.getItem("orderInfo");
@@ -96,7 +90,7 @@ const Ebarimt = () => {
       </button>
       <button
         className=" uppercase h-[174px]  text-[#525050] bg-white rounded-full text-[64px] mt-[50px]"
-        onClick={() => setView("qpay")}
+        onClick={() => setView("socialPay")}
       >
         Social Pay
       </button>
@@ -130,6 +124,7 @@ const Ebarimt = () => {
         {view === "receipt" && renderReceiptView()}
         {view === "card" && renderCardReceiptView()}
         {view === "qpay" && <Qpay item={jsonData} />}
+        {view === "socialPay" && <SocialPay item={jsonData} />}
       </div>
 
       {/* {view === "qpay" && <Qpay onPaymentSuccess={handleQpayPayment} />} */}

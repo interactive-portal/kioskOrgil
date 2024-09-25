@@ -34,6 +34,7 @@ const Sell = () => {
     const result = await fetchJson(
       `/api/get-process?command=fitKioskContractDtlData_GET_004&parameters=${params}`
     );
+    // console.log("result :>> ", result);
     if (result?.status == "success") {
       const res = await axios.post(`/api/post-process`, {
         processcode: "fitKioskContractIsConfirm_DV_001",
@@ -55,9 +56,11 @@ const Sell = () => {
     fetchData();
   }, [cid]);
 
+  // console.log("item :>> ", item);
   if (!item) {
     return (
       <Layout>
+        No order id
         <Spin fullscreen size="large" />
       </Layout>
     );
