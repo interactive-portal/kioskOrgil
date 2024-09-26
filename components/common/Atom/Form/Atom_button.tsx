@@ -44,11 +44,11 @@ const Atom_button: FC<PropsType> = ({
 
       if (res?.status == "success") {
         handleChangeContext({
-          name: "image",
-          value: res?.result?.image,
+          name: "value",
+          value: res?.result?.value,
         });
 
-        localStorage?.setItem("imgStr", res?.result?.value);
+        localStorage?.setItem("imgStr", res?.result?.image);
         // setLoading(true);
         // setCustomer(res?.result);
         // Cookies.set("customer", res?.result);
