@@ -44,7 +44,7 @@ const Atom_button: FC<PropsType> = ({
 
       if (res?.status == "success") {
         handleChangeContext({
-          name: "value",
+          name: "imageValue",
           value: res?.result?.value,
         });
 
