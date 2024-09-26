@@ -48,7 +48,7 @@ const Atom_button: FC<PropsType> = ({
           value: res?.result?.image,
         });
 
-        localStorage?.setItem("imgStr", JSON.stringify(res?.result?.value));
+        localStorage?.setItem("imgStr", res?.result?.value);
         // setLoading(true);
         // setCustomer(res?.result);
         // Cookies.set("customer", res?.result);
