@@ -90,7 +90,6 @@ const Extend = () => {
       if (res?.status == "success") {
         const customerId = res?.result?.customerId;
 
-        // const data = await fetchData(customerId);
         setCustomerId(customerId);
         setLoading(true);
         // alert(res?.result);
@@ -117,6 +116,8 @@ const Extend = () => {
       // }
     };
   };
+
+  console.log("customerId :>> ", customerId);
 
   useEffect(() => {
     if (customerId) {
