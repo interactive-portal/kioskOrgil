@@ -19,24 +19,20 @@ const Extend = () => {
 
   // SWR fetcher function for search
   const fetchData = async (query: any) => {
-    const response = await fetchJson(
-      `/api/get-data?metaid=1722853892303075&criteria=${JSON.stringify({
-        filterRegNumber: [
-          {
-            operator: "=",
-            operand: query,
-          },
-        ],
-      })}`
-    );
-    return response;
-  };
-
-  const handleSearch = async () => {
-    if (searchQuery) {
+    if (query) {
       setLoading(true);
       try {
-        const data = await fetchData(searchQuery);
+        // const data = await fetchData(searchQuery);
+        const data = await fetchJson(
+          `/api/get-data?metaid=1722853892303075&criteria=${JSON.stringify({
+            filterRegNumber: [
+              {
+                operator: "=",
+                operand: query,
+              },
+            ],
+          })}`
+        );
 
         console.log("data :>> ", data);
 
@@ -57,6 +53,47 @@ const Extend = () => {
         setLoading(false);
       }
     }
+
+    // const response = await fetchJson(
+    //   `/api/get-data?metaid=1722853892303075&criteria=${JSON.stringify({
+    //     filterRegNumber: [
+    //       {
+    //         operator: "=",
+    //         operand: query,
+    //       },
+    //     ],
+    //   })}`
+    // );
+
+    // return response;
+  };
+
+  const handleSearch = async () => {
+    fetchData(searchQuery);
+    // if (searchQuery) {
+    //   setLoading(true);
+    //   try {
+    //     const data = await fetchData(searchQuery);
+
+    //     console.log("data :>> ", data);
+
+    //     if (data.result.length > 0) {
+    //       setErr(false);
+    //       setUser(data.result);
+    //       setLoading(false);
+    //     } else {
+    //       // alert("No user found for the given register number.");
+    //       setLoading(false);
+    //       setErr(true);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //     // alert("An error occurred while searching.");
+    //     setErr(true);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
   };
 
   const renderField = (field: any) => {
