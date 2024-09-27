@@ -169,7 +169,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 
     const valid = validateForm(formdata, processConfig);
 
-    console.log(`formDataInitData save:: `, formdata);
+    // console.log(`formDataInitData save:: `, formdata);
 
     if (valid) {
       setValidData(valid);
@@ -187,10 +187,9 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 
       if (data.status === "success") {
         notification.success({ message: "Амжилттай бүртгэгдлээ" });
-        // console.log("object :>> ", data);
+        console.log("object :>> ", data);
         setResultForm(data);
         setLoadingForm(false);
-
         window.location.href = `/page/sell?id=${data.result.id}`;
       } else {
         setResultForm(data);
