@@ -4,6 +4,8 @@ import Qpay from "@/components/project/riverclub/v1/qpay/qpay";
 import { useRouter } from "next/navigation";
 import Title from "@/components/common/Title";
 import SocialPay from "@/components/project/riverclub/v1/qpay/socailpay";
+import axios from "axios";
+import Payment from "@/components/project/riverclub/v1/payment/payment";
 
 const Ebarimt = () => {
   const router = useRouter();
@@ -109,9 +111,31 @@ const Ebarimt = () => {
     </div>
   );
 
+  const checkPayment = () => {
+    Payment(
+      Number("111"),
+      process.env.NEXT_PUBLIC_TERMINAL_ID,
+      process.env.NEXT_PUBLIC_DEVICE_TYPE,
+      function (item: any) {
+        console.log("payment result backasdasdasd", item);
+        if (item?.status == "success") {
+          // setPaymentResult(item);
+          // paymentProcess(item, "pos");
+        } else {
+          // setSelectDateModal(false);
+          // notification.error({
+          //   message: item?.text,
+          // });
+        }
+      }
+    );
+  };
+
   const renderCardReceiptView = () => (
     <div className="min-h-[900px] flex items-center justify-center mt-[250px]">
-      <p className="text-white text-[64px]">ТА КАРТАА УНШУУЛНА УУ!</p>
+      <p className="text-white text-[64px] " onClick={() => checkPayment()}>
+        ТА КАРТАА УНШУУЛНА УУ!
+      </p>
     </div>
   );
 
