@@ -247,7 +247,7 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
                     background: "var(--green-main, #BAD405)",
                   }}
                   onClick={() => {
-                    setSelectDateModal(false);
+                    // setSelectDateModal(false);
                     // setModalContent("pay");
                     Cookies.remove("customer");
                   }}
