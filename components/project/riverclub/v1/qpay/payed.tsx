@@ -73,7 +73,7 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
         ? {
             subTotal: Number(item?.saleprice),
             total: Number(item?.saleprice),
-            customerId: session?.customerId,
+            customerId: 12, // customerid
             vat: Number(item?.vat),
             contractId: contract,
             fitKioskSalesDtlNew_DV: {
@@ -102,7 +102,7 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
         : {
             subTotal: Number(item?.saleprice),
             total: Number(item?.saleprice),
-            customerId: session?.customerId,
+            customerId: 12, // customerid
             vat: Number(item?.vat),
             contractId: contract,
             fitKioskSalesDtlNew_DV: {
