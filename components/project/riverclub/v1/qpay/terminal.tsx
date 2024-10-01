@@ -2,7 +2,7 @@
 
 import moment from "moment";
 
-export default function bankIpTerminalTransfer(
+export default function BankIpTerminalTransfer(
   amount: any,
   terminalId: any,
   deviceType: any,
@@ -23,7 +23,7 @@ export default function bankIpTerminalTransfer(
       dvctype = "databank";
     }
     bankCheckIpTerminal(terminalId, deviceType, function () {
-      //   console.log("as");
+      console.log("as");
     });
     // else if (deviceType == "golomtbank") {
     //   dvctype = "glmt";
@@ -91,7 +91,7 @@ export default function bankIpTerminalTransfer(
       console.log("smsm", jsonData);
 
       if (jsonData.status == "success") {
-        var getParse = JSON.parse(jsonData.details[0].value);
+        let getParse: any = JSON.parse(jsonData.details[0].value);
         var resultIpTerminal: any = { status: "success" };
 
         console.log("resultIpTerminal", getParse);
@@ -110,6 +110,8 @@ export default function bankIpTerminalTransfer(
             callback(resultIpTerminal);
             return;
           } else {
+            console.log("getParse err", getParse);
+
             callback({
               status: "error",
               code: getParse["response"]["response_code"],

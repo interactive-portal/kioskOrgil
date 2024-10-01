@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Payment from "@/components/project/riverclub/v1/payment/payment";
 import Payed from "./payed";
+import BankIpTerminalTransfer from "./terminal";
 export default function PosTerminal({
   item,
   close,
@@ -24,15 +25,16 @@ export default function PosTerminal({
 }) {
   console.log("item :>> ", item);
 
-  Payment(
-    Number("100"),
+  BankIpTerminalTransfer(
+    Number("50"),
     // Number(item?.amount),
     process.env.NEXT_PUBLIC_TERMINAL_ID,
     process.env.NEXT_PUBLIC_DEVICE_TYPE,
     function (item: any) {
-      // console.log("payment result backasdasdasd", item);
+      console.log("payment result backasdasdasd", item);
       if (item?.status == "success") {
         // setPaymentResult(item);
+        console.log("item :>> pos  ", item);
         Payed(item, "pos");
       } else {
         notification.error({
