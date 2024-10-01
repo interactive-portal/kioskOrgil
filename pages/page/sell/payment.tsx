@@ -6,6 +6,7 @@ import Title from "@/components/common/Title";
 import SocialPay from "@/components/project/riverclub/v1/qpay/socailpay";
 import axios from "axios";
 import Payment from "@/components/project/riverclub/v1/payment/payment";
+import PosTerminal from "@/components/project/riverclub/v1/qpay/posTerminal";
 
 const Ebarimt = () => {
   const router = useRouter();
@@ -21,6 +22,8 @@ const Ebarimt = () => {
   }, [order]);
 
   const jsonData = order ? JSON.parse(order) : {};
+
+  console.log("jsonData :>> ", jsonData);
 
   if (!jsonData)
     return (
@@ -111,7 +114,7 @@ const Ebarimt = () => {
     </div>
   );
 
-  const checkPayment = () => {
+  const checkPayment = (data: any) => {
     Payment(
       Number("111"),
       process.env.NEXT_PUBLIC_TERMINAL_ID,
@@ -133,7 +136,10 @@ const Ebarimt = () => {
 
   const renderCardReceiptView = () => (
     <div className="min-h-[900px] flex items-center justify-center mt-[250px]">
-      <p className="text-white text-[64px] " onClick={() => checkPayment()}>
+      <p
+        className="text-white text-[64px] "
+        //  onClick={() => checkPayment()}
+      >
         ТА КАРТАА УНШУУЛНА УУ!
       </p>
     </div>
@@ -146,7 +152,7 @@ const Ebarimt = () => {
         {view === "organization" && renderOrganizationView()}
         {view === "payment" && renderPaymentView()}
         {view === "receipt" && renderReceiptView()}
-        {view === "card" && renderCardReceiptView()}
+        {view === "card" && <PosTerminal item={jsonData} />}
         {view === "qpay" && <Qpay item={jsonData} />}
         {view === "socialPay" && <SocialPay item={jsonData} />}
       </div>

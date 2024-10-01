@@ -50,7 +50,6 @@ export default function Qpay({
       amount: Number(item?.amount),
       callback_url: "http://localhost:4000/",
     };
-    console.log("params qpay", params);
     const { data } = await axios.post(`/api/post-process`, {
       processcode: "QPAY_V2_CREATEINVOICE_SIMPLE",
       parameters: params,
