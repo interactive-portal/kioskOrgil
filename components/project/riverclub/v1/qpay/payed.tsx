@@ -14,6 +14,7 @@ type PropsType = {
 
 const Payed: FC<PropsType> = ({ item, contract, type }) => {
   const [modalContent, setModalContent] = useState("pay");
+  const [selectDateModal, setSelectDateModal] = useState<any>(false);
   const [paymentResult, setPaymentResult] = useState<any>();
   const [qpayResult, setQpayResult] = useState<any>();
 
@@ -371,9 +372,6 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
                   onClick={() => {
                     setSelectDateModal(false);
                     deleteContract();
-                    if (setModal) {
-                      setModal("date");
-                    }
                   }}
                 >
                   БОЛИХ
