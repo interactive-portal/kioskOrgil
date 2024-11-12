@@ -168,7 +168,11 @@ export default function BankIpTerminalTransfer(
           callback(resultIpTerminal);
         }
       } else {
-        callback({ status: "error", code: "", text: jsonData.description });
+        callback({
+          status: "error",
+          code: "nnnnnnnn",
+          text: jsonData.description,
+        });
         return;
       }
     };
@@ -184,6 +188,7 @@ export default function BankIpTerminalTransfer(
 
     ws.onclose = function () {
       console.log("Connection is closed...");
+      callback({ status: "error", code: "", text: "not Terminal!" });
     };
   } else {
     var resultJson = {

@@ -13,7 +13,7 @@ type PropsType = {
 };
 
 const Payed: FC<PropsType> = ({ item, contract, type }) => {
-  const [modalContent, setModalContent] = useState("pay");
+  const [modalContent, setModalContent] = useState("pos");
   const [selectDateModal, setSelectDateModal] = useState<any>(false);
   const [paymentResult, setPaymentResult] = useState<any>();
   const [qpayResult, setQpayResult] = useState<any>();
@@ -43,28 +43,7 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
   const [contractId, setContractId] = useState();
   const [loading, setLoading] = useState(false);
 
-  console.log("contract", contract);
-
-  const checkPayment = () => {
-    setModalContent("card");
-    Payment(
-      Number(item?.saleprice),
-      process.env.NEXT_PUBLIC_TERMINAL_ID,
-      process.env.NEXT_PUBLIC_DEVICE_TYPE,
-      function (item: any) {
-        console.log("payment result backasdasdasd", item);
-        if (item?.status == "success") {
-          setPaymentResult(item);
-          paymentProcess(item, "pos");
-        } else {
-          setSelectDateModal(false);
-          notification.error({
-            message: item?.text,
-          });
-        }
-      }
-    );
-  };
+  console.log("contract", item);
 
   const paymentProcess = async (payment: any, type: any) => {
     setLoading(true);
@@ -127,7 +106,7 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
       processcode: "fitKioskSalesNew_DV_001",
       parameters: param,
     });
-    // console.log(param);
+    console.log(param);
     if (res?.data?.status == "success") {
       // console.log("processoos irsen resposne", res);
       setPrintOptions({
@@ -152,12 +131,14 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
           templateIds: res?.data?.result?.templateId,
         },
       });
+
       const ebarimtResult = await axios.post(`/api/post-process`, {
         processcode: "kiosk_Ebarimt_Send",
         parameters: {
           id: res?.data?.result?.id,
         },
       });
+
       if (ebarimtResult?.data?.status == "success") {
         setLoading(false);
         setContractId(res?.data?.result?.id);
@@ -181,44 +162,24 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
   };
 
   // console.log(loading);
-  const deleteContract = async () => {
-    const res = await axios.post(`/api/post-process`, {
-      processcode: "fitKioskDeleteContract_DV_005",
-      parameters: {
-        id: contract,
-      },
-    });
-    if (res?.data?.status == "success") {
-      notification.success({
-        message: "Амжилттай цуцлагдлаа",
-      });
-    } else {
-      alert(res?.data?.error);
-    }
-  };
+  // const deleteContract = async () => {
+  //   const res = await axios.post(`/api/post-process`, {
+  //     processcode: "fitKioskDeleteContract_DV_005",
+  //     parameters: {
+  //       id: contract,
+  //     },
+  //   });
+  //   if (res?.data?.status == "success") {
+  //     notification.success({
+  //       message: "Амжилттай цуцлагдлаа",
+  //     });
+  //   } else {
+  //     alert(res?.data?.error);
+  //   }
+  // };
 
   const content = () => {
     switch (modalContent) {
-      case "card":
-        return (
-          <div
-            className="flex items-center justify-center h-full mx-auto "
-            id="divcontents"
-          >
-            <div
-              className="w-[424px] h- box-border relative rounded"
-              style={{
-                background: "var(--202020, #202020)",
-              }}
-            >
-              <div className="p-[30px]">
-                <p className="text-[#BAD405] text-[22px] uppercase font-bold">
-                  Картаа уншуулна уу
-                </p>
-              </div>
-            </div>
-          </div>
-        );
       case "success":
         return (
           <div className="flex items-center justify-center h-full mx-auto">
@@ -327,69 +288,7 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
           </div>
         );
       default:
-        return (
-          <div className=" h-full w-full">
-            <div
-              className="w-full h-full box-border relative rounded"
-              style={{
-                background: "var(--202020, #202020)",
-              }}
-            >
-              <div className="p-[30px]">
-                <p className="text-[#BAD405] text-[28px] uppercase font-bold">
-                  Төлбөр төлөх
-                </p>
-                <div className="rounded-lg border border-[#00B0AB]  mt-[50px] py-4">
-                  <div className="text-[16px] text-center text-white my-4">
-                    ТА QPAY БОЛОН ӨӨРИЙН БАНКНЫ КАРТААР ТӨЛБӨРӨӨ ТӨЛӨХ
-                    БОЛОМЖТОЙ.
-                  </div>
-                  <div className="flex flex-col gap-[20px] py-[10px] border rounded-lg mx-[25px] border-white font-bold text-[32px] text-white px-4">
-                    <div className="flex items-center gap-x-10">
-                      <p className="">{item?.classificationname}</p>
-                      <p>{item?.saleprice}₮</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-x-6 text-white text-[32px] uppercase font-bold mx-[25px] py-[20px] ">
-                    <p className="">Үнийн дүн </p>
-                    <p className="font-bold">{item?.saleprice}₮</p>
-                  </div>
-                  <Qpay
-                    item={item}
-                    setPay={setQpayResult}
-                    paymentProcess={paymentProcess}
-                    setModalContent={setModalContent}
-                  />
-                </div>
-              </div>
-              <div className="pb-[20px] w-full flex gap-[16px] px-[100px] cursor-pointer">
-                <div
-                  className="w-full italic text-[20px] text-center uppercase rounded-[8px] font-medium py-2 flex items-center justify-center"
-                  style={{
-                    color: "#C4C4C4",
-                    background: "#272A32",
-                  }}
-                  onClick={() => {
-                    setSelectDateModal(false);
-                    deleteContract();
-                  }}
-                >
-                  БОЛИХ
-                </div>
-                <div
-                  className="w-full  text-[20px] text-center uppercase rounded-[8px] font-medium py-2 italic"
-                  style={{
-                    color: "var(--202020, #202020)",
-                    background: "var(--green-main, #BAD405)",
-                  }}
-                  onClick={() => checkPayment()}
-                >
-                  КАРТААР ТӨЛӨХ
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+        return <div className=" h-full w-full">loading</div>;
     }
   };
 
