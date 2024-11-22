@@ -13,93 +13,190 @@ type PropsType = {
 const Terms: FC<PropsType> = ({ data, options }) => {
   return (
     <div className="">
-      <body id="terms-and-conditions">
-        <div className="container-fluid">
-          <div className="row terms-and-conditions-section">
-            <div className="col-xs-12 text-center">
-              <h1 className="title">Terms and Conditions</h1>
+      <div className="flex flex-col">
+        <div className="mt-2 shadow-lg  p-4 bg-white rounded-2xl h-[450px] overflow-auto transition-max-height duration-300 ease-in-out scrollbar-thumb-gray-300  scrollbar-track-gray-200 scrollbar-thin hover:scrollbar-thumb-gray-300 -dark scrollbar-thumb-rounded-full">
+          <div className="flex flex-col text-base ">
+            <div className="flex flex-col gap-2">
+              <p>
+                &nbsp; &nbsp; &nbsp; &nbsp; Хэрэглэгч нь BB ХХК” /цаашид
+                <b> “Үйлчилгээ үзүүлэгч”</b> гэх/-ийн хэрэглэгчдээ үзүүлэх kiosk
+                /цаашид “Систем” гэх/ үйлчилгээг авахдаа дор дурдсан
+                нөхцөлүүдийг бүрэн ойлгож, хүлээн зөвшөөрсөн болно. Энэ нь цахим
+                үйлчилгээний нөхцөл/Цаашид <b>“Үйлчилгээний нөхцөл”</b> гэх
+                /-ийг бүрэн ойлгож, хүлээн зөвшөөрсөн, холбогдох гэрээг бичгээр
+                байгуулсантай адилаар тооцогдоно.
+              </p>
             </div>
-
-            <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-              <div className="content">
-                <ul>
-                  <li>
-                    for any illegal purpose, in any manner inconsistent with
-                    applicable laws, regulations, or ordinances, or to submit,
-                    post, upload, or otherwise transmit any Customer Data or
-                    Content that is unlawful, defamatory, libelous, invasive of
-                    another's privacy, abusive, threatening, harassing, vulgar,
-                    obscene, indecent or otherwise objectionable;
-                  </li>
-                  <li>
-                    to submit, post, upload or otherwise transmit any Customer
-                    Data or Content that infringes or otherwise violates the
-                    rights of any third party, including without limitation
-                    privacy rights, fiduciary rights and proprietary rights;
-                  </li>
-                  <li>
-                    to submit, post, upload or otherwise transmit Customer Data
-                    or Content that contains viruses, corrupted files, or any
-                    other similar software or programs that may damage the
-                    operation of Project Hub or another person's computer; or
-                  </li>
-                  <li>
-                    if you are a person barred from receiving Project Hub under
-                    the laws of the United States or other countries, including
-                    the country in which you are resident or from which you use
-                    Project Hub.
-                  </li>
-                </ul>
-
-                <h2 className="section-title">
-                  2. Cancellation and Termination
-                </h2>
-                <p>
-                  To cancel your subscription, account, and access to Project
-                  Hub, send us an email at{" "}
-                  <a href="mailto:hi@tryprojecthub.com?Subject=Cancel+Subscription">
-                    hi@tryprojecthub.com
-                  </a>{" "}
-                  instructing us to do so or cancel via the functionality on the
-                  Waffle website.
-                </p>
-                <p>
-                  You agree that Xmartlabs, in its sole discretion and for any
-                  or no reason, may terminate or suspend your account.
-                </p>
-
-                <h2 className="section-title">3. Customer Data</h2>
-                <p>
-                  u and Xmartlabs, Xmartlabs shall own all compilations of the
-                  Aggregated Data, including all reports, statistics or analyses
-                  created or derived therefrom.
-                </p>
-                <p>
-                  You understand that projects in Project Hub will display
-                  Customer Data to you and any collaborators that you designate
-                  for that project.
-                </p>
-
-                <h2 className="section-title">4. Ideas and Feedback</h2>
-                <p>
-                  As part of your use of Project Hub, you may choose, or we may
-                  invite you, to submit comments, feedback or ideas about Ideas
-                  as proprietary or confidential.
-                </p>
-
-                <p>Version 1.0, June 7, 2017</p>
-              </div>
+            <div className="flex flex-col gap-2 ">
+              <span className="text-[#000] leading-[26px] md:leading-4 font-bold text-[16px] cloud-list text-center mt-4">
+                НЭГ. СИСТЕМД НЭВТРЭХ
+              </span>
+              <ul className="list-outside pl-2 ">
+                <li className=" flex gap-4">
+                  <span> 1.1.</span>
+                  <p>
+                    Системийн хэвийн үйл ажиллагаа алдагдвал модуль, тайлан
+                    мэдээ, цонх зэрэг бүхий л талбарт гарсан алдааг нийлүүлэгч
+                    талаар түргэн шуурхай асуудлыг шийдвэрлүүлэх эрхтэй.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 1.2.</span>
+                  <p>
+                    Системд ашиглагдах хэрэглэгчийн нууц үг, цахим шууданд
+                    илгээдэг нэвтрэх холбоос, нууц үг солих холбоосны аюулгүй
+                    байдлыг хэрэглэгч хариуцна.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 1.3.</span>
+                  <p>
+                    Системийн хэрэглэгчийн нэвтрэх нэр, нууц үгийг бусдад хууль
+                    бус зорилгоор дамжуулах, ашиглуулахыг хориглоно.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 1.4.</span>
+                  <p>
+                    Үйлчлүүлэгч нь системд нэвтрэх нэр, нууц үгээ бусдад алдсан,
+                    шилжүүлсэн эсхүл зөвшөөрөлгүй таны хувийн мэдээлэлд хандсан
+                    нөхцөл байдал үүссэн гэж үзвэл энэ тухай яаралтай Үйлчилгээ
+                    үзүүлэгчид мэдэгдэж, хэрэглэгч нууц үгээ солих үүрэгтэй.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div className="flex flex-col gap-2 ">
+              <span className="text-[#000] leading-[26px] md:leading-4 font-bold text-[16px] cloud-list text-center mt-4">
+                ХОЁР. ХЭРЭГЛЭГЧИЙН ЭРХ, ҮҮРЭГ
+              </span>
+              <ul className="list-outside pl-2 ">
+                <li className=" flex gap-4">
+                  <span> 2.1.</span>
+                  <p>
+                    Хэрэглэгч нь систем ашиглах компьютер, сүлжээ, техник
+                    хангамжийг бэлтгэсэн байна.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 2.2.</span>
+                  <p>
+                    Системийн хэвийн үйл ажиллагаа алдагдсан тохиолдол буюу
+                    модуль, тайлан мэдээ, цонх зэрэг бүхий л талбарт гарсан
+                    алдааг Үйлчилгээ үзүүлэгчид мэдэгдэн түргэн шуурхай асуудлыг
+                    шийдвэрлүүлэх эрхтэй.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 2.3.</span>
+                  <p>
+                    Эрх бүхий хэрэглэгчдийн нууц үг болон системийн аюулгүй
+                    байдалтай холбоотой дүрэм журмыг чанд мөрдөж, нууц үгээ
+                    алдахгүй байх, тогтсон хугацаанд нууц үгээ өөрчилдөг байх
+                    зэрэг шаардлагыг хангаж ажиллана.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 2.4.</span>
+                  <p>
+                    Хэрэглэгч нь системийг хэрэглэхдээ интернэт холболтыг
+                    асуудалгүй ажиллагааг хангаж ажиллах үүрэгтэй ба тус үүргээ
+                    биелүүлээгүйгээс үүссэн аливаа асуудлыг Үйлчилгээ үзүүлэгч
+                    хариуцахгүй болно.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div className="flex flex-col gap-2 ">
+              <span className="text-[#000] leading-[26px] md:leading-4 font-bold text-[16px] cloud-list text-center mt-4">
+                ГУРАВ. ҮЙЛЧИЛГЭЭ ҮЗҮҮЛЭГЧИЙН ЭРХ ҮҮРЭГ
+              </span>
+              <ul className="list-outside pl-2 ">
+                <li className=" flex gap-4">
+                  <span> 3.1.</span>
+                  <p>
+                    Хэрэглэгч талд системийг ашиглах хэрэглэгчийн эрхийн
+                    тохиргоо, нэвтрэх хэрэглэгчийн нэр нууц үгийг үүсгэж өгнө.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 3.2.</span>
+                  <p>
+                    Аливаа өөрчлөлт сайжруулалтыг системийн видео хичээл, гарын
+                    авлагат тусган хэрэглэгчид help.ddd.com хаягаар хүргэх
+                    үүрэгтэй.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 3.3.</span>
+                  <p>
+                    Системийн хэвийн үйл ажиллагаатай холбоотой хүсэлт, санал,
+                    гомдлыг даваа-баасан гаригт 09:00-18:00 цагийн хооронд
+                    0000000 дугаарын утсаар хүлээн авч түргэн шуурхай шийдвэрлэх
+                    үүрэгтэй.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 3.4.</span>
+                  <p>
+                    Хэрэглэгч системийн ашиглалтын төлбөрийг төлөөгүй нөхцөлд
+                    системийн ажиллагааг түр хугацаагаар түдгэлзүүлэх эрхтэй.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 3.5.</span>
+                  <p>
+                    Тодорхой бус шалтгааны улмаас системд саатал гарч үйл
+                    ажиллагаа доголдсон тохиолдолд хоёр тал хамтран ажлын 3
+                    хоногийн дотор шалтгааныг тодруулж яаралтай шийдвэрлэнэ.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 3.6.</span>
+                  <p>Системийг зогсолтгүй, найдвартай ажиллуулах үүрэгтэй.</p>
+                </li>
+              </ul>
+            </div>
+            <div className="flex flex-col gap-2 ">
+              <span className="text-[#000] leading-[26px] md:leading-4 font-bold text-[16px] cloud-list text-center mt-4">
+                ДӨРӨВ. ҮЙЛЧИЛГЭЭНИЙ ТӨЛБӨР, ТООЦОО
+              </span>
+              <ul className="list-outside pl-2 ">
+                <li className=" flex gap-4">
+                  <span> 4.1.</span>
+                  <p>
+                    Системийн ашиглалт үйлчилгээний хөлсийг төлөх олон боломжийг
+                    хэрэглэгчид санал болгох ба тухайн төлбөр тооцооны хэлбэрээс
+                    хамаарч гүйлгээний шимтгэл харилцан адилгүй байна.
+                  </p>
+                </li>
+                <li className=" flex gap-4">
+                  <span> 4.2.</span>
+                  <p>
+                    Төлбөрийн нэхэмжлэхийг системээр илгээснээс хойш ажлын 1
+                    хоногт төлбөрийг 100% төлнө.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div className="flex flex-col gap-2 ">
+              <span className="text-[#000] leading-[26px] md:leading-4 font-bold text-[16px] cloud-list text-center mt-4">
+                ТАВ. МЭДЭЭЛЛИЙН НУУЦЛАЛ
+              </span>
+              <ul className="list-outside pl-2 ">
+                <li className=" flex gap-4">
+                  <span> 5.1.</span>
+                  <p>
+                    Байгууллагын нууцын тухай хуулийн дагуу нууцад хамаарах
+                    мэдээ, материалын талаар ямар нэгэн хэлбэрээр гадагш
+                    задруулахгүй байх үүргийг талууд хугацаагүйгээр хүлээнэ.
+                  </p>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-        <footer className="footer">
-          <div className="container-fluid">
-            <div className="row footer-logo-container">
-              <div className="col col-xs-12 text-center">test</div>
-            </div>
-          </div>
-        </footer>
-      </body>
+      </div>
     </div>
   );
 };

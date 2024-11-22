@@ -55,6 +55,37 @@ export function checkDVCriteria(json) {
   }
 }
 
+export function registerNumberToDate(str) {
+  var x = 0;
+  var y = 0;
+  var z = 0;
+  var today = new Date();
+  var yy = today.getFullYear();
+  var ages = 0;
+  var odd = 0;
+  var gender = "";
+
+  x = str.substr(2, 2);
+  y = str.substr(4, 2);
+  z = str.substr(6, 2);
+
+  // 01102210
+  if (y > 20) {
+    x = 2000 + parseInt(x);
+    y = y - 20;
+  } else x = 1900 + parseInt(x);
+  ages = parseInt(yy) - parseInt(x);
+  gender = parseInt(str.substr(8, 1)) % 2;
+  if (!gender) gender = "2";
+  else gender = "1";
+
+  odd = parseInt(str.substr(8, 1)) % 2;
+  var dateOfBirth = x + "-" + y + "-" + z;
+  var year = parseInt(dateOfBirth.substr(0, 4));
+
+  return { year, dateOfBirth, ages, gender };
+}
+
 export function getLocalStorageGet(string) {
   if (localStorage) {
     return localStorage.getItem(string);

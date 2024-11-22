@@ -91,7 +91,6 @@ const KioskFormWrapper: FC<PropsType> = ({
               </button>
             </div>
           )}
-
         <Modal
           footer={false}
           destroyOnClose={true}
@@ -102,11 +101,11 @@ const KioskFormWrapper: FC<PropsType> = ({
           <div className="box p-2">
             <div className="box-header flex pb-4 justify-between">
               <div className="flex flex-row w-full bg-transparent relative items-center gap-1">
-                <div className="flex-none mr-3">
+                {/* <div className="flex-none mr-3">
                   <div>
                     <img src={`/terms.png`} className="w-[40px] h-[40px]" />
                   </div>
-                </div>
+                </div> */}
                 <div className="flex flex-col">
                   <RenderAtom
                     item={{ value: "Үйлчилгээний нөхцөл" }}
@@ -129,9 +128,9 @@ const KioskFormWrapper: FC<PropsType> = ({
               <div className="flex flex-row w-full bg-transparent relative items-center sm:gap-8 gap-3 justify-end">
                 <div
                   onClick={onCloseTerms}
-                  className="group w-[150px] h-[40px] rounded-full bg-blue-400   hover:bg-opacity-50 py-2  text-white cursor-pointer "
+                  className="group w-[150px] h-[40px] rounded-full border border-gray-200   hover:bg-opacity-50 py-2  text-black cursor-pointer "
                 >
-                  <div className="rounded-full flex h-full w-full items-center justify-center bg-[#ffffff]  group-hover:bg-gradient-to-b group-hover:from-[#002961] group-hover:to-[#00A7DC]">
+                  <div className="rounded-full flex h-full w-full items-center justify-center bg-[#ffffff]  hover:text-blue-400">
                     Цуцлах
                   </div>
                 </div>

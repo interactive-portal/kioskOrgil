@@ -1,7 +1,11 @@
 import FormMetaContext from "@/context/Meta/FormMetaContext";
 import { FC, useContext, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { fieldHideShow, getAtomValue } from "@/util/helper";
+import {
+  fieldHideShow,
+  getAtomValue,
+  registerNumberToDate,
+} from "@/util/helper";
 import Atom_label from "./Atom_label";
 type PropsType = {
   config: any;
@@ -36,6 +40,8 @@ const StateRegNumber: FC<PropsType> = ({
       value: e.currentTarget.value,
       rowIndex,
     });
+    const { dateOfBirth } = registerNumberToDate(e.currentTarget.value);
+    localStorage?.setItem("dateOfBirth", dateOfBirth);
   };
 
   const handlerKey = (e: any) => {
@@ -48,14 +54,16 @@ const StateRegNumber: FC<PropsType> = ({
       config?.paramrealpath == "stateregnumber"
     ) {
       if (!regex.test(key)) {
-        setError("Регистрээ зөв оруулна уу латин үсгээр  Жич :АБ80111219");
+        setError("Регистрээ зөв оруулна уу латин үсгээр  Жич: АБ152111514");
         e.preventDefault();
       } else {
         setError("");
       }
     }
   };
+
   // console.log("error :>> ", error);
+
   return (
     <div
       className={`${

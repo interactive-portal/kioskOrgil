@@ -40,12 +40,12 @@ const Register = () => {
       <div className=" flex flex-col gap-y-10 ">
         <Title title="БҮРТГЭЛ"></Title>
         {/* {readyData.map((group) => ( */}
-        <div className="w-4/5 mx-auto flex flex-col gap-6 text-center px-4">
+        <div className=" mx-auto flex flex-col gap-6 text-center px-4">
           {readyData?.map((item: any) => (
             <div
               key={item.id}
               onClick={() => handleItemClick(item)}
-              className="rounded-full text-[64px] xs:text-[30px] py-5 xs:px-6 cursor-pointer obtn"
+              className="rounded-full text-[64px] xs:text-[30px] py-5 xs:px-6 cursor-pointer obtn px-6"
             >
               {item?.itemtypename || item?.name}
             </div>

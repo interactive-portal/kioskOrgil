@@ -13,6 +13,7 @@ import Header from "./Header/Header";
 import RenderField from "./RenderField";
 import useSWR from "swr";
 import KioskFormWrapper from "./KioskFormWrapper";
+import Skeleton from "@/components/common/Skeleton/Skeleton";
 type PropsType = {
   listConfig: any;
   dialog?: any;
@@ -77,6 +78,14 @@ const WidgetKiosk: FC<PropsType> = ({
   };
 
   const { header } = processParams || [];
+  // console.log("header :>> ", processParams);
+
+  if (!processParams)
+    return (
+      <>
+        <Skeleton type="loading" />
+      </>
+    );
 
   const renderTypeView = () => {
     return (

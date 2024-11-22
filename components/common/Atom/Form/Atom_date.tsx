@@ -10,6 +10,7 @@ import EndDate from "./endDate";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import DateOfBirth from "./dateOfBirth";
 
 dayjs.extend(customParseFormat);
 
@@ -61,12 +62,21 @@ const Atom_date: FC<PropsType> = ({
       />
     );
 
+  if (config.paramname == "dateOfBirth")
+    return (
+      <DateOfBirth
+        config={config}
+        sectionConfig={sectionConfig}
+        className={className}
+        rowIndex={rowIndex}
+      />
+    );
+
   const handlerChangeSelectDate = (e: any, dateString: any) => {
     const { paramrealpath } = config;
-
     let d = new Date(dateString);
-    d.setMonth(d.getMonth() + duration);
 
+    d.setMonth(d.getMonth() + duration);
     if (paramrealpath == "startDate") {
       localStorage?.setItem("enddate", d.toLocaleDateString("fr-CA"));
     }
@@ -111,7 +121,7 @@ const Atom_date: FC<PropsType> = ({
             id={config.paramrealpath}
             // placeholder="Огноо сонгох"
             placeholder={config?.placeholdername || "Огноо сонгох"}
-            defaultValue={dayjs(nowDate, dateFormat)}
+            // defaultValue={dayjs(nowDate, dateFormat)}
             // moment(
             //   getAtomValue(
             //     config,

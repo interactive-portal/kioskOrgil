@@ -8,6 +8,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   // localStorage.removeItem("enddate");
   // localStorage.removeItem("imgStr");
   //max-w-[1080px]
+
+  const handlerChange = async (e: any) => {
+    e.preventDefault();
+    // const linkPath = item?.position3?.value;
+    localStorage.clear();
+    const href = "/page";
+    router.push(href, undefined, { scroll: true });
+    // window.location.href = "/" + router.query.slug + "?qm=" + linkPath;
+  };
+
   return (
     <div
       className="max-w-[1080px]  h-screen flex flex-col relative"
@@ -43,7 +53,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <div className="w-full flex justify-between px-16">
             <button
               className=" flex text-white uppercase text-[24px] md:text-[48px] hover:text-opacity-75"
-              onClick={() => router.push("/page")}
+              // onClick={() => router.push("/page")}
+
+              onClick={(e) => handlerChange(e)}
             >
               home
             </button>
