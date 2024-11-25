@@ -180,29 +180,29 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     if (!Object.keys(valid).length) {
       let resExp = "";
 
-      console.log(`formDataInitData save:: `, formdata);
+      // console.log(`formDataInitData save:: `, formdata);
       setResultForm({ member: "add" });
 
-      // const { data } = await axios.post(`/api/post-process`, {
-      //   processcode: processConfig.metadatacode,
-      //   parameters: formdata,
-      // });
+      const { data } = await axios.post(`/api/post-process`, {
+        processcode: processConfig.metadatacode,
+        parameters: formdata,
+      });
 
-      // if (data.status === "success") {
-      //   notification.success({ message: "Амжилттай бүртгэгдлээ" });
-      //   console.log("object :>> ", data);
-      //   setResultForm(data);
-      //   setLoadingForm(false);
-      //   window.location.href = `/page/sell?id=${data.result.id}`;
-      // } else {
-      //   setResultForm(data);
-      //   notification.warning({
-      //     message: "Алдаа гарлаа!",
-      //     description: parseHtml(decode(data)),
-      //   });
-      //   setLoadingForm(false);
-      // }
-      // return data;
+      if (data.status === "success") {
+        notification.success({ message: "Амжилттай бүртгэгдлээ" });
+        console.log("object :>> ", data);
+        setResultForm(data);
+        setLoadingForm(false);
+        window.location.href = `/page/sell?id=${data.result.id}`;
+      } else {
+        setResultForm(data);
+        notification.warning({
+          message: "Алдаа гарлаа!",
+          description: parseHtml(decode(data)),
+        });
+        setLoadingForm(false);
+      }
+      return data;
     } else {
       setResultForm(valid);
       notification.warning({
