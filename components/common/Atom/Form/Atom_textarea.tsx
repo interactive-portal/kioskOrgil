@@ -73,7 +73,7 @@ const Atom_textarea: FC<PropsType> = ({
             // ...style,
             minHeight: 40,
             borderRadius: "80px",
-            width: parseInt(config.columnwidth, 10),
+            // width: parseInt(config?.columnwidth, 10),
           }}
           placeholder={config?.placeholdername}
           onChange={handlerChange}

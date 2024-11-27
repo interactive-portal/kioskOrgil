@@ -22,6 +22,7 @@ type PropsContextType = {
   handleSubmitContext?: any;
   validData?: any;
   resultForm?: any;
+  addMember?: any;
   lookUpData?: any;
   handleLookUpData?: any;
   processExpression?: any;
@@ -52,6 +53,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
   const [checkContext, setCheckContext] = useState(false);
   const [product, setProduct] = useState<any>();
   const [resultForm, setResultForm] = useState<any>();
+  const [addMember, setMember] = useState(false);
   const [price, setPrice] = useState<any>();
 
   useEffect(() => {
@@ -181,28 +183,30 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       let resExp = "";
 
       // console.log(`formDataInitData save:: `, formdata);
-      setResultForm({ member: "add" });
 
       const { data } = await axios.post(`/api/post-process`, {
         processcode: processConfig.metadatacode,
         parameters: formdata,
       });
 
-      if (data.status === "success") {
-        notification.success({ message: "Амжилттай бүртгэгдлээ" });
-        console.log("object :>> ", data);
-        setResultForm(data);
-        setLoadingForm(false);
-        window.location.href = `/page/sell?id=${data.result.id}`;
-      } else {
-        setResultForm(data);
-        notification.warning({
-          message: "Алдаа гарлаа!",
-          description: parseHtml(decode(data)),
-        });
-        setLoadingForm(false);
-      }
-      return data;
+      setMember(true);
+
+      // if (data.status === "success") {
+      //   notification.success({ message: "Амжилттай бүртгэгдлээ" });
+
+      //   setResultForm(data);
+      //   setMember(true);
+      //   setLoadingForm(false);
+      //   window.location.href = `/page/sell?id=${data.result.id}`;
+      // } else {
+      //   setResultForm(data);
+      //   notification.warning({
+      //     message: "Алдаа гарлаа!",
+      //     description: parseHtml(decode(data)),
+      //   });
+      //   setLoadingForm(false);
+      // }
+      // return data;
     } else {
       setResultForm(valid);
       notification.warning({
@@ -252,6 +256,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     processExpression,
     loadingForm,
     resultForm,
+    addMember,
     setLoadingForm,
   };
 

@@ -43,13 +43,13 @@ const Ebarimt = () => {
     <>
       <div className=" flex gap-6">
         <button
-          className="h-[174px] bg-white text-[#525050] rounded-full text-[64px] w-full"
+          className="h-[174px] bg-white text-[#525050] rounded-full text-[64px] w-full px-10"
           onClick={() => setView("payment")}
         >
           ХУВЬ ХҮН
         </button>
         <button
-          className="h-[174px]  bg-white text-[#525050] rounded-full text-[64px] w-full"
+          className="h-[174px]  bg-white text-[#525050] rounded-full text-[64px] w-full px-10"
           onClick={() => setView("organization")}
         >
           БАЙГУУЛЛАГА
@@ -88,19 +88,19 @@ const Ebarimt = () => {
   const renderPaymentView = () => (
     <div className="flex flex-col">
       <button
-        className="h-[174px]  bg-white rounded-full text-[#525050] text-[64px] uppercase"
+        className="h-[174px]  bg-white rounded-full text-[#525050] text-[64px] uppercase px-10"
         onClick={() => setView("card")}
       >
         Карт
       </button>
       <button
-        className=" uppercase h-[174px]  text-[#525050] bg-white rounded-full text-[64px] mt-[50px]"
+        className=" uppercase h-[174px]  text-[#525050] bg-white rounded-full text-[64px] mt-[50px] px-10"
         onClick={() => setView("socialPay")}
       >
         Social Pay
       </button>
       <button
-        className="uppercase h-[174px] text-[#525050]  bg-white rounded-full text-[64px] mt-[50px]"
+        className="uppercase h-[174px] text-[#525050]  bg-white rounded-full text-[64px] mt-[50px] px-10"
         onClick={() => setView("qpay")}
       >
         QPay
