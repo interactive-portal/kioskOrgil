@@ -189,24 +189,23 @@ export const FormMetaContextProvider: FC<PropsType> = ({
         parameters: formdata,
       });
 
-      setMember(true);
+      if (data.status === "success") {
+        notification.success({ message: "Амжилттай бүртгэгдлээ" });
+        setMember(true);
 
-      // if (data.status === "success") {
-      //   notification.success({ message: "Амжилттай бүртгэгдлээ" });
-
-      //   setResultForm(data);
-      //   setMember(true);
-      //   setLoadingForm(false);
-      //   window.location.href = `/page/sell?id=${data.result.id}`;
-      // } else {
-      //   setResultForm(data);
-      //   notification.warning({
-      //     message: "Алдаа гарлаа!",
-      //     description: parseHtml(decode(data)),
-      //   });
-      //   setLoadingForm(false);
-      // }
-      // return data;
+        setResultForm(data);
+        setMember(true);
+        setLoadingForm(false);
+        window.location.href = `/page/sell?id=${data.result.id}`;
+      } else {
+        setResultForm(data);
+        notification.warning({
+          message: "Алдаа гарлаа!",
+          description: parseHtml(decode(data)),
+        });
+        setLoadingForm(false);
+      }
+      return data;
     } else {
       setResultForm(valid);
       notification.warning({
