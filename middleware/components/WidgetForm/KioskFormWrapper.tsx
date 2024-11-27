@@ -55,6 +55,7 @@ const KioskFormWrapper: FC<PropsType> = ({
     <>
       {addMember == true ? (
         <>
+          <>Гишүүн нэмэх</>
           <WidgetKiosk
             listConfig={{
               metadataid: "17256874307141",
