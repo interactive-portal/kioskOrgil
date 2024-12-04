@@ -40,8 +40,9 @@ const StateRegNumber: FC<PropsType> = ({
       value: e.currentTarget.value,
       rowIndex,
     });
-    const { dateOfBirth } = registerNumberToDate(e.currentTarget.value);
+    const { dateOfBirth, gender } = registerNumberToDate(e.currentTarget.value);
     localStorage?.setItem("dateOfBirth", dateOfBirth);
+    localStorage?.setItem("gender", gender);
   };
 
   const handlerKey = (e: any) => {

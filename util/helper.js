@@ -279,6 +279,7 @@ export function strtotime(str, now) {
 
   return now;
 }
+
 export function formatDate(val, row) {
   if (val == null) {
     return null;

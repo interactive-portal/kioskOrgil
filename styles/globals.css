@@ -87,7 +87,28 @@ body {
   color: #a68b5c;
   font-size: 90px;
 }
-
+#react-select-3-listbox div:hover {
+  opacity: 0.7;
+}
+#react-select-3-listbox div {
+  background-color: transparent;
+  background: #55627e;
+  cursor: pointer;
+}
+#react-select-3-listbox {
+  background: #2f3440;
+}
+#react-select-7-listbox div:hover {
+  opacity: 0.7;
+}
+#react-select-7-listbox div {
+  background-color: transparent;
+  background: #55627e;
+  cursor: pointer;
+}
+#react-select-7-listbox {
+  background: #2f3440;
+}
 @media screen and (max-width: 450px) {
   .pagetitle {
     font-size: 40px;

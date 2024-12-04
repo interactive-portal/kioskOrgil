@@ -22,6 +22,7 @@ import {
 import { getRowItems, dtlToSectionDtl, isEmpty } from "@/util/helper";
 import RenderDetail from "@/middleware/components/WidgetForm/RenderDetail";
 import RenderWidgetUniversal from "@/middleware/components/WidgetStandart/RenderWidgetUniversal";
+import Atom_popup from "@/components/common/Atom/Form/Atom_popup";
 
 type PropsType = {
   field: any;
@@ -43,6 +44,8 @@ const RenderField: FC<PropsType> = ({
   sectionConfig,
 }) => {
   if (isEmpty(field)) return null;
+
+  // console.log("object :>> ", object);
 
   if (field["isshow"] === "0") {
     return (
@@ -98,6 +101,17 @@ const RenderField: FC<PropsType> = ({
           className={className}
           sectionConfig={sectionConfig}
           labelClassName={labelClassName}
+        />
+      );
+    case field["lookuptype"] === "popup":
+      return (
+        <Atom_popup
+          className={className}
+          style={style}
+          labelClassName={labelClassName}
+          config={field}
+          sectionConfig={sectionConfig}
+          rowIndex={rowIndex}
         />
       );
     case field["lookuptype"] === "range_slider":

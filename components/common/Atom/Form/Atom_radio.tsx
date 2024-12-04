@@ -28,9 +28,11 @@ const Atom_radio: FC<PropsType> = ({
   let { data } = useSWR(`/api/get-data?metaid=${config.lookupmetadataid}`);
 
   // if (!data) return <div>Loading...</div>;
-  delete data.aggregatecolumns;
-  delete data.paging;
-  data = _.values(data);
+  // delete data.aggregatecolumns;
+  // delete data.paging;
+  data = _.values(data?.result);
+
+  // console.log("data :>> ", data);
 
   const handlerChangeSelectRadio = (e: any) => {
     handleChangeContext({

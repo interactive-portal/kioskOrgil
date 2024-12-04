@@ -161,6 +161,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       endDate: localStorage.getItem("enddate"),
       dateOfBirth: localStorage.getItem("dateOfBirth"),
       image: localStorage.getItem("imgStr"),
+      gender: localStorage.getItem("gender"),
     };
 
     let formdata = mergedFormData ? mergedFormData : formDataInitData;

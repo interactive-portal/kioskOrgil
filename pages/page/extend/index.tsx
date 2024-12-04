@@ -25,7 +25,7 @@ const Extend = () => {
         // const data = await fetchData(searchQuery);
         const data = await fetchJson(
           `/api/get-data?metaid=1722853892303075&criteria=${JSON.stringify({
-            filterRegNumber: [
+            NAME: [
               {
                 operator: "=",
                 operand: query,
@@ -39,6 +39,7 @@ const Extend = () => {
         if (data.result.length > 0) {
           setErr(false);
           setUser(data.result);
+          setCustomerId(data.result[0]?.customerid);
           setLoading(false);
         } else {
           // alert("No user found for the given register number.");
@@ -188,7 +189,7 @@ const Extend = () => {
                 onClick={() =>
                   router.push({
                     pathname: "/page/register/",
-                    query: { user: user[0]?.contractcode }, // Pass user data as query parameter
+                    query: { crm: customerId || user[0]?.customerId }, // Pass user data as query parameter
                   })
                 }
               >
