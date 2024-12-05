@@ -1,5 +1,4 @@
 import * as ExpressionFuntions from "./expressionFunctions";
-import { notification } from "antd";
 import * as Helper from "./helper";
 const { isEmpty, isObject, mergeJsonObjs, getSaveExprission, objectToArray } =
   Helper;
@@ -21,13 +20,7 @@ export const waitEval = (ev: any) => {
     // new Function("resolve", ev)(resolve);
   });
 };
-export const setFieldValueAll = (ev: any) => {
-  return new Promise((resolve, reject) => {
-    eval(ev);
-    // ajiluulah
-  });
-};
-export const passwordStrength = (path, options) => {
+export const passwordStrength = (path: any, options: any) => {
   return "options";
 };
 export const showTooltip = (ev: any) => {
@@ -47,10 +40,6 @@ export const runExpression = async (
   if (type == "all") {
     // experssionFunctions={};
     // experssionFunctions.type={};
-    // console.log("type", type);
-    // console.log("processExpression", processExpression);
-    // console.log("config", config);
-    // console.log("formDataInitData", formDataInitData);
     try {
       var varfnc: any = expressionConvert(
         JSON.stringify(processExpression),
@@ -61,6 +50,7 @@ export const runExpression = async (
       );
 
       // var object = eval("formDataInitData." + elemName);?
+
       let varfncf: any;
       eval(
         "varfncf=async function(processExpression,config,formDataInitData){" +
@@ -102,17 +92,16 @@ export const runExpression = async (
       );
 
       await eventf(processExpression, config, formDataInitData);
-      // console.log("varfnc processExpression", processExpression);
+
       return { expression: processExpression, data: formDataInitData };
 
       console.log("varfnc fist", varfnc);
     } catch (error) {
-      // console.log("error-----", error);
+      console.log("error-----", error);
       return false;
     }
   }
 };
-
 export const expressionConvert = (
   processExpression: any,
   strfunctions: any,
@@ -219,7 +208,6 @@ function getFullExpressionArrayConvert(str: any) {
 
 // Calc
 function convertToCalcFunctions(str: any) {
-  // console.log(str, "str");
   let sums = str.match(/sum\(\[(.*?)\]\)/g);
   if (!isEmpty(sums)) {
     sums.forEach((data: any) => {
@@ -874,6 +862,7 @@ export const runExpressionEndAfter = async (
 ) => {
   var expressionStr = getSaveExprission(config["saveexpressionstring"], type);
 
+  // console.log("ddddddddd dddddddddddddddd", type);
   try {
     var event: any = expressionConvert(
       JSON.stringify(processExpression),
@@ -901,86 +890,82 @@ export const runExpressionEndAfter = async (
   }
 };
 
-// export const fillGroupByDv = async function (
-// 	metaDataCode: any,
-// 	processRowsPath: any,
-// 	criteria: any,
-// 	map: any,
-// 	type: any,
-// ) {
-// 	var criteriaRows: any = {};
-// 	var inputParamsArr = criteria.split("@");
-// 	var mappingParamsArr = map.split("|");
-// 	var mappingParamsData = [];
+export const fillGroupByDv = async function (
+  metaDataCode: any,
+  processRowsPath: any,
+  criteria: any,
+  map: any,
+  type: any
+) {
+  var criteriaRows: any = {};
+  var inputParamsArr = criteria.split("|");
+  var mappingParamsArr = map.split("|");
+  var mappingParamsData = [];
 
-// 	const globData = getprocessparam(
-// 		metaDataCode,
-// 		"templateId@templateId",
-// 		"",
-// 		"",
-// 	);
-// 	// getprocessparam
-// 	console.log("fillGroupByDv globData v", globData);
+  const globData = getprocessparam(metaDataCode, criteria, "", "");
+  // getprocessparam
+  console.log("inputParamsArr", globData);
 
-// 	// if (!isEmpty(inputParamsArr)) {
-// 	// 	for (var i = 0; i < inputParamsArr.length; i++) {
-// 	// 		var fieldPathArr = inputParamsArr[i].split("@");
-// 	// 		var fieldPath = fieldPathArr[0];
-// 	// 		var inputPath = fieldPathArr[1];
-// 	// 		var fieldValue = "";
+  // if (!isEmpty(inputParamsArr)) {
+  // 	for (var i = 0; i < inputParamsArr.length; i++) {
+  // 		var fieldPathArr = inputParamsArr[i].split("@");
+  // 		var fieldPath = fieldPathArr[0];
+  // 		var inputPath = fieldPathArr[1];
+  // 		var fieldValue = "";
 
-// 	// 		var rowsdataCheck = "";
+  // 		var rowsdataCheck = "";
 
-// 	// 		if (!isEmpty(rowsdataCheck)) {
-// 	// 			fieldValue = rowsdataCheck;
-// 	// 		} else {
-// 	// 			fieldValue = fieldPath;
-// 	// 		}
-// 	// 		criteriaRows[inputPath] = {
-// 	// 			0: { operator: "=", operand: fieldValue },
-// 	// 		};
-// 	// 	}
-// 	// }
+  // 		if (!isEmpty(rowsdataCheck)) {
+  // 			fieldValue = rowsdataCheck;
+  // 		} else {
+  // 			fieldValue = fieldPath;
+  // 		}
+  // 		criteriaRows[inputPath] = {
+  // 			0: { operator: "=", operand: fieldValue },
+  // 		};
+  // 	}
+  // }
 
-// 	// if (type == "empty") {
-// 	// 	if (isEmpty(eval("globValue.data." + processRowsPath))) {
-// 	// 		eval("globValue.data." + processRowsPath + "=[]");
-// 	// 	} else {
-// 	// 		var rowsData = eval("globValue.data." + processRowsPath);
-// 	// 		var newRowsData: any = {};
-// 	// 		Object.keys(rowsData).forEach(function (key: any) {
-// 	// 			const item = rowsData[key];
-// 	// 			if (isNaN(key)) {
-// 	// 				newRowsData[key] = rowsData[item];
-// 	// 			}
-// 	// 		});
-// 	// 		eval("globValue.data." + processRowsPath + "=" + newRowsData);
-// 	// 	}
-// 	// }
-// 	// for (var j = 0; j < mappingParamsArr.length; j++) {
-// 	// 	var mappingPathArr = mappingParamsArr[j].split("@");
-// 	// 	var dataviewPath = mappingPathArr[0].toLowerCase();
-// 	// 	var processPath = mappingPathArr[1].toLowerCase();
-// 	// 	var realpath = processPath.replaceAll(
-// 	// 		processRowsPath.toLowerCase() + ".",
-// 	// 		"",
-// 	// 	);
-// 	// 	mappingParamsData.push({
-// 	// 		dataviewPath: dataviewPath.toLowerCase(),
-// 	// 		processPath: realpath,
-// 	// 	});
-// 	// }
-// 	// var getJson: any = {};
-// 	// getJson.ignorePermission = "1";
-// 	// getJson.criteria = criteriaRows;
-// 	// getJson.systemmetagroupid = metaDataId;
-// 	// result = await serverData("PL_MDVIEW_004", getJson);
+  // if (type == "empty") {
+  // 	if (isEmpty(eval("globValue.data." + processRowsPath))) {
+  // 		eval("globValue.data." + processRowsPath + "=[]");
+  // 	} else {
+  // 		var rowsData = eval("globValue.data." + processRowsPath);
+  // 		var newRowsData: any = {};
+  // 		Object.keys(rowsData).forEach(function (key: any) {
+  // 			const item = rowsData[key];
+  // 			if (isNaN(key)) {
+  // 				newRowsData[key] = rowsData[item];
+  // 			}
+  // 		});
+  // 		eval("globValue.data." + processRowsPath + "=" + newRowsData);
+  // 	}
+  // }
+  // for (var j = 0; j < mappingParamsArr.length; j++) {
+  // 	var mappingPathArr = mappingParamsArr[j].split("@");
+  // 	var dataviewPath = mappingPathArr[0].toLowerCase();
+  // 	var processPath = mappingPathArr[1].toLowerCase();
+  // 	var realpath = processPath.replaceAll(
+  // 		processRowsPath.toLowerCase() + ".",
+  // 		"",
+  // 	);
+  // 	mappingParamsData.push({
+  // 		dataviewPath: dataviewPath.toLowerCase(),
+  // 		processPath: realpath,
+  // 	});
+  // }
+  // var getJson: any = {};
+  // getJson.ignorePermission = "1";
+  // getJson.criteria = criteriaRows;
+  // getJson.systemmetagroupid = metaDataId;
+  // result = await serverData("PL_MDVIEW_004", getJson);
 
-// 	return "globData";
-// };
+  return "result";
+};
 
 export const getDetailRowCount = (childPath: any) => {
-  // console.log("getDetailRowCount", childPath);
+  console.log("getDetailRowCount", childPath);
+
   // if (!isEmpty(globValue.data[childPath.toLowerCase()])) {
   //   let count = 0;
   //   let data = globValue.data[childPath.toLowerCase()];
@@ -1038,38 +1023,6 @@ export const convertFunctionToExpression = (str: any, varfnc: any) => {
 
   // console.log("varfunction return ", str);
   return str;
-};
-export const kpiSetValue = (config: any, value: any) => {
-  if (!isEmpty(value.templatedtlid)) {
-    objectToArray(config.kpitemplate).forEach((template: any) => {
-      if (!isEmpty(template.kpitemplateindicator)) {
-        objectToArray(template.kpitemplateindicator).forEach(
-          (indicator: any) => {
-            if (
-              !isEmpty(indicator.kpitemplatedtlfact) &&
-              value.indicatorid == indicator.indicatorid
-            ) {
-              objectToArray(indicator.kpitemplatedtlfact).forEach(
-                (fact: any) => {
-                  if (fact.templatedtlid == value.templatedtlid) {
-                    if (
-                      !isEmpty(value[fact.parampath.toLowerCase()]) &&
-                      isEmpty(fact.value)
-                    ) {
-                      fact.value = value[fact.parampath.toLowerCase()];
-                    }
-                    if (!isEmpty(value.id) && !isNaN(value.id)) {
-                      fact.valueid = value.id;
-                    }
-                  }
-                }
-              );
-            }
-          }
-        );
-      }
-    });
-  }
 };
 
 /* aжиллуулах  */
@@ -1295,10 +1248,43 @@ function createKpiJson(path: any, itemData: any) {
 
 */
 
+const kpiSetValue = (config: any, value: any) => {
+  if (!isEmpty(value.templatedtlid)) {
+    objectToArray(config.kpitemplate).forEach((template: any) => {
+      if (!isEmpty(template.kpitemplateindicator)) {
+        objectToArray(template.kpitemplateindicator).forEach(
+          (indicator: any) => {
+            if (
+              !isEmpty(indicator.kpitemplatedtlfact) &&
+              value.indicatorid == indicator.indicatorid
+            ) {
+              objectToArray(indicator.kpitemplatedtlfact).forEach(
+                (fact: any) => {
+                  if (fact.templatedtlid == value.templatedtlid) {
+                    if (
+                      !isEmpty(value[fact.parampath.toLowerCase()]) &&
+                      isEmpty(fact.value)
+                    ) {
+                      fact.value = value[fact.parampath.toLowerCase()];
+                    }
+                    if (!isEmpty(value.id) && !isNaN(value.id)) {
+                      fact.valueid = value.id;
+                    }
+                  }
+                }
+              );
+            }
+          }
+        );
+      }
+    });
+  }
+};
+
 export const createkpiConfig = (data: any, type: any) => {
   let KpiConfig = data;
 
-  // console.log("kpi config", KpiConfig);
+  console.log("kpi config", KpiConfig);
   // if (type == "2") {
   //   if (isEmpty(selectDataViewItemValue?.kpidmdtl)) {
   // 	selectDataViewItemValue.kpidmdtl = {};
@@ -1365,10 +1351,53 @@ export const createkpiConfig = (data: any, type: any) => {
   return KpiConfig.kpitemplate;
 };
 
-function checkKpiConfig() {
-  var kpisConfig: any = [];
+export const showKpi = async (type: any) => {
+  let activeSlideIndex = 0;
 
-  return true;
-}
+  // console.log("showType", type);
+  // let data: any = await getKpiTemplate("16443795914459");
+  // console.log("showType", type);
+  // createkpiConfig(data, type);
+
+  // if (type == "1") {
+  // 	let data: any = await getKpiTemplate(globValue.data.kpitemplateid);
+  // 	if (data?.error != true) {
+  // 		if (isEmpty(globValue.kpiConfig)) {
+  // 			globValue.kpiConfig = {};
+  // 		}
+  // 		globValue.kpiConfig = data;
+  // 		createkpiConfig(data, globValue.kpiConfig, type);
+  // 	}
+  // } else if (type == "2") {
+  // 	if (
+  // 		!isEmpty(selectDataViewItemValue.kpidmdtl) &&
+  // 		!isEmpty(selectDataViewItemValue.kpidmdtl.kpiConfig)
+  // 	) {
+  // 		createkpiConfig(
+  // 			selectDataViewItemValue.kpidmdtl.kpiConfig,
+  // 			selectDataViewItemValue.kpidmdtl,
+  // 			type,
+  // 		);
+  // 	} else {
+  // 		var templateid = selectDataViewItemValue.kpitemplateid; // eval('$rootScope.selectDataViewItemValue.' + $rootScope.ItemDtlData.kpitemplateidPath);
+  // 		if (isEmpty(templateid)) {
+  // 			templateid = globValue.data.kpitemplateid;
+  // 		}
+  // 		let data: any = await getKpiTemplate(templateid);
+  // 		if (data.error != true) {
+  // 			if (isEmpty(selectDataViewItemValue.kpidmdtl)) {
+  // 				selectDataViewItemValue.kpidmdtl = {};
+  // 			}
+  // 			selectDataViewItemValue.kpidmdtl.kpiConfig = data;
+  // 			createkpiConfig(data, selectDataViewItemValue.kpidmdtl, type);
+  // 		}
+  // 	}
+  // }showType
+  let kpiOptions = {
+    showType: type,
+  };
+
+  return kpiOptions;
+};
 
 // mobKpiTemplateGetDV_004
