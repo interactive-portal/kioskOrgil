@@ -42,10 +42,6 @@ const WidgetKiosk: FC<PropsType> = ({
 
   const router = useRouter();
 
-  // console.log("router.query.crm :>> ", router.query.crm);
-  // console.lo :>> );
-  let crmid = router.query.crm;
-
   const parameters = `&parameters=${JSON.stringify({
     id: listConfig?.metadataid,
     crm: router.query.crm || "",
@@ -58,8 +54,6 @@ const WidgetKiosk: FC<PropsType> = ({
 
   useEffect(() => {
     if (router.isReady) {
-      console.log("object :>> ", router.query.crm);
-
       runExpressionAsync();
     }
   }, [router.isReady]);
@@ -92,7 +86,6 @@ const WidgetKiosk: FC<PropsType> = ({
   };
 
   const { header } = processParams || [];
-  // console.log("header :>> ", processParams);
 
   if (!processParams)
     return (

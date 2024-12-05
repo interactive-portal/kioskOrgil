@@ -8,18 +8,18 @@ import { fieldDisableEnable, fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
 import GenderAuto from "./genderAuto";
 import { Empty, Select } from "antd";
+import { useRouter } from "next/router";
 
 type PropsType = {
-  config: any;
+  config?: any;
   rowIndex?: any;
   className?: any;
-  labelClassName: any;
+  labelClassName?: any;
   style?: any;
   sectionConfig?: any;
 };
 
-const Atom_combo: FC<PropsType> = ({
-  config,
+const PopUpSearch: FC<PropsType> = ({
   rowIndex,
   labelClassName,
   sectionConfig,
@@ -35,15 +35,72 @@ const Atom_combo: FC<PropsType> = ({
     handleLookUpData,
     validData,
   } = useContext(FormMetaContext);
+  const config: any = {
+    columnaggregate: "",
+    processgetparampath: "",
+    mandatorycriteria: "",
+    labelname: "Гишүүн",
+    separatortype: "",
+    isshowmultiple: "",
+    isshowdelete: "",
+    isshowadd: "",
+    issave: "",
+    isrefresh: "0",
+    sidebarname: "",
+    isfreeze: "0",
+    stylecriteria: "",
+    isbutton: "",
+    groupingname: "",
+    paramrealpathid: "",
+    columnwidth: "300px",
+    visiblecriteria: "",
+    valuecriteria: "",
+    enablecriteria: "",
+    validationcriteria: "",
+    featurenum: "",
+    tabname: "",
+    fractionrange: "",
+    getprocessmetadataid: "",
+    globecode: "",
+    id: "1733283208220260",
+    processmetadataid: "1726115747829573",
+    groupmetadataid: "",
+    parammetadataid: "",
+    isshow: "1",
+    isrequired: "0",
+    minvalue: "",
+    maxvalue: "",
+    defaultvalue: "",
+    recordtype: "",
+    choosetype: "single",
+    displayfield: "name",
+    lookupmetadataid: "1543807989239385",
+    lookuptype: "popup",
+    patternid: "",
+    valuefield: "id",
+    parampath: "customerId",
+    parentid: "",
+    isinput: "1",
+    paramname: "customerId",
+    paramrealpath: "customerid",
+    expressionstring: "",
+    isuserconfig: "0",
+    fileextension: "",
+    themepositionno: "",
+    dtltheme: "",
+    datatype: "long",
+    lookupkeymetadataid: "",
+    ordernumber: "13",
+    pagingconfig: "",
+    isfirstrow: "",
+    iconname: "",
+  };
+  const router = useRouter();
 
   const [searchValue, setSearchValue] = useState<any>();
   const [resultList, setResultList] = useState<any>();
-  const [state, setSetState] = useState<any>(
-    localStorage.getItem("checkCustomer")
-  );
 
-  const metadataId = config?.lookupmetadataid;
-  console.log("config :>> ", config);
+  const metadataId = config.lookupmetadataid;
 
   const fetchData = async () => {
     let criteria = {
@@ -63,19 +120,9 @@ const Atom_combo: FC<PropsType> = ({
     }
   };
 
-  // console.log("config.lookupmetadataid :>> ", config.lookupmetadataid)dd
   useEffect(() => {
     fetchData();
   }, [searchValue]);
-
-  return <></>;
-
-  const handlerFocus = async (e: any, index: any) => {
-    setLoading(true);
-    const res = await getLookUpData(index, formDataInitData);
-    setOptions(comboDataTransform(res));
-    setLoading(false);
-  };
 
   const comboDataTransform = (data: any) => {
     return data.map((item: any, key: any) => {
@@ -93,52 +140,22 @@ const Atom_combo: FC<PropsType> = ({
     });
   };
 
-  const style1 = {
-    control: (base: any, state: any) => ({
-      ...base,
-      borderColor: "rgba(156, 163, 175, 1)",
-      boxShadow: "0 !important",
-      cursort: "pointer",
-      // border: validData[config?.paramname] ? `solid 1px red` : ``,
-      border: "none",
-      backgroundColor: "transparent",
-      padding: 0,
-
-      "&:hover": {
-        // border: "0 !important",
-      },
-    }),
-  };
-
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
 
-  if (localStorage.getItem("checkCustomer") == "0") return <></>;
-
-  console.log(
-    " statestatestatestate:>> ",
-    localStorage.getItem("checkCustomer")
-  );
   return (
     <div
       className={`selectBox  ${
         sectionConfig?.widgetnemgooReady?.labelPosition == "top"
           ? `flex flex-col`
-          : `grid grid-cols-2 gap-4`
+          : ``
       } ${
         config.isshow == "0"
           ? "hidden"
           : fieldHideShow(config, processExpression) && "hidden"
       }`}
     >
-      <Atom_label
-        labelName={config.labelname}
-        isrequired={config.isrequired}
-        className={`${labelClassName}`}
-        styles=""
-        sectionConfig={sectionConfig}
-      />
       <span className="relative">
         <>
           <div className="w-full ">
@@ -162,6 +179,9 @@ const Atom_combo: FC<PropsType> = ({
                   {resultList?.map((item: any, index: number) => {
                     return (
                       <li
+                        onClick={(e: any) =>
+                          (window.location.href = `/page/form?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}`)
+                        }
                         className="bg-[#d9d9d94f] text-white cursor-pointer hover:text-blue-400 my-2 p-4 rounded-xl text-sm hover:"
                         key={item?.id || index}
                       >
@@ -184,7 +204,7 @@ const Atom_combo: FC<PropsType> = ({
     </div>
   );
 };
-export default Atom_combo;
+export default PopUpSearch;
 
 export const encodeCriteria = (criteria: any) => {
   if (isEmpty(criteria)) return [{}];

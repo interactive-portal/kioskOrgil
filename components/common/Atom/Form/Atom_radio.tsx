@@ -6,6 +6,7 @@ import { fieldHideShow } from "@/util/helper";
 import Atom_label from "./Atom_label";
 import { Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
+import PopUpSearch from "./PopUpSearch";
 
 type PropsType = {
   config?: any;
@@ -29,10 +30,6 @@ const Atom_radio: FC<PropsType> = ({
 
   let result: any;
   let { data } = useSWR(`/api/get-data?metaid=${config.lookupmetadataid}`);
-
-  // if (!data) return <div>Loading...</div>;
-  // delete data.aggregatecolumns;
-  // delete data.paging;
   data = _.values(data?.result);
 
   // console.log("data :>> ", data);
@@ -45,9 +42,11 @@ const Atom_radio: FC<PropsType> = ({
   };
 
   const [value, setValue] = useState(1);
+  const [addMember, setAddMember] = useState(0);
 
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value);
+    setAddMember(e.target.value);
     localStorage.setItem(config.paramrealpath, e.target.value);
     handleChangeContext({
       name: config.paramrealpath,
@@ -57,11 +56,7 @@ const Atom_radio: FC<PropsType> = ({
 
   return (
     <div
-      className={`${
-        sectionConfig?.widgetnemgooReady?.labelPosition == "top"
-          ? `flex flex-col`
-          : `grid grid-cols-2 gap-4`
-      } ${
+      className={` flex flex-col ${
         config.isshow == "0"
           ? "hidden"
           : fieldHideShow(config, processExpression) && "hidden"
@@ -74,7 +69,7 @@ const Atom_radio: FC<PropsType> = ({
         sectionConfig={sectionConfig}
         className={`${labelClassName}`}
       />
-      <div className="mt-2 ">
+      <div className="mt-2 flex flex-col ">
         <Radio.Group onChange={onChange} value={value}>
           {data &&
             data.map((item: any, index: any) => {
@@ -89,6 +84,13 @@ const Atom_radio: FC<PropsType> = ({
               );
             })}
         </Radio.Group>
+        {addMember == 1 ? (
+          <>
+            <PopUpSearch />
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
