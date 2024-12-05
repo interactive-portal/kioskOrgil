@@ -141,7 +141,7 @@ const Atom_combo: FC<PropsType> = ({
     // }
 
     fetchData();
-  }, [searchValue]);
+  }, []);
 
   const handlerFocus = async (e: any, index: any) => {
     setLoading(true);

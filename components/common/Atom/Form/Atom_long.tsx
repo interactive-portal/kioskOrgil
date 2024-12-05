@@ -31,8 +31,6 @@ const Atom_long: FC<PropsType> = ({
     validData,
   } = useContext(FormMetaContext);
 
-  console.log("config :>> ", config);
-
   const handlerChange = (e: any) => {
     handleChangeContext({
       name: config.paramrealpath,

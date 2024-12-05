@@ -82,7 +82,9 @@ const Atom_radio: FC<PropsType> = ({
               let valuefield = item[config.valuefield.toLowerCase()];
               return (
                 <Radio value={valuefield} key={index}>
-                  {displayfield}
+                  <span className="text-white text-xl font-bold">
+                    {displayfield}{" "}
+                  </span>
                 </Radio>
               );
             })}

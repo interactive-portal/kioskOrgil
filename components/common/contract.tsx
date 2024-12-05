@@ -16,7 +16,7 @@ const ontractItem: React.FC<TitleProps> = ({ data }) => {
   //     </>
   //   );
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mt-6">
       {data?.map((item: any, index: any) => (
         <>
           <ContractItem data={item} key={index} />

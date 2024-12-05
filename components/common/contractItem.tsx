@@ -1,5 +1,6 @@
 // components/WelcomeTitle.tsx
 import moment from "moment";
+import { useRouter } from "next/router";
 import React from "react";
 
 interface TitleProps {
@@ -7,9 +8,10 @@ interface TitleProps {
 }
 
 const ContractItem: React.FC<TitleProps> = ({ data }) => {
+  const router = useRouter();
   console.log("data :>> ", data);
   return (
-    <div className="border p-6 rounded-2xl space-y-8 ">
+    <div className="border p-6 rounded-2xl space-y-8 mt-10 ">
       <h3 className="text-white text-[40px]"> {data.itemname || "--"}</h3>
       <div className="text-2xl text-white text-start grid md:grid-cols-2 xs:grid-cols-1 w-full  gap-4 ">
         <div className="flex justify-between flex-col gap-y-2 ">
@@ -63,7 +65,15 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
           </span>
         </div>
       </div>
-      <button className=" bg-[#A68B5C] text-white px-6 py-2 rounded-full mt-5  hover:bg-white hover:text-[#A68B5C]">
+      <button
+        className=" bg-[#A68B5C] text-white px-6 py-2 rounded-full mt-5  hover:bg-white hover:text-[#A68B5C]"
+        onClick={() =>
+          router.push({
+            pathname: "/page/register",
+            query: { crm: data.customerid, contractid: data?.contractid },
+          })
+        }
+      >
         Cунгалт хийх
       </button>
     </div>

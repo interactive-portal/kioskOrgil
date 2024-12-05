@@ -56,13 +56,18 @@ const WidgetKiosk: FC<PropsType> = ({
     let processParamsvar: any = {},
       formDataInitDatavar: any = {};
 
-    const data = await fetchJson(
-      `/api/get-process?command=META_BUSINESS_PROCESS_LINK_BP_GET_004${parameters}`
+    const { result: data, getData } = await fetchJson(
+      `/api/get-process-config?command=META_BUSINESS_PROCESS_LINK_BP_GET_004${parameters}`
     );
 
     processParamsvar = await processTransform(data.result, userData);
-    formDataInitDatavar = data.getData
-      ? await _.merge(processParamsvar.__dataElement, data.getData)
+
+    // console.log("processParamsvar :>> ", processParamsvar);
+
+    localStorage.setItem("memberData", getData);
+
+    formDataInitDatavar = getData
+      ? await _.merge(processParamsvar.__dataElement, getData)
       : processParamsvar?.__dataElement;
 
     const expResult: any = await runExpression(
@@ -71,6 +76,8 @@ const WidgetKiosk: FC<PropsType> = ({
       processParamsvar,
       formDataInitDatavar
     );
+
+    // console.log("expResult :>> ", expResult);
     setProcessParams(processParamsvar);
     setFormDataInitDataState(expResult.data);
     setProcessExpression(expResult?.expression);
@@ -93,6 +100,7 @@ const WidgetKiosk: FC<PropsType> = ({
         dialog={dialog}
         title={`${processConfigState?.result?.metadataname || ""}`}
         settings={listConfig?.otherattr}
+        formConfig={processConfigState}
         setResult={setResult}
       >
         <Header

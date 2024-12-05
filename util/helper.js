@@ -1433,19 +1433,32 @@ export const getAtomValue = (
   rowIndex
 ) => {
   try {
-    let atomValue = formDataInitData[config.paramrealpath];
-
+    var paramName = config.paramrealpath.trim().toLowerCase();
+    let atomValue = formDataInitData[paramName];
     const getGroup = config.paramrealpath.split(".");
+    // if ((paramName = "crm_ref_customer_address_dv.customerid")) {
+    //   console.log("getGroup getGroup ", getGroup);
+    //   console.log("getGroup config ", config);
+    // }
+
+    console.log("formDataInitData :>> ", formDataInitData);
+
     if (getGroup.length == 2) {
       if (
         processConfig["__groupPath"][getGroup[0]][0]["recordtype"] === "rows"
       ) {
-        atomValue = formDataInitData[getGroup[0]][rowIndex][config.paramname];
+        // console.log(getGroup[0])
+        let getGroup1 = getGroup[0].toLowerCase();
+        let paramname = config.paramname.toLowerCase();
+        // // console.log(formDataInitData[getGroup[0]]);
+        // console.log("config", config);
+        // console.log("paramname", paramname);
+
+        atomValue = formDataInitData[getGroup[0]][rowIndex][paramname];
       } else {
-        atomValue = formDataInitData[getGroup[0]][config.paramname];
+        atomValue = formDataInitData[getGroup1][paramname];
       }
     }
-
     return atomValue || "";
   } catch (ex) {
     // console.log("getAtomValue " + ex);

@@ -33,6 +33,15 @@ const Atom_string: FC<PropsType> = ({
     validData,
   } = useContext(FormMetaContext);
   // const { t } = useTranslation("translation");
+
+  let getVal = getAtomValue(config, formDataInitData, processConfig, rowIndex);
+
+  // console.log("getVal :>> ", getVal);
+  // console.log("getVal :>> ", getVal);
+  // console.log("fff :>> ", processConfig);
+
+  // console.log("config :>> ", config);
+
   const handlerChange = (e: any) => {
     handleChangeContext({
       name: config.paramrealpath,
@@ -72,7 +81,6 @@ const Atom_string: FC<PropsType> = ({
           rowIndex={rowIndex}
         />
       );
-
     case "contractTypeId":
       return (
         <ContractType

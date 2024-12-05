@@ -13,6 +13,7 @@ type PropsType = {
   dialog?: any;
   setResult?: any;
   title?: string;
+  formConfig?: string;
 };
 
 const KioskFormWrapper: FC<PropsType> = ({
@@ -21,6 +22,7 @@ const KioskFormWrapper: FC<PropsType> = ({
   dialog,
   settings,
   setResult,
+  formConfig,
 }) => {
   const {
     handleSubmitContext,

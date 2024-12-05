@@ -31,10 +31,13 @@ const Extend = () => {
                 operand: query,
               },
             ],
+          })}&paging=${JSON.stringify({
+            offset: 1,
+            pageSize: 20,
           })}`
         );
 
-        console.log("data :>> ", data);
+        // console.log("data :>> ", data);
 
         if (data.result.length > 0) {
           setErr(false);
@@ -154,9 +157,7 @@ const Extend = () => {
       // }
     };
   };
-
-  console.log("customerId :>> ", customerId);
-
+  // console.log("customerId :>> ", customerId);
   useEffect(() => {
     if (customerId) {
       fetchData(customerId);
@@ -167,10 +168,9 @@ const Extend = () => {
     <Layout>
       {user ? (
         <>
-          <div className="mx-auto  flex flex-col py-6 px-6">
+          <div className="mx-auto  flex flex-col py-6 px-6 ">
             <Title title="ИЛЭРЦ"></Title>
             <Contract data={user} />
-
             <div className="mt-[50px] flex flex-col space-y-6">
               {/* <div
                 className="rounded-full md:text-[64px] xs:text-[28px] xs:px-6 py-5 cursor-pointer obtn"
@@ -199,7 +199,7 @@ const Extend = () => {
           </div>
         </>
       ) : (
-        <div className="mx-auto  flex flex-col gap-10">
+        <div className="mx-auto  flex flex-col gap-10 ">
           <Title title="Сунгалт"></Title>
           <div className="relative w-4/5 mx-auto ">
             <i className="fa-solid fa-magnifying-glass absolute md:left-4 md:top-[35px] md:text-[42px] text-[#525050] xs:left-4 xs:top-1"></i>
