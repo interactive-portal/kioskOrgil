@@ -1,9 +1,12 @@
 import FormMetaContext from "@/context/Meta/FormMetaContext";
 import _ from "lodash";
-import { FC, useContext } from "react";
+import { FC, useContext, useState } from "react";
 import useSWR from "swr";
 import { fieldHideShow } from "@/util/helper";
 import Atom_label from "./Atom_label";
+import { Radio } from "antd";
+import type { RadioChangeEvent } from "antd";
+
 type PropsType = {
   config?: any;
   sectionConfig?: any;
@@ -41,6 +44,17 @@ const Atom_radio: FC<PropsType> = ({
     });
   };
 
+  const [value, setValue] = useState(1);
+
+  const onChange = (e: RadioChangeEvent) => {
+    setValue(e.target.value);
+    localStorage.setItem(config.paramrealpath, e.target.value);
+    handleChangeContext({
+      name: config.paramrealpath,
+      value: e.target.value,
+    });
+  };
+
   return (
     <div
       className={`${
@@ -61,36 +75,18 @@ const Atom_radio: FC<PropsType> = ({
         className={`${labelClassName}`}
       />
       <div className="mt-2 ">
-        {data &&
-          data.map((item: any, index: any) => {
-            let displayfield = item[config.displayfield.toLowerCase()];
-            let valuefield = item[config.valuefield.toLowerCase()];
-            return (
-              <div className="flex items-center mt-2" key={item?.id || index}>
-                <div className="bg-white dark:bg-gray-100 rounded-full w-5 h-5 flex shrink-0 justify-center items-center relative">
-                  <input
-                    type="radio"
-                    id={config.paramrealpath + "_" + valuefield}
-                    name={config.paramrealpath}
-                    onChange={handlerChangeSelectRadio}
-                    value={valuefield}
-                    className="checkbox appearance-none focus:outline-none border rounded-full border-gray-400 absolute cursor-pointer w-full h-full checked:border-none"
-                  />
-                  <div className="check-icon hidden border-4 border-indigo-700 rounded-full w-full h-full z-1" />
-                </div>
-                {/* <p className="mx-2 text-sm leading-4 font-normal text-gray-800 dark:text-gray-100">{displayfield}</p> */}
-                <Atom_label
-                  labelName={displayfield}
-                  labelFor={config.paramrealpath + "_" + valuefield}
-                  isrequired={config.isrequired}
-                  styles={{ marginBottom: 0, marginLeft: 10 }}
-                  sectionConfig={sectionConfig}
-                  className={`${labelClassName}`}
-                  isHideSeperator={true}
-                />
-              </div>
-            );
-          })}
+        <Radio.Group onChange={onChange} value={value}>
+          {data &&
+            data.map((item: any, index: any) => {
+              let displayfield = item[config.displayfield.toLowerCase()];
+              let valuefield = item[config.valuefield.toLowerCase()];
+              return (
+                <Radio value={valuefield} key={index}>
+                  {displayfield}
+                </Radio>
+              );
+            })}
+        </Radio.Group>
       </div>
     </div>
   );

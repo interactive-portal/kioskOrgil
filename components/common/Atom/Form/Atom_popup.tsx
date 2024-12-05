@@ -40,6 +40,10 @@ const Atom_combo: FC<PropsType> = ({
 
   const [searchValue, setSearchValue] = useState<any>();
   const [resultList, setResultList] = useState<any>();
+  const [state, setSetState] = useState<any>(
+    localStorage.getItem("checkCustomer")
+  );
+
   const metadataId = config.lookupmetadataid;
 
   const getLookUpData = async (i: any, item: any) => {
@@ -126,7 +130,16 @@ const Atom_combo: FC<PropsType> = ({
 
   // console.log("config.lookupmetadataid :>> ", config.lookupmetadataid)dd
   useEffect(() => {
-    // getLookUpData(0, formDataInitData);
+    // // getLookUpData(0, formDataInitData);
+    // const itemParent =
+    //   (localStorage.getItem("checkCustomer") &&
+    //     JSON.parse(localStorage.getItem("checkCustomer") || "")) ||
+    //   {};
+
+    // if (itemParent) {
+    //   setSetState(itemParent);
+    // }
+
     fetchData();
   }, [searchValue]);
 
@@ -174,8 +187,12 @@ const Atom_combo: FC<PropsType> = ({
     console.log(`selected ${value}`);
   };
 
-  console.log("resultList :>> ", resultList);
+  if (localStorage.getItem("checkCustomer") == "0") return <></>;
 
+  // console.log(
+  //   " statestatestatestate:>> ",
+  //   localStorage.getItem("checkCustomer")
+  // );
   return (
     <div
       className={`selectBox  ${
@@ -195,6 +212,7 @@ const Atom_combo: FC<PropsType> = ({
         styles=""
         sectionConfig={sectionConfig}
       />
+
       <span className="relative">
         <>
           <div className="w-full ">

@@ -39,7 +39,7 @@ const GenderAuto: FC<PropsType> = ({
   //     setUserData(itemParent);
   //   }
   // }, []);
-  console.log("lookupData :>> ", lookupData);
+  // console.log("lookupData :>> ", lookupData);
   return (
     <div
       className={`${
