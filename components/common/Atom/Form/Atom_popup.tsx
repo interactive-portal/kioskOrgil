@@ -21,7 +21,9 @@ type PropsType = {
 const Atom_combo: FC<PropsType> = ({
   config,
   rowIndex,
+  className,
   labelClassName,
+  style,
   sectionConfig,
 }) => {
   const [laoding, setLoading] = useState(false);
@@ -38,12 +40,73 @@ const Atom_combo: FC<PropsType> = ({
 
   const [searchValue, setSearchValue] = useState<any>();
   const [resultList, setResultList] = useState<any>();
-  const [state, setSetState] = useState<any>(
-    localStorage.getItem("checkCustomer")
-  );
+  const [state, setSetStat] = useState(false);
 
-  const metadataId = config?.lookupmetadataid;
-  console.log("config :>> ", config);
+  const metadataId = config.lookupmetadataid;
+
+  const getLookUpData = async (i: any, item: any) => {
+    // console.log("groupconfigparampath :>> ", config);
+    let params = {};
+
+    if (config?.groupconfigparampath) {
+      params = config?.groupconfigparampath
+        .toLowerCase()
+        .split("|")
+        .reduce(function (obj: any, str: any, index: any) {
+          let strParts = str.split(":");
+          let params = str.split(".");
+          let param = params[0] || "";
+          if (params.length >= 2) {
+            param = params[1];
+          }
+          let field: any = "";
+          if (params.length <= 1) {
+            field = item[params[0]];
+          } else {
+            const dtlList = _.values(formDataInitData[params[0]]) || "";
+            field = dtlList[i]?.[param];
+          }
+          obj[param] = field;
+          return obj;
+        }, {});
+    }
+    // console.log("formDataInitData :>> ", formDataInitData);
+    if (config.paramrealpath == "districtId") {
+      params = {
+        cityId: formDataInitData["cityId"],
+      };
+    }
+    if (config.paramrealpath == "streetId") {
+      params = {
+        districtId: formDataInitData["districtId"],
+      };
+    }
+
+    const criteria = {
+      ...params,
+    };
+
+    let paging = {
+      offset: 1,
+      pageSize: 100,
+    };
+
+    let data = await fetchJson(
+      `/api/get-data?metaid=${
+        config.lookupmetadataid
+      }&pagingwithoutaggregate=1&criteria=${JSON.stringify(
+        criteria
+      )}&paging=${JSON.stringify(paging)}`
+    );
+    delete data.aggregatecolumns;
+    delete data.paging;
+
+    data = _.values(data.result);
+
+    setOptions(comboDataTransform(data));
+
+    return data;
+  };
 
   const fetchData = async () => {
     let criteria = {
@@ -65,10 +128,18 @@ const Atom_combo: FC<PropsType> = ({
 
   // console.log("config.lookupmetadataid :>> ", config.lookupmetadataid)dd
   useEffect(() => {
+    // getLookUpData(0, formDataInitData);
+    const itemParent =
+      (localStorage.getItem("checkCustomer") &&
+        JSON.parse(localStorage.getItem("checkCustomer") || "")) ||
+      {};
+
+    if (itemParent) {
+      setResultList(itemParent);
+    }
+
     fetchData();
   }, [searchValue]);
-
-  return <></>;
 
   const handlerFocus = async (e: any, index: any) => {
     setLoading(true);
@@ -113,13 +184,8 @@ const Atom_combo: FC<PropsType> = ({
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
+  return <></>;
 
-  if (localStorage.getItem("checkCustomer") == "0") return <></>;
-
-  console.log(
-    " statestatestatestate:>> ",
-    localStorage.getItem("checkCustomer")
-  );
   return (
     <div
       className={`selectBox  ${
