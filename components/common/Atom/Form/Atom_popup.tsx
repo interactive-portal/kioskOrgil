@@ -2,11 +2,12 @@ import FormMetaContext from "@/context/Meta/FormMetaContext";
 import fetchJson from "@/lib/fetchJson";
 import _, { isEmpty } from "lodash";
 import { FC, useContext, useEffect, useState } from "react";
-import Select from "react-select";
+// import Select from "react-select";
 import { twMerge } from "tailwind-merge";
 import { fieldDisableEnable, fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
 import GenderAuto from "./genderAuto";
+import { Empty, Select } from "antd";
 
 type PropsType = {
   config: any;
@@ -36,6 +37,10 @@ const Atom_combo: FC<PropsType> = ({
     handleLookUpData,
     validData,
   } = useContext(FormMetaContext);
+
+  const [searchValue, setSearchValue] = useState<any>();
+  const [resultList, setResultList] = useState<any>();
+  const metadataId = config.lookupmetadataid;
 
   const getLookUpData = async (i: any, item: any) => {
     // console.log("groupconfigparampath :>> ", config);
@@ -101,10 +106,29 @@ const Atom_combo: FC<PropsType> = ({
     return data;
   };
 
+  const fetchData = async () => {
+    let criteria = {
+      name: [
+        {
+          operator: "like",
+          operand: `%${searchValue}%`,
+        },
+      ],
+    };
+
+    const data = await fetchJson(
+      `/api/get-data?metaid=${metadataId}&criteria=${JSON.stringify(criteria)}`
+    );
+    if (data.status == "success") {
+      setResultList(data?.result);
+    }
+  };
+
+  // console.log("config.lookupmetadataid :>> ", config.lookupmetadataid)dd
   useEffect(() => {
-    if (options != undefined) return;
-    getLookUpData(0, formDataInitData);
-  }, [options]);
+    // getLookUpData(0, formDataInitData);
+    fetchData();
+  }, [searchValue]);
 
   const handlerFocus = async (e: any, index: any) => {
     setLoading(true);
@@ -146,16 +170,11 @@ const Atom_combo: FC<PropsType> = ({
     }),
   };
 
-  // if (config.paramname == "gender")
-  //   return (
-  //     <GenderAuto
-  //       config={config}
-  //       lookupData={options}
-  //       sectionConfig={sectionConfig}
-  //       className={className}
-  //       rowIndex={rowIndex}
-  //     />
-  //   );
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
+
+  console.log("resultList :>> ", resultList);
 
   return (
     <div
@@ -176,46 +195,48 @@ const Atom_combo: FC<PropsType> = ({
         styles=""
         sectionConfig={sectionConfig}
       />
-
-      <div className={`self-center w-full  `}>
-        {processConfig.actiontype === "view" ? (
-          <>
-            {
-              options?.filter(
-                (option: any) =>
-                  option["value"] ===
-                  getAtomValue(
-                    config,
-                    formDataInitData,
-                    processConfig,
-                    rowIndex
-                  )
-              )?.[0]?.["label"]
-            }
-          </>
-        ) : (
-          <Select
-            options={options}
-            onChange={handlerChange}
-            onFocus={(e) => handlerFocus(e, rowIndex)}
-            isLoading={laoding}
-            className={twMerge(
-              `comboSelect ${className} ${
-                validData[config?.paramname] ? ` border-red-500` : ``
-              }`
-            )}
-            name={config.paramrealpath}
-            data-attr={config.paramrealpath}
-            styles={style1}
-            value={options?.filter(
-              (option: any) =>
-                option["value"] ==
-                getAtomValue(config, formDataInitData, processConfig, rowIndex)
-            )}
-            menuPortalTarget={document.body}
-          />
+      <span className="relative">
+        <>
+          <div className="w-full ">
+            <div className="relative px-2">
+              <input
+                className="rounded border-gray-400 text-[14px] focus:ring-0 kiosk "
+                type="text"
+                placeholder="Бүртгэлтэй гишүүн хайх"
+                // value="val"
+                onChange={(event) => setSearchValue(event.target.value)}
+              />
+              <i className="fa-sharp fa-light fa-magnifying-glass  absolute text-base top-2 right-5 cursor-pointer text-[#585858]"></i>
+            </div>
+          </div>
+        </>
+        {searchValue?.length > 0 && (
+          <div className="absolute top-10   bg-[#2e343f] max-h-[400px]  w-full rounded-2xl border  text-black mt-6 overflow-hidden z-[9999] scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin hover:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full shadow  text-left">
+            <ul className="z-20 px-2 ">
+              {resultList?.length > 0 ? (
+                <>
+                  {resultList?.map((item: any, index: number) => {
+                    return (
+                      <li
+                        className="bg-[#d9d9d94f] text-white cursor-pointer hover:text-blue-400 my-2 p-4 rounded-xl text-sm hover:"
+                        key={item?.id || index}
+                      >
+                        <div className="flex flex-col">
+                          <p>Овог: {item?.lastname}</p>
+                          <p>Нэр: {item?.name}</p>
+                          <p>Регистр: {item?.stateregnumber}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </>
+              ) : (
+                <Empty description={"Хайлтын илэрц олдсонгүй"} />
+              )}
+            </ul>
+          </div>
         )}
-      </div>
+      </span>
     </div>
   );
 };
