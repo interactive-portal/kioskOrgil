@@ -1434,14 +1434,17 @@ export const getAtomValue = (
 ) => {
   try {
     var paramName = config.paramrealpath.trim().toLowerCase();
-    let atomValue = formDataInitData[paramName];
+    // let atomValue = formDataInitData[paramName];
     const getGroup = config.paramrealpath.split(".");
     // if ((paramName = "crm_ref_customer_address_dv.customerid")) {
     //   console.log("getGroup getGroup ", getGroup);
     //   console.log("getGroup config ", config);
-    // }
 
-    console.log("formDataInitData :>> ", formDataInitData);
+    let formLocalData = JSON.parse(localStorage.getItem("memberData"));
+
+    let atomValue = formLocalData[paramName];
+
+    // console.log("formDataInitData ssss:>> ", atomValue);
 
     if (getGroup.length == 2) {
       if (

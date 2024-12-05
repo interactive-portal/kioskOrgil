@@ -7,6 +7,7 @@ import _ from "lodash";
 const getProcess = async (req: any, res: any) => {
   const metaName: string = req?.query?.metaName || "metaProd";
   const processcode = req.query?.command || "";
+  const crm = req.query?.crm || "";
   let parameters =
     req.body.parameters || jsonParse(req.query?.parameters) || "{}";
   const debug = req.query?.debug || false;
@@ -32,7 +33,7 @@ const getProcess = async (req: any, res: any) => {
     // const parampath = result?.meta_process_default_get[0]?.parampath;
 
     const parameters = {
-      filterCustomerId: "17266426733403",
+      filterCustomerId: crm,
     };
 
     const resultsss = await getProcessData(
@@ -42,8 +43,8 @@ const getProcess = async (req: any, res: any) => {
 
     getData = resultsss.result;
 
-    console.log("parameters :>> ", resultsss);
-    console.log("param :>> ", param);
+    console.log("DDD :>> ", parameters);
+    // console.log("param :>> ", crm);
   }
 
   res.status(200).json({ result, getData });

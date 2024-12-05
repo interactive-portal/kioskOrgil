@@ -187,12 +187,12 @@ const Atom_combo: FC<PropsType> = ({
     console.log(`selected ${value}`);
   };
 
-  if (localStorage.getItem("checkCustomer") != "1") return <>ggg</>;
+  if (localStorage.getItem("checkCustomer") == "0") return <></>;
 
-  // console.log(
-  //   " statestatestatestate:>> ",
-  //   localStorage.getItem("checkCustomer")
-  // );
+  console.log(
+    " statestatestatestate:>> ",
+    localStorage.getItem("checkCustomer")
+  );
   return (
     <div
       className={`selectBox  ${
@@ -212,7 +212,6 @@ const Atom_combo: FC<PropsType> = ({
         styles=""
         sectionConfig={sectionConfig}
       />
-
       <span className="relative">
         <>
           <div className="w-full ">

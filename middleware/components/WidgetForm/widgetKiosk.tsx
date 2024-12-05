@@ -14,6 +14,8 @@ import RenderField from "./RenderField";
 import useSWR from "swr";
 import KioskFormWrapper from "./KioskFormWrapper";
 import Skeleton from "@/components/common/Skeleton/Skeleton";
+import { useRouter } from "next/router";
+
 type PropsType = {
   listConfig: any;
   dialog?: any;
@@ -38,8 +40,15 @@ const WidgetKiosk: FC<PropsType> = ({
   const [processConfigState, setProcessConfigState] = useState<any>();
   const [processParams, setProcessParams] = useState<any>({ header: [] });
 
+  const router = useRouter();
+
+  console.log("router.query.crm :>> ", router.query.crm);
+  // console.lo :>> );
+  let crmid = router.query.crm;
+
   const parameters = `&parameters=${JSON.stringify({
     id: listConfig?.metadataid,
+    crm: router.query.crm || "",
   })}`;
 
   const listConfigParse = {
@@ -48,9 +57,9 @@ const WidgetKiosk: FC<PropsType> = ({
   };
 
   useEffect(() => {
-    if (!_.isEmpty(userData) || _.isNull(userData))
-      runExpressionAsync(userData);
-  }, [userData]);
+    if (!router.isReady) return;
+    runExpressionAsync(crmid);
+  }, [router.isReady]);
 
   const runExpressionAsync = async (userData: any) => {
     let processParamsvar: any = {},
@@ -60,7 +69,7 @@ const WidgetKiosk: FC<PropsType> = ({
       `/api/get-process-config?command=META_BUSINESS_PROCESS_LINK_BP_GET_004${parameters}`
     );
     processParamsvar = await processTransform(data.result, userData);
-    localStorage.setItem("memberData", getData);
+    localStorage?.setItem("memberData", JSON.stringify(getData));
     formDataInitDatavar = getData
       ? await _.merge(processParamsvar.__dataElement, getData)
       : processParamsvar?.__dataElement;
@@ -72,7 +81,7 @@ const WidgetKiosk: FC<PropsType> = ({
       formDataInitDatavar
     );
 
-    // console.log("expResult :>> ", expResult);
+    // console.log("expResult :>> ", formDataInitDatavar);
     setProcessParams(processParamsvar);
     setFormDataInitDataState(expResult.data);
     setProcessExpression(expResult?.expression);
