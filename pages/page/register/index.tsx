@@ -32,7 +32,16 @@ const Register = () => {
 
   const handleItemClick = (item: any) => {
     localStorage?.setItem("product", JSON.stringify(item));
-    router.push(`/page/register/category=${item?.id}`);
+    // router.push(`/page/register/category=${item?.id}`);
+
+    router.push({
+      pathname: "/page/register/category=" + item?.id,
+      query: {
+        // category: item?.id,
+        crm: router.query.crm,
+        contractid: router.query.contractid,
+      }, // Pass user data as query parameter
+    });
   };
 
   return (

@@ -141,7 +141,7 @@ const Atom_combo: FC<PropsType> = ({
     // }
 
     fetchData();
-  }, []);
+  }, [searchValue]);
 
   const handlerFocus = async (e: any, index: any) => {
     setLoading(true);
@@ -187,7 +187,7 @@ const Atom_combo: FC<PropsType> = ({
     console.log(`selected ${value}`);
   };
 
-  if (localStorage.getItem("checkCustomer") == "0") return <></>;
+  if (localStorage.getItem("checkCustomer") != "1") return <>ggg</>;
 
   // console.log(
   //   " statestatestatestate:>> ",

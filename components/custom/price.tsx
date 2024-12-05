@@ -23,6 +23,8 @@ const Price: FC<PropsTypeItem> = ({ data }) => {
       pathname: "/page/form",
       query: {
         price: item.id,
+        crm: router.query.crm,
+        contractid: router.query.contractid,
       },
     });
   };

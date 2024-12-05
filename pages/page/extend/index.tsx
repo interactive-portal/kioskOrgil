@@ -25,7 +25,7 @@ const Extend = () => {
         // const data = await fetchData(searchQuery);
         const data = await fetchJson(
           `/api/get-data?metaid=1722853892303075&criteria=${JSON.stringify({
-            NAME: [
+            filterRegNumber: [
               {
                 operator: "=",
                 operand: query,
