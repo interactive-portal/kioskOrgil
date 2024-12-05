@@ -42,7 +42,7 @@ const WidgetKiosk: FC<PropsType> = ({
 
   const router = useRouter();
 
-  console.log("router.query.crm :>> ", router.query.crm);
+  // console.log("router.query.crm :>> ", router.query.crm);
   // console.lo :>> );
   let crmid = router.query.crm;
 
@@ -57,18 +57,21 @@ const WidgetKiosk: FC<PropsType> = ({
   };
 
   useEffect(() => {
-    if (!router.isReady) return;
-    runExpressionAsync(crmid);
+    if (router.isReady) {
+      console.log("object :>> ", router.query.crm);
+
+      runExpressionAsync();
+    }
   }, [router.isReady]);
 
-  const runExpressionAsync = async (userData: any) => {
+  const runExpressionAsync = async () => {
     let processParamsvar: any = {},
       formDataInitDatavar: any = {};
 
     const { result: data, getData } = await fetchJson(
       `/api/get-process-config?command=META_BUSINESS_PROCESS_LINK_BP_GET_004${parameters}`
     );
-    processParamsvar = await processTransform(data.result, userData);
+    processParamsvar = await processTransform(data.result, "");
     localStorage?.setItem("memberData", JSON.stringify(getData));
     formDataInitDatavar = getData
       ? await _.merge(processParamsvar.__dataElement, getData)
