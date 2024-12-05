@@ -1,7 +1,6 @@
-import * as ExpressionFuntions from "./ExpressionFunctions";
+import * as ExpressionFuntions from "./expressionFunctions";
 import { notification } from "antd";
 import * as Helper from "./helper";
-import fetchJson from "lib/fetchJson";
 const { isEmpty, isObject, mergeJsonObjs, getSaveExprission, objectToArray } =
   Helper;
 
@@ -11,8 +10,6 @@ const {
   runprocessvalue,
   getprocessparam,
   fillgroupbydata,
-  showKpi,
-  fillGroupByDv,
   getauthlogin,
   getKpiTemplate,
 } = ExpressionFuntions;
