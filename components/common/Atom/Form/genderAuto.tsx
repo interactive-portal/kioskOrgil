@@ -34,12 +34,6 @@ const GenderAuto: FC<PropsType> = ({
 
   const itemParent: any = localStorage.getItem("enddate");
 
-  // useEffect(() => {
-  //   if (itemParent) {
-  //     setUserData(itemParent);
-  //   }
-  // }, []);
-  // console.log("lookupData :>> ", lookupData);
   return (
     <div
       className={`${
@@ -67,32 +61,6 @@ const GenderAuto: FC<PropsType> = ({
         className="rounded border-gray-400  focus:ring-0 kiosk false "
         value={itemParent || ""}
       />
-
-      {/* <DatePicker
-        name={config.paramrealpath}
-        id={config.paramrealpath}
-        // placeholder="Огноо сонгох"
-        placeholder={config?.placeholdername || "Огноо сонгох"}
-        // defaultValue={moment().format("YYYY-MM-DD")}
-        // moment(
-        //   getAtomValue(
-        //     config,
-        //     formDataInitData,
-        //     processConfig,
-        //     rowIndex,
-        //   ),
-        // ) ||
-        // className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black  ant-input-lg rounded-none"
-        className={twMerge(
-          `rounded  border-gray-400 ${className}   ${
-            validData[config.paramname] ? ` border-red-500 border` : ``
-          }`
-        )}
-        showToday={true}
-        // onChange={handlerChangeSelectDate}
-        // style={{ ...style, width: "165px", height: 42 }}
-        style={{ ...style, height: 40 }}
-      /> */}
     </div>
   );
 };

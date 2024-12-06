@@ -31,16 +31,25 @@ const StateRegNumber: FC<PropsType> = ({
     validData,
     processConfig,
   } = useContext(FormMetaContext);
+  let getVal = getAtomValue(config, formDataInitData, processConfig, rowIndex);
 
   const [error, setError] = useState<any>();
+  const [dval, setDval] = useState<any>(getVal);
 
+  const { dateOfBirth, gender } = registerNumberToDate(dval || "");
+  if (dval) {
+    localStorage?.setItem("dateOfBirth", dateOfBirth);
+    localStorage?.setItem("gender", gender);
+  }
+
+  // console.log("getVal :>> ", getVal);
   const handlerChange = (e: any) => {
+    setDval(e.currentTarget.value);
     handleChangeContext({
       name: config.paramrealpath,
       value: e.currentTarget.value,
       rowIndex,
     });
-    const { dateOfBirth, gender } = registerNumberToDate(e.currentTarget.value);
     localStorage?.setItem("dateOfBirth", dateOfBirth);
     localStorage?.setItem("gender", gender);
   };
@@ -111,7 +120,7 @@ const StateRegNumber: FC<PropsType> = ({
             style={{ ...style }}
             placeholder={config?.placeholdername}
             data-path={config.paramrealpath}
-            // value={itemParent?.id}
+            value={dval}
             onChange={handlerChange}
             onKeyPress={(e) => handlerKey(e)}
             // disabled={fieldDisableEnable(config, processExpression)}

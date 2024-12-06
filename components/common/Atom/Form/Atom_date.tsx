@@ -77,7 +77,7 @@ const Atom_date: FC<PropsType> = ({
     let d = new Date(dateString);
 
     d.setMonth(d.getMonth() + duration);
-    if (paramrealpath == "startDate") {
+    if (paramrealpath == "startDate" || paramrealpath == "startdate") {
       localStorage?.setItem("enddate", d.toLocaleDateString("fr-CA"));
     }
 

@@ -39,7 +39,6 @@ const Atom_string: FC<PropsType> = ({
   // console.log("getVal :>> ", getVal);
   // console.log("getVal :>> ", getVal);
   // console.log("fff :>> ", processConfig);
-
   // console.log("config :>> ", config);
 
   const handlerChange = (e: any) => {

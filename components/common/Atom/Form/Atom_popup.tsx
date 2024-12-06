@@ -164,26 +164,6 @@ const Atom_combo: FC<PropsType> = ({
     });
   };
 
-  const style1 = {
-    control: (base: any, state: any) => ({
-      ...base,
-      borderColor: "rgba(156, 163, 175, 1)",
-      boxShadow: "0 !important",
-      cursort: "pointer",
-      // border: validData[config?.paramname] ? `solid 1px red` : ``,
-      border: "none",
-      backgroundColor: "transparent",
-      padding: 0,
-
-      "&:hover": {
-        // border: "0 !important",
-      },
-    }),
-  };
-
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
   return <></>;
 
   return (

@@ -25,11 +25,6 @@ const getProcess = async (req: any, res: any) => {
   let getData: any = {};
 
   if (result?.status == "success") {
-    console.log(
-      "result :>> ",
-      _.values(result?.result?.meta_process_default_get)
-    );
-
     const param: any = _.values(result?.result?.meta_process_default_get);
     const command = result?.meta_process_default_get?.code;
     // const parampath = result?.meta_process_default_get[0]?.parampath;
@@ -42,11 +37,7 @@ const getProcess = async (req: any, res: any) => {
       "fitKioskFindCustomerDtlData_GET_004",
       parameters
     );
-
     getData = resultsss.result;
-
-    console.log("DDD :>> ", parameters);
-    // console.log("param :>> ", crm);
   }
 
   res.status(200).json({ result, getData });

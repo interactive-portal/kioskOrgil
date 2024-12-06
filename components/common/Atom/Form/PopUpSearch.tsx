@@ -177,6 +177,7 @@ const PopUpSearch: FC<PropsType> = ({
               {resultList?.length > 0 ? (
                 <>
                   {resultList?.map((item: any, index: number) => {
+                    console.log("item :>> ", item);
                     return (
                       <li
                         onClick={(e: any) =>
