@@ -153,6 +153,9 @@ export const FormMetaContextProvider: FC<PropsType> = ({
   ) => {
     e.preventDefault();
     setLoadingForm(true);
+    let formLocalDatasss: any = JSON.parse(localStorage.getItem("memberData"));
+
+    // console.log("formLocalDatasss :>> ", formLocalDatasss);
 
     let defaulData = {
       contractTypeId: price?.contracttypeid,
@@ -169,6 +172,11 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       image: localStorage.getItem("imgStr"),
       gender: localStorage.getItem("gender"),
       contractid: router.query.contractid,
+      firstname: formDataInitData.firstname || formLocalDatasss.firstname,
+      stateregnumber:
+        formDataInitData.stateregnumber || formLocalDatasss.stateregnumber,
+      lastname: formDataInitData.lastname || formLocalDatasss.lastname,
+      firstemail: formDataInitData.firstemail || formLocalDatasss.firstemail,
     };
 
     let formdata = mergedFormData ? mergedFormData : formDataInitData;
@@ -180,8 +188,6 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     }
 
     const valid = validateForm(formdata, processConfig);
-
-    console.log(`formDataInitDat:: `, formdata);
 
     if (valid) {
       setValidData(valid);
@@ -204,7 +210,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
         setResultForm(data);
         setMember(true);
         setLoadingForm(false);
-        window.location.href = `/page/sell?id=${data.result.id}`;
+        // window.location.href = `/page/sell?id=${data.result.id}`;
       } else {
         setResultForm(data);
         notification.warning({

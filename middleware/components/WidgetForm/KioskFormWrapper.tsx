@@ -53,7 +53,7 @@ const KioskFormWrapper: FC<PropsType> = ({
     setModalTerms(false);
   };
 
-  // console.log("addMember :>> ", addMember);
+  console.log("addMember :>> ", addMember);
   return (
     <>
       {addMember == true ? (

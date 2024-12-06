@@ -42,13 +42,13 @@ const Atom_string: FC<PropsType> = ({
   // console.log("fff :>> ", processConfig);
   // console.log("config :>> ", config);
 
-  if (getVal) {
-    handleChangeContext({
-      name: config.paramrealpath,
-      value: getVal,
-      rowIndex,
-    });
-  }
+  // if (getVal) {
+  //   handleChangeContext({
+  //     name: config.paramrealpath,
+  //     value: getVal,
+  //     rowIndex,
+  //   });
+  // }
 
   const handlerChange = (e: any) => {
     setValue(e.currentTarget.value);

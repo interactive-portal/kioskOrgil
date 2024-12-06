@@ -58,13 +58,13 @@ const Atom_number: FC<PropsType> = ({
   let getVal = getAtomValue(config, formDataInitData, processConfig, rowIndex);
   const [value, setValue] = useState(getVal);
 
-  if (getVal) {
-    handleChangeContext({
-      name: config.paramrealpath,
-      value: getVal,
-      rowIndex,
-    });
-  }
+  // if (getVal) {
+  //   handleChangeContext({
+  //     name: config.paramrealpath,
+  //     value: getVal,
+  //     rowIndex,
+  //   });
+  // }
 
   const handlerChange = (e: any) => {
     setValue(e.value);
