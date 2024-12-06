@@ -1,5 +1,5 @@
 import FormMetaContext from "@/context/Meta/FormMetaContext";
-import { FC, useContext } from "react";
+import { FC, useContext, useState } from "react";
 import NumberFormat, { NumericFormat } from "react-number-format";
 import { twMerge } from "tailwind-merge";
 import { fieldDisableEnable, fieldHideShow, getAtomValue } from "@/util/helper";
@@ -55,7 +55,19 @@ const Atom_number: FC<PropsType> = ({
       </>
     );
 
+  let getVal = getAtomValue(config, formDataInitData, processConfig, rowIndex);
+  const [value, setValue] = useState(getVal);
+
+  if (getVal) {
+    handleChangeContext({
+      name: config.paramrealpath,
+      value: getVal,
+      rowIndex,
+    });
+  }
+
   const handlerChange = (e: any) => {
+    setValue(e.value);
     handleChangeContext({
       name: config.paramrealpath,
       value: e.value,
@@ -89,12 +101,7 @@ const Atom_number: FC<PropsType> = ({
       <div>
         <NumericFormat
           thousandsGroupStyle="thousand"
-          value={getAtomValue(
-            config,
-            formDataInitData,
-            processConfig,
-            rowIndex
-          )}
+          value={value}
           prefix=""
           decimalSeparator="."
           displayType={processConfig.actiontype === "view" ? "text" : "input"}

@@ -181,7 +181,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 
     const valid = validateForm(formdata, processConfig);
 
-    console.log(`formDataInitDat:: `, valid);
+    console.log(`formDataInitDat:: `, formdata);
 
     if (valid) {
       setValidData(valid);
