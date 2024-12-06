@@ -1444,7 +1444,14 @@ export const getAtomValue = (
 
     let atomValue = formLocalData[paramName];
 
-    // console.log("formDataInitData ssss:>> ", atomValue);
+    if (paramName == "email") {
+      atomValue = formLocalData["firstemail"];
+    } else if (paramName == "phonenumber") {
+      atomValue = formLocalData["firstphone"];
+    }
+
+    // console.log("formDataInitData ssss:>> ", paramName);
+    // console.log("formDataInitData ssss:>> ", formLocalData);
 
     if (getGroup.length == 2) {
       if (

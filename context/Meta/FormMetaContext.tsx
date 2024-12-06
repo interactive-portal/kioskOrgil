@@ -164,7 +164,6 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     let defaulData = {
       contractTypeId: price?.contracttypeid,
       contracttypeid: price?.contracttypeid,
-      durationTypeId: price?.durationtypeid,
       itemId: price?.itemid,
       itemid: price?.itemid,
       price: price?.saleprice,
@@ -173,6 +172,8 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       enddate: localStorage.getItem("enddate"),
       dateOfBirth: localStorage.getItem("dateOfBirth"),
       dateofbirth: localStorage.getItem("dateOfBirth"),
+      birthdate: localStorage.getItem("dateOfBirth"),
+      phonenumber: formDataInitData.firstphone || formLocalDatasss.firstphone,
       image: localStorage.getItem("imgStr"),
       gender: localStorage.getItem("gender"),
       customerid: localStorage.getItem("cmrid"),

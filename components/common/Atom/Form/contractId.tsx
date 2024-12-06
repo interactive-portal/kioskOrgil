@@ -40,7 +40,7 @@ const ContractId: FC<PropsType> = ({
   const [error, setError] = useState<any>();
   const [dval, setDval] = useState<any>(localStorage.getItem("conId"));
 
-  // console.log("getVal :>> ", getVal);
+  console.log("getVal :>> ", router?.query?.conId);
   const handlerChange = (e: any) => {
     setDval(e.currentTarget.value);
   };

@@ -54,7 +54,7 @@ const Atom_date: FC<PropsType> = ({
     {};
   const [duration, setDuration] = useState(parseFloat(itemParent.durationtype));
 
-  if (config.paramname == "endDate")
+  if (config.paramrealpath == "enddate")
     return (
       <EndDate
         config={config}
@@ -64,7 +64,10 @@ const Atom_date: FC<PropsType> = ({
       />
     );
 
-  if (config.paramname == "dateOfBirth")
+  if (
+    config.paramrealpath == "dateofbirth" ||
+    config.paramrealpath == "birthdate"
+  )
     return (
       <DateOfBirth
         config={config}

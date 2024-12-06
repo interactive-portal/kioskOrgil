@@ -61,9 +61,8 @@ const Atom_string: FC<PropsType> = ({
 
   const handlerBlur = (e: any) => {};
   if (config?.columnwidth) style = { ...style };
-
-  switch (config.paramname) {
-    case "itemId":
+  switch (config.paramrealpath) {
+    case "itemid":
       return (
         <ItemId
           config={config}
@@ -90,7 +89,7 @@ const Atom_string: FC<PropsType> = ({
           rowIndex={rowIndex}
         />
       );
-    case "contractTypeId":
+    case "contracttypeid":
       return (
         <ContractType
           config={config}
@@ -99,7 +98,7 @@ const Atom_string: FC<PropsType> = ({
           rowIndex={rowIndex}
         />
       );
-    case "stateRegNumber":
+    case "stateregnumber":
       return (
         <StateRegNumber
           config={config}
@@ -109,6 +108,8 @@ const Atom_string: FC<PropsType> = ({
         />
       );
     default:
+      // console.log("stateRegNumber :>> ", config);
+
       return (
         <div
           className={`${
