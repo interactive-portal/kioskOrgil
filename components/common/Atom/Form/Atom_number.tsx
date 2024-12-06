@@ -56,6 +56,8 @@ const Atom_number: FC<PropsType> = ({
     );
 
   let getVal = getAtomValue(config, formDataInitData, processConfig, rowIndex);
+
+  console.log("getVal :>> ", getVal);
   const [value, setValue] = useState(getVal);
 
   // if (getVal) {

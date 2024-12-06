@@ -97,8 +97,6 @@ const PopUpSearch: FC<PropsType> = ({
   };
   const router = useRouter();
 
-  console.log("re :>> ", router);
-
   const [searchValue, setSearchValue] = useState<any>();
   const [resultList, setResultList] = useState<any>();
 

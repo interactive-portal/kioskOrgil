@@ -176,7 +176,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       image: localStorage.getItem("imgStr"),
       gender: localStorage.getItem("gender"),
       customerid: localStorage.getItem("cmrid"),
-      contractid: router.query.contractid,
+      contractid: router.query.conId || localStorage.getItem("conId"),
       firstname: formDataInitData.firstname || formLocalDatasss.firstname,
       stateregnumber:
         formDataInitData.stateregnumber || formLocalDatasss.stateregnumber,
@@ -185,13 +185,17 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     };
 
     let formdata = mergedFormData ? mergedFormData : formDataInitData;
-    if (processConfig.metadatacode == "kioskContractMainDV") {
+
+    if (
+      processConfig.metadatacode == "kioskContractMainDV" ||
+      processConfig.metadatacode == "kioskContractMainDV_2"
+    ) {
       formdata = {
         ...formDataInitData,
         ...defaulData,
       };
     }
-    // console.log(`formDataInitData save:: `, formdata);
+    console.log(`formDataInitData save:: `, formdata);
 
     const valid = validateForm(formdata, processConfig);
 
