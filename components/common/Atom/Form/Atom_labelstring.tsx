@@ -70,7 +70,7 @@ const Atom_labelstring: FC<PropsType> = ({
         <p
           className={twMerge(
             `${className || ""} text-base${
-              validData[config.paramname] ? ` border-red-500` : ``
+              validData[config.paramrealpath] ? ` border-red-500` : ``
             }`
           )}
           style={{ ...style }}

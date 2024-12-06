@@ -31,7 +31,7 @@ const EndDate: FC<PropsType> = ({
   } = useContext(FormMetaContext);
 
   const itemParent: any = localStorage.getItem("enddate");
-  console.log("enddate :>> ", itemParent);
+  // console.log("enddate :>> ", itemParent);
 
   // useEffect(() => {
   //   if (itemParent) {
@@ -84,7 +84,7 @@ const EndDate: FC<PropsType> = ({
         // className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black  ant-input-lg rounded-none"
         className={twMerge(
           `rounded  border-gray-400 ${className}   ${
-            validData[config.paramname] ? ` border-red-500 border` : ``
+            validData[config.paramrealpath] ? ` border-red-500 border` : ``
           }`
         )}
         showToday={true}

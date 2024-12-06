@@ -71,7 +71,7 @@ const Atom_string: FC<PropsType> = ({
           name={config.paramname}
           className={twMerge(
             `rounded border-gray-400 focus:ring-0 self-center focus:border-black${
-              validData[config.paramname] ? ` border-red-500` : ``
+              validData[config.paramrealpath] ? ` border-red-500` : ``
             } ${className}`
           )}
           onKeyPress={(event) => {

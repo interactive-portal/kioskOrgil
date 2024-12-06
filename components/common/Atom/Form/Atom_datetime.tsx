@@ -80,7 +80,9 @@ const Atom_datetime: FC<PropsType> = ({
               // }
               className={twMerge(
                 `rounded ${className}  ${
-                  validData[config.paramname] ? ` border-red-500 border` : ``
+                  validData[config.paramrealpath]
+                    ? ` border-red-500 border`
+                    : ``
                 }`
               )}
               showToday={true}

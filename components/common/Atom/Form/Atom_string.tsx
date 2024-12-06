@@ -1,5 +1,5 @@
 import FormMetaContext from "@/context/Meta/FormMetaContext";
-import { FC, useContext } from "react";
+import { FC, useContext, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
@@ -35,6 +35,7 @@ const Atom_string: FC<PropsType> = ({
   // const { t } = useTranslation("translation");
 
   let getVal = getAtomValue(config, formDataInitData, processConfig, rowIndex);
+  const [value, setValue] = useState(getVal);
 
   // console.log("getVal :>> ", getVal);
   // console.log("getVal :>> ", getVal);
@@ -42,6 +43,7 @@ const Atom_string: FC<PropsType> = ({
   // console.log("config :>> ", config);
 
   const handlerChange = (e: any) => {
+    setValue(e.currentTarget.value);
     handleChangeContext({
       name: config.paramrealpath,
       value: e.currentTarget.value,
@@ -144,7 +146,9 @@ const Atom_string: FC<PropsType> = ({
                   ` rounded border-gray-400 text-[14px] focus:ring-0  ${className}  ${
                     config.iconname && "pl-10"
                   }   ${
-                    validData[config.paramname] ? ` border-red-500 border` : ``
+                    validData[config.paramrealpath]
+                      ? ` border-red-500 border`
+                      : ``
                   }
                 ${config?.labelname == "" && "w-full"}
                 `
@@ -152,12 +156,7 @@ const Atom_string: FC<PropsType> = ({
                 style={{ ...style }}
                 placeholder={config?.placeholdername}
                 data-path={config.paramrealpath}
-                value={getAtomValue(
-                  config,
-                  formDataInitData,
-                  processConfig,
-                  rowIndex
-                )}
+                value={value}
                 // disabled={fieldDisableEnable(config, processExpression)}
                 onChange={handlerChange}
                 onBlur={(e) => handlerBlur(e)}
@@ -166,7 +165,7 @@ const Atom_string: FC<PropsType> = ({
               {config.isrequired == "1" && "*"}
             </span> */}
 
-              {/* {validData[config.paramname] ? <>ddddd</> : ``} */}
+              {/* {validData[config.paramrealpath] ? <>ddddd</> : ``} */}
             </div>
           )}
           {config.isEmpty && <span>{config.errorText}</span>}
@@ -229,7 +228,9 @@ const Atom_string: FC<PropsType> = ({
             className={twMerge(
               ` rounded border-gray-400 text-[14px] focus:ring-0  ${className}  ${
                 config.iconname && "pl-10"
-              }   ${validData[config.paramname] ? ` border-red-500 border` : ``}
+              }   ${
+                validData[config.paramrealpath] ? ` border-red-500 border` : ``
+              }
               ${config?.labelname == "" && "w-full"}
               `
             )}
@@ -250,7 +251,7 @@ const Atom_string: FC<PropsType> = ({
 						{config.isrequired == "1" && "*"}
 					</span> */}
 
-          {/* {validData[config.paramname] ? <>ddddd</> : ``} */}
+          {/* {validData[config.paramrealpath] ? <>ddddd</> : ``} */}
         </div>
       )}
       {config.isEmpty && <span>{config.errorText}</span>}

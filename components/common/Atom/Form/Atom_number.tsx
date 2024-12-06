@@ -107,7 +107,7 @@ const Atom_number: FC<PropsType> = ({
           style={{ ...style }}
           className={twMerge(
             `rounded border-gray-400 focus:ring-0 focus:border-black text-right ${className}  ${
-              validData[config.paramname] ? ` border-red-500 border` : ``
+              validData[config.paramrealpath] ? ` border-red-500 border` : ``
             }`
           )}
           onValueChange={handlerChange}

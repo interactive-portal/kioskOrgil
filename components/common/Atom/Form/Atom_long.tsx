@@ -115,7 +115,11 @@ const Atom_long: FC<PropsType> = ({
               ` rounded border-gray-400 focus:ring-0 focus:border-black text-left ${className} ${
                 config.iconname && "pl-10"
               }
-                 ${validData[config.paramname] ? ` border-red-500 border` : ``}
+                 ${
+                   validData[config.paramrealpath]
+                     ? ` border-red-500 border`
+                     : ``
+                 }
 			  ${config?.labelname == "" && "w-full"}
 			  `
             )}

@@ -113,7 +113,9 @@ const StateRegNumber: FC<PropsType> = ({
             className={twMerge(
               ` rounded border-gray-400 text-[14px] focus:ring-0  ${className}  ${
                 config.iconname && "pl-10"
-              }   ${validData[config.paramname] ? ` border-red-500 border` : ``}
+              }   ${
+                validData[config.paramrealpath] ? ` border-red-500 border` : ``
+              }
               ${config?.labelname == "" && "w-full"}
               `
             )}

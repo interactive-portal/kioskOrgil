@@ -77,7 +77,7 @@ const Atom_password: FC<PropsType> = ({
             id={config.paramname}
             name={config.paramname}
             className={`${className} rounded border-gray-400 focus:ring-0 self-center focus:border-black${
-              validData[config.paramname] ? ` border-red-500` : ``
+              validData[config.paramrealpath] ? ` border-red-500` : ``
             }  ${config.iconname && "pl-10"}
             ${config?.labelname == "" && "w-full"}
             `}

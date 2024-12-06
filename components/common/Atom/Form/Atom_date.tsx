@@ -38,7 +38,9 @@ const Atom_date: FC<PropsType> = ({
     processConfig,
     validData,
   } = useContext(FormMetaContext);
-  // console.log("date", config);
+
+  // console.log("date", validData);
+  // console.log("config.paramname", config);
 
   const dateFormat = "YYYY-MM-DD";
   let nowDate = moment().format("YYYY-MM-DD");
@@ -133,7 +135,7 @@ const Atom_date: FC<PropsType> = ({
             // className="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black  ant-input-lg rounded-none"
             className={twMerge(
               `rounded  border-gray-400 ${className}   ${
-                validData[config.paramname] ? ` border-red-500 border` : ``
+                validData[config.paramrealpath] ? ` border-red-500 border` : ``
               }`
             )}
             showToday={true}
