@@ -153,7 +153,9 @@ export const FormMetaContextProvider: FC<PropsType> = ({
   ) => {
     e.preventDefault();
     setLoadingForm(true);
-    let formLocalDatasss: any = JSON.parse(localStorage.getItem("memberData"));
+
+    let ddata: any = localStorage.getItem("memberData");
+    let formLocalDatasss: any = JSON.parse(ddata);
 
     // console.log("formLocalDatasss :>> ", formLocalDatasss);
 
