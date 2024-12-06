@@ -32,7 +32,7 @@ const Atom_number: FC<PropsType> = ({
     validData,
   } = useContext(FormMetaContext);
 
-  if (config.paramname == "amount")
+  if (config.paramrealpath == "amount")
     return (
       <>
         <Amount
@@ -43,7 +43,7 @@ const Atom_number: FC<PropsType> = ({
         />
       </>
     );
-  if (config.paramname == "price")
+  if (config.paramrealpath == "price")
     return (
       <>
         <Price

@@ -97,10 +97,14 @@ const PopUpSearch: FC<PropsType> = ({
   };
   const router = useRouter();
 
+  // console.log("re :>> ", router);
+
   const [searchValue, setSearchValue] = useState<any>();
   const [resultList, setResultList] = useState<any>();
 
   const metadataId = config.lookupmetadataid;
+
+  // console.log("metadataId :>> ", metadataId);
 
   const fetchData = async () => {
     let criteria = {
@@ -141,9 +145,8 @@ const PopUpSearch: FC<PropsType> = ({
       value: item.id,
       rowIndex,
     });
-
-    // console.log(`selected item`, config.paramrealpath);
-    window.location.href = `/page/form?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}&isreg=1`;
+    // console.log(`selected item`, item);
+    window.location.href = `${router.asPath}?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}&isreg=1&conId=${router?.query?.conId}`;
   };
 
   return (

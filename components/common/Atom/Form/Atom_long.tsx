@@ -6,6 +6,7 @@ import Atom_label from "./Atom_label";
 import NumberFormat, { NumericFormat } from "react-number-format";
 import Amount from "./amount";
 import Price from "./price";
+import ContractId from "./contractId";
 type PropsType = {
   config: any;
   className: any;
@@ -38,6 +39,18 @@ const Atom_long: FC<PropsType> = ({
       rowIndex,
     });
   };
+  if (config.paramrealpath == "contractid") {
+    return (
+      <>
+        <ContractId
+          config={config}
+          sectionConfig={sectionConfig}
+          className={className}
+          rowIndex={rowIndex}
+        />
+      </>
+    );
+  }
 
   if (config?.columnwidth) style = { ...style }; //width: parseInt(config?.columnwidth, 10)
 

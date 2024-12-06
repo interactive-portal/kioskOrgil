@@ -155,7 +155,9 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     setLoadingForm(true);
 
     let ddata: any = localStorage.getItem("memberData");
+    let prrr: any = localStorage.getItem("price");
     let formLocalDatasss: any = JSON.parse(ddata);
+    let pp: any = JSON.parse(prrr);
 
     // console.log("formLocalDatasss :>> ", formLocalDatasss);
 
@@ -189,7 +191,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
         ...defaulData,
       };
     }
-    console.log(`formDataInitData save:: `, formdata);
+    // console.log(`formDataInitData save:: `, formdata);
 
     const valid = validateForm(formdata, processConfig);
 
@@ -208,14 +210,15 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       if (data.status === "success") {
         notification.success({ message: "Амжилттай бүртгэгдлээ" });
 
+        // console.log("prrr :>> ", pp);
+        if (pp.maxqty > 0) {
+          window.location.href = `/page/form/addMember?conId=${data.result.id}`;
+        }
+
         localStorage.setItem("conId", data.result.id);
-
-        setMember(true);
-
-        setResultForm(data);
-        setMember(true);
         setLoadingForm(false);
-        // window.location.href = `/page/sell?id=${data.result.id}`;
+
+        // window.location.href = `/page/form/addMember?conId=${data.result.id}`;
       } else {
         setResultForm(data);
         notification.warning({
