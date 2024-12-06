@@ -97,7 +97,7 @@ const PopUpSearch: FC<PropsType> = ({
   };
   const router = useRouter();
 
-  // console.log("re :>> ", router);
+  console.log("re :>> ", router);
 
   const [searchValue, setSearchValue] = useState<any>();
   const [resultList, setResultList] = useState<any>();
@@ -146,7 +146,7 @@ const PopUpSearch: FC<PropsType> = ({
       rowIndex,
     });
     // console.log(`selected item`, item);
-    window.location.href = `${router.asPath}?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}&isreg=1&conId=${router?.query?.conId}`;
+    window.location.href = `${router.pathname}?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}&isreg=1&conId=${router?.query?.conId}`;
   };
 
   return (
