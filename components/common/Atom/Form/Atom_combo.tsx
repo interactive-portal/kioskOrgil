@@ -157,7 +157,7 @@ const Atom_combo: FC<PropsType> = ({
   //     />
   //   );
 
-  console.log("options :>> ", options);
+  // console.log("options :>> ", options);
 
   return (
     <div
@@ -181,7 +181,6 @@ const Atom_combo: FC<PropsType> = ({
 
       <div className={`self-center w-full  `}>
         <Select
-          defaultValue="lucy"
           style={{}}
           className="kiosk w-full py-4"
           onChange={handlerChange}
