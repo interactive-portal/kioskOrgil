@@ -140,8 +140,17 @@ const PopUpSearch: FC<PropsType> = ({
     });
   };
 
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+  const handleChange = (e: any, item: any) => {
+    e.preventDefault();
+    // const linkPath = item?.position3?.val
+
+    handleChangeContext({
+      name: config.paramrealpath,
+      value: item.id,
+      rowIndex,
+    });
+    // console.log(`selected item`, config.paramrealpath);
+    window.location.href = `/page/form?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}&isreg=1`;
   };
 
   return (
@@ -181,9 +190,10 @@ const PopUpSearch: FC<PropsType> = ({
                       // console.log("item :>> ", item);
                       return (
                         <li
-                          onClick={(e: any) =>
-                            (window.location.href = `/page/form?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}`)
-                          }
+                          onClick={(e) => handleChange(e, item)}
+                          // onClick={(e: any) =>
+                          //   (window.location.href = `/page/form?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}`)
+                          // }
                           className="bg-[#d9d9d94f] flex items-center gap-4  text-white cursor-pointer hover:text-blue-400 my-2 p-4 rounded-xl text-sm hover:"
                           key={item?.id || index}
                         >

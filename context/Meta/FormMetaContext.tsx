@@ -205,6 +205,9 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 
       if (data.status === "success") {
         notification.success({ message: "Амжилттай бүртгэгдлээ" });
+
+        localStorage.setItem("conId", data.result.id);
+
         setMember(true);
 
         setResultForm(data);
