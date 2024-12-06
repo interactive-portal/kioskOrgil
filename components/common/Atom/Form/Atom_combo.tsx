@@ -2,11 +2,11 @@ import FormMetaContext from "@/context/Meta/FormMetaContext";
 import fetchJson from "@/lib/fetchJson";
 import _, { isEmpty } from "lodash";
 import { FC, useContext, useEffect, useState } from "react";
-import Select from "react-select";
 import { twMerge } from "tailwind-merge";
 import { fieldDisableEnable, fieldHideShow, getAtomValue } from "@/util/helper";
 import Atom_label from "./Atom_label";
 import GenderAuto from "./genderAuto";
+import { Select } from "antd";
 
 type PropsType = {
   config: any;
@@ -157,6 +157,8 @@ const Atom_combo: FC<PropsType> = ({
   //     />
   //   );
 
+  console.log("options :>> ", options);
+
   return (
     <div
       className={`selectBox  ${
@@ -178,7 +180,22 @@ const Atom_combo: FC<PropsType> = ({
       />
 
       <div className={`self-center w-full  `}>
-        {processConfig.actiontype === "view" ? (
+        <Select
+          defaultValue="lucy"
+          style={{}}
+          className="kiosk w-full py-4"
+          onChange={handlerChange}
+          options={(options || []).map((d: any) => ({
+            value: d.value,
+            label: d.label,
+          }))}
+          // value={options?.filter(
+          //   (option: any) =>
+          //     option["value"] ==
+          //     getAtomValue(config, formDataInitData, processConfig, rowIndex)
+          // )}
+        />
+        {/* {processConfig.actiontype === "view" ? (
           <>
             {
               options?.filter(
@@ -214,7 +231,7 @@ const Atom_combo: FC<PropsType> = ({
             )}
             menuPortalTarget={document.body}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

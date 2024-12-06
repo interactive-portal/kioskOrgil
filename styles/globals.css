@@ -114,7 +114,16 @@ body {
     font-size: 40px;
   }
 }
-
+.selectBox .ant-select-selector span {
+  color: #fff;
+}
+.selectBox .ant-select-selector {
+  background: transparent !important;
+  border: none !important;
+}
+.selectBox .ant-select {
+  height: 48px;
+}
 .obtn:hover {
   background-color: #a68b5c;
   color: #ffffff;
