@@ -32,7 +32,7 @@ const GenderAuto: FC<PropsType> = ({
     processConfig,
   } = useContext(FormMetaContext);
 
-  const itemParent: any = localStorage.getItem("enddate");
+  const itemParent: any = localStorage.getItem("gender");
 
   return (
     <div
@@ -59,7 +59,7 @@ const GenderAuto: FC<PropsType> = ({
         type="text"
         readOnly
         className="rounded border-gray-400  focus:ring-0 kiosk false "
-        value={itemParent || ""}
+        value={itemParent == 1 ? "Эрэгтэй" : "Эмэгтэй"}
       />
     </div>
   );

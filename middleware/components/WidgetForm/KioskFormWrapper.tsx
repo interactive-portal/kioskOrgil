@@ -120,11 +120,6 @@ const KioskFormWrapper: FC<PropsType> = ({
               <div className="box p-2">
                 <div className="box-header flex pb-4 justify-between">
                   <div className="flex flex-row w-full bg-transparent relative items-center gap-1">
-                    {/* <div className="flex-none mr-3">
-                  <div>
-                    <img src={`/terms.png`} className="w-[40px] h-[40px]" />
-                  </div>
-                </div> */}
                     <div className="flex flex-col">
                       <RenderAtom
                         item={{ value: "Үйлчилгээний нөхцөл" }}

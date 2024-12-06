@@ -146,16 +146,16 @@ const Atom_combo: FC<PropsType> = ({
     }),
   };
 
-  // if (config.paramname == "gender")
-  //   return (
-  //     <GenderAuto
-  //       config={config}
-  //       lookupData={options}
-  //       sectionConfig={sectionConfig}
-  //       className={className}
-  //       rowIndex={rowIndex}
-  //     />
-  //   );
+  if (config.paramname == "gender")
+    return (
+      <GenderAuto
+        config={config}
+        lookupData={options}
+        sectionConfig={sectionConfig}
+        className={className}
+        rowIndex={rowIndex}
+      />
+    );
 
   // console.log("options :>> ", options);
 

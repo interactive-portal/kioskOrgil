@@ -37,11 +37,11 @@ const StateRegNumber: FC<PropsType> = ({
   const [dval, setDval] = useState<any>(getVal);
 
   const { dateOfBirth, gender } = registerNumberToDate(dval || "");
+
   if (dval) {
     localStorage?.setItem("dateOfBirth", dateOfBirth);
     localStorage?.setItem("gender", gender);
   }
-
   // console.log("getVal :>> ", getVal);
   const handlerChange = (e: any) => {
     setDval(e.currentTarget.value);
