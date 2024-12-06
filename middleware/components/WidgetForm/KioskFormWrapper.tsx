@@ -32,6 +32,7 @@ const KioskFormWrapper: FC<PropsType> = ({
     resultForm,
     addMember,
   } = useContext(FormMetaContext);
+
   const customSettings = settings?.widgetnemgoo;
   const customOptions = settings?.widgetnemgooReady;
   const [termsValue, setTermsValue] = useState(false);

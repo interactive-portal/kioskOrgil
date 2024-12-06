@@ -8,7 +8,7 @@ import { decode } from "html-entities";
 import parseHtml from "html-react-parser";
 import fetchJson from "@/lib/fetchJson";
 import _ from "lodash";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import ChangeEventInput from "@/util/ChangeEventInput";
 // import { runExpressionEndAfter } from "@/util/expression";
 
@@ -55,6 +55,8 @@ export const FormMetaContextProvider: FC<PropsType> = ({
   const [resultForm, setResultForm] = useState<any>();
   const [addMember, setMember] = useState(false);
   const [price, setPrice] = useState<any>();
+
+  const router = useRouter();
 
   useEffect(() => {
     const itemParent =
@@ -154,14 +156,19 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 
     let defaulData = {
       contractTypeId: price?.contracttypeid,
+      contracttypeid: price?.contracttypeid,
       durationTypeId: price?.durationtypeid,
       itemId: price?.itemid,
+      itemid: price?.itemid,
       price: price?.saleprice,
       amount: price?.saleprice,
       endDate: localStorage.getItem("enddate"),
+      enddate: localStorage.getItem("enddate"),
       dateOfBirth: localStorage.getItem("dateOfBirth"),
+      dateofbirth: localStorage.getItem("dateOfBirth"),
       image: localStorage.getItem("imgStr"),
       gender: localStorage.getItem("gender"),
+      contractid: router.query.contractid,
     };
 
     let formdata = mergedFormData ? mergedFormData : formDataInitData;
