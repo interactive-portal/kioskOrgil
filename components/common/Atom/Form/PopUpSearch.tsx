@@ -132,23 +132,16 @@ const PopUpSearch: FC<PropsType> = ({
     });
   };
 
-  const handlerChange = (e: any) => {
-    handleChangeContext({
-      name: config.paramrealpath,
-      value: e.value,
-      rowIndex,
-    });
-  };
-
   const handleChange = (e: any, item: any) => {
     e.preventDefault();
     // const linkPath = item?.position3?.val
-
+    localStorage?.setItem("cmrid", item?.id);
     handleChangeContext({
       name: config.paramrealpath,
       value: item.id,
       rowIndex,
     });
+
     // console.log(`selected item`, config.paramrealpath);
     window.location.href = `/page/form?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}&isreg=1`;
   };
@@ -211,32 +204,6 @@ const PopUpSearch: FC<PropsType> = ({
                 )}
               </div>
             </div>
-            {/* <ul className="z-20 px-2 h-full  ">
-              {resultList?.length > 0 ? (
-                <>
-                  {resultList?.map((item: any, index: number) => {
-                    // console.log("item :>> ", item);
-                    return (
-                      <li
-                        onClick={(e: any) =>
-                          (window.location.href = `/page/form?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}`)
-                        }
-                        className="bg-[#d9d9d94f] text-white cursor-pointer hover:text-blue-400 my-2 p-4 rounded-xl text-sm hover:"
-                        key={item?.id || index}
-                      >
-                        <div className="flex flex-col">
-                          <p>Овог: {item?.lastname}</p>
-                          <p>Нэр: {item?.name}</p>
-                          <p>Регистр: {item?.stateregnumber}</p>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </>
-              ) : (
-                <Empty description={"Хайлтын илэрц олдсонгүй"} />
-              )}
-            </ul> */}
           </div>
         )}
       </span>

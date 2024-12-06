@@ -173,6 +173,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       dateofbirth: localStorage.getItem("dateOfBirth"),
       image: localStorage.getItem("imgStr"),
       gender: localStorage.getItem("gender"),
+      customerid: localStorage.getItem("cmrid"),
       contractid: router.query.contractid,
       firstname: formDataInitData.firstname || formLocalDatasss.firstname,
       stateregnumber:
@@ -188,6 +189,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
         ...defaulData,
       };
     }
+    console.log(`formDataInitData save:: `, formdata);
 
     const valid = validateForm(formdata, processConfig);
 
@@ -197,8 +199,6 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 
     if (!Object.keys(valid).length) {
       let resExp = "";
-
-      // console.log(`formDataInitData save:: `, formdata);
 
       const { data } = await axios.post(`/api/post-process`, {
         processcode: processConfig.metadatacode,
