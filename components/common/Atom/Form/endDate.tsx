@@ -63,7 +63,11 @@ const EndDate: FC<PropsType> = ({
       <input
         type="text"
         readOnly
-        className="rounded border-gray-400  focus:ring-0 kiosk false "
+        className={twMerge(
+          `rounded  border-gray-400  focus:ring-0 kiosk ${className}   ${
+            validData[config.paramrealpath] ? ` border-red-500 border` : ``
+          }`
+        )}
         value={itemParent || ""}
       />
 
