@@ -156,9 +156,9 @@ const PopUpSearch: FC<PropsType> = ({
           : fieldHideShow(config, processExpression) && "hidden"
       }`}
     >
-      <span className="relative">
+      <span className="relative bg-red-400">
         <>
-          <div className="w-full ">
+          <div className="w-full mt-4 ">
             <div className="relative px-2">
               <input
                 className="rounded border-gray-400 text-[14px] focus:ring-0 kiosk "
@@ -172,12 +172,40 @@ const PopUpSearch: FC<PropsType> = ({
           </div>
         </>
         {searchValue?.length > 0 && (
-          <div className="absolute top-10   bg-[#2e343f] max-h-[400px]  w-full rounded-2xl border  text-black mt-6 overflow-hidden z-[9999] scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin hover:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full shadow  text-left">
-            <ul className="z-20 px-2 ">
+          <div className="absolute  top-10    w-[400px] rounded-2xl border bg-[#2e343f] text-black mt-10 overflow-hidden z-[9999]  shadow  text-left">
+            <div className="relative rounded-xl overflow-auto ">
+              <div className="overflow-y-scroll  h-[350px] relative max-w-sm mx-auto   shadow-lg ring-1 ring-black/5 rounded-xl flex flex-col divide-y dark:divide-slate-200/5 scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin hover:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full ">
+                {resultList?.length > 0 ? (
+                  <>
+                    {resultList?.map((item: any, index: number) => {
+                      // console.log("item :>> ", item);
+                      return (
+                        <li
+                          onClick={(e: any) =>
+                            (window.location.href = `/page/form?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}`)
+                          }
+                          className="bg-[#d9d9d94f] flex items-center gap-4  text-white cursor-pointer hover:text-blue-400 my-2 p-4 rounded-xl text-sm hover:"
+                          key={item?.id || index}
+                        >
+                          <div className="flex flex-col">
+                            <p>Овог: {item?.lastname}</p>
+                            <p>Нэр: {item?.name}</p>
+                            <p>Регистр: {item?.stateregnumber}</p>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <Empty description={"Хайлтын илэрц олдсонгүй"} />
+                )}
+              </div>
+            </div>
+            {/* <ul className="z-20 px-2 h-full  ">
               {resultList?.length > 0 ? (
                 <>
                   {resultList?.map((item: any, index: number) => {
-                    console.log("item :>> ", item);
+                    // console.log("item :>> ", item);
                     return (
                       <li
                         onClick={(e: any) =>
@@ -198,7 +226,7 @@ const PopUpSearch: FC<PropsType> = ({
               ) : (
                 <Empty description={"Хайлтын илэрц олдсонгүй"} />
               )}
-            </ul>
+            </ul> */}
           </div>
         )}
       </span>
