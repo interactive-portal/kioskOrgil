@@ -132,7 +132,7 @@ const Extend = () => {
         const customerId = res?.result?.customerId;
 
         setCustomerId(customerId);
-        setLoading(true);
+        setLoading(false);
         // alert(res?.result);
 
         ws.send('{"action":"Close"}');

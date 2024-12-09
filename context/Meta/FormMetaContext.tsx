@@ -215,9 +215,22 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       if (data.status === "success") {
         notification.success({ message: "Амжилттай бүртгэгдлээ" });
 
-        // console.log("prrr :>> ", pp);
-        if (pp.maxqty > 0) {
-          window.location.href = `/page/form/addMember?conId=${data.result.id}`;
+        let datsssssa = await fetchJson(
+          `/api/get-process?command=fitKioskCountContractCustomer_GET_004&parameters=${JSON.stringify(
+            {
+              id: data.result.id,
+            }
+          )}`
+        );
+        console.log("prrr :>> ", datsssssa);
+        // if (pp.maxqty > 0) {
+        //   window.location.href = `/page/form/addMember?conId=${data.result.id}member=`;
+
+        // }
+        if (datsssssa.status === "success") {
+          if (datsssssa.result.cnt > 0) {
+            window.location.href = `/page/form/addMember?conId=${data.result.id}member=${datsssssa.result.cnt}`;
+          }
         }
 
         localStorage.setItem("conId", data.result.id);
