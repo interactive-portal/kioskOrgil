@@ -1444,11 +1444,11 @@ export const getAtomValue = (
 
     let atomValue = formLocalData[paramName];
 
-    if (paramName == "email") {
-      atomValue = formLocalData["firstemail"];
-    } else if (paramName == "phonenumber") {
-      atomValue = formLocalData["firstphone"];
-    }
+    // if (paramName == "email") {
+    //   atomValue = formLocalData["firstemail"];
+    // } else if (paramName == "phonenumber") {
+    //   atomValue = formLocalData["firstphone"];
+    // }
 
     // console.log("formDataInitData ssss:>> ", paramName);
     // console.log("formDataInitData ssss:>> ", formLocalData);
