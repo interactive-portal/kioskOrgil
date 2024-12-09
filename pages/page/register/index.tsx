@@ -29,9 +29,12 @@ const Register = () => {
       items: items.map(({ itemtypename, id }) => ({ itemtypename, id })),
     }))
     .value();
+  let crm: any = router.query.crm || "";
 
   const handleItemClick = (item: any) => {
     localStorage?.setItem("product", JSON.stringify(item));
+    // localStorage?.setItem("product", JSON.stringify(item));
+    localStorage?.setItem("cmrid", crm);
     // router.push(`/page/register/category=${item?.id}`);
 
     router.push({
