@@ -106,6 +106,7 @@ const AddMember = () => {
       let prrr: any = localStorage.getItem("price");
       let pp: any = prrr ? JSON.parse(prrr) : {};
       setMember(pp?.maxqty);
+      console.log("pp :>> ", pp);
     }
   }, [methods.watch()]);
 
@@ -130,12 +131,12 @@ const AddMember = () => {
     );
   }
   const Mm: any = router?.query?.member;
-  const [mem, setMember] = useState<any>();
+  const [mem, setMember] = useState<any>(4);
 
   return (
     <Layout>
       <Title title="Гишүүн нэмэх "></Title>
-      <span> Гишүүн </span>/{mem - Mm}/
+      <span> АНКЕТ {router?.query?.member}</span>
       <BlockDiv className="py-2 text-[32px] text-white">
         <WidgetKiosk
           listConfig={{

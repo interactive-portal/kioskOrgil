@@ -231,12 +231,13 @@ export const FormMetaContextProvider: FC<PropsType> = ({
           if (datsssssa.result.cnt > 0) {
             window.location.href = `/page/form/addMember?conId=${data.result.id}&member=${datsssssa.result.cnt}`;
           }
+          window.location.href = `/page/page/sell?id=${data.result.id}`;
         }
 
         localStorage.setItem("conId", data.result.id);
         setLoadingForm(false);
 
-        // window.location.href = `/page/form/addMember?conId=${data.result.id}`;
+        window.location.href = `/page/form/addMember?conId=${data.result.id}`;
       } else {
         setResultForm(data);
         notification.warning({
