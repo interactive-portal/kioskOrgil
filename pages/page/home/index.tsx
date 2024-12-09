@@ -32,7 +32,7 @@ const Home = () => {
         <Title title="Welcome" />
         {/* Or use any text */}
         {/* <WelcomeTitle title="Any Custom Title" /> */}
-        <div className=" mx-auto flex flex-col gap-6 text-center px-4">
+        <div className=" mx-auto flex flex-col gap-6 text-center px-2">
           {homeData.map((item, index) => (
             <ButtonList
               key={index}

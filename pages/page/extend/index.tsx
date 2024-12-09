@@ -201,7 +201,7 @@ const Extend = () => {
       ) : (
         <div className="mx-auto  flex flex-col gap-10 ">
           <Title title="Сунгалт"></Title>
-          <div className="relative w-4/5 mx-auto ">
+          <div className="relative w-full mx-auto ">
             <i className="fa-solid fa-magnifying-glass absolute md:left-4 md:top-[35px] md:text-[42px] text-[#525050] xs:left-4 xs:top-1"></i>
             <input
               type="text"
