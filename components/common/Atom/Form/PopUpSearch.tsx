@@ -144,7 +144,7 @@ const PopUpSearch: FC<PropsType> = ({
       rowIndex,
     });
     // console.log(`selected item`, item);
-    window.location.href = `${router.pathname}?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}&isreg=1&conId=${router?.query?.conId}&member=${router?.query?.conId}`;
+    window.location.href = `${router.pathname}?crm=${item?.id}&price=${router?.query?.price}&contractid=${router?.query?.contractid}&isreg=1&conId=${router?.query?.conId}&member=${router?.query?.member}`;
   };
 
   return (

@@ -131,12 +131,16 @@ const AddMember = () => {
     );
   }
   const Mm: any = router?.query?.member;
-  const [mem, setMember] = useState<any>(4);
+  const [mem, setMember] = useState<number>(4);
+  console.log("mem :>> ", mem);
 
   return (
     <Layout>
       <Title title="Гишүүн нэмэх "></Title>
-      <span> АНКЕТ {router?.query?.member}</span>
+      <span>
+        {" "}
+        АНКЕТ <b>{mem}</b> {"/" + router?.query?.member}
+      </span>
       <BlockDiv className="py-2 text-[32px] text-white">
         <WidgetKiosk
           listConfig={{
