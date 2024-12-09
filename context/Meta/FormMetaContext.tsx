@@ -222,22 +222,25 @@ export const FormMetaContextProvider: FC<PropsType> = ({
             }
           )}`
         );
-        // console.log("prrr :>> ", datsssssa);
+
         // if (pp.maxqty > 0) {
         //   window.location.href = `/page/form/addMember?conId=${data.result.id}member=`;
 
         // }
         if (datsssssa.status === "success") {
-          if (datsssssa.result.cnt > 0) {
+          const cnt = parseFloat(datsssssa.result.cnt);
+          console.log("prrr :>> ", cnt);
+          if (cnt > 0) {
             window.location.href = `/page/form/addMember?conId=${data.result.id}&member=${datsssssa.result.cnt}`;
+          } else {
+            window.location.href = `/page/sell?id=${data.result.id}`;
           }
-          window.location.href = `/page/page/sell?id=${data.result.id}`;
         }
 
         localStorage.setItem("conId", data.result.id);
         setLoadingForm(false);
 
-        window.location.href = `/page/form/addMember?conId=${data.result.id}`;
+        // window.location.href = `/page/form/addMember?conId=${data.result.id}`;
       } else {
         setResultForm(data);
         notification.warning({
