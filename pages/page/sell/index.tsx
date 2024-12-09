@@ -17,6 +17,7 @@ const Sell = () => {
   const [loading, setLoading] = useState(true);
   const [templateId, setTemplateId] = useState("");
   const [contractId, setContractId] = useState("");
+  const [info, setIfno] = useState<any>();
   const [activeCheck, setActiveCheck] = useState(false);
   const [nextButtonView, setNextButtonView] = useState(false);
   const [contentType, setContentType] = useState("contract");
@@ -54,9 +55,16 @@ const Sell = () => {
       return;
     }
     fetchData();
+
+    if (localStorage) {
+      let prrr: any = localStorage.getItem("price");
+      let pp: any = prrr ? JSON.parse(prrr) : {};
+      setIfno(pp);
+      // console.log("pp :>> ", pp);
+    }
   }, [cid]);
 
-  // console.log("item :>> ", item);
+  console.log("item :>> ", item);
   if (!item) {
     return (
       <Layout>
@@ -92,7 +100,7 @@ const Sell = () => {
               <label className="text-[48px]">Хугацаа</label>
               <input
                 className="bg-[#D9D9D94D] border border-white min-h-[98px] rounded-[60px] px-10 text-[48px]"
-                value={item?.month}
+                value={item?.month || info?.durationtype}
               />
             </div>
           </div>
