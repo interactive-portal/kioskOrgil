@@ -159,7 +159,7 @@ const PopUpSearch: FC<PropsType> = ({
           : fieldHideShow(config, processExpression) && "hidden"
       }`}
     >
-      <span className="relative -top-4">
+      <span className="relative -top-2">
         <>
           <div className="w-full  ">
             <div className="relative px-2">
