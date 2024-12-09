@@ -64,7 +64,7 @@ const Sell = () => {
     }
   }, [cid]);
 
-  console.log("item :>> ", item);
+  // console.log("item :>> ", item);
   if (!item) {
     return (
       <Layout>
