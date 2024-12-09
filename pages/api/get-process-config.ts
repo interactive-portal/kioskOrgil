@@ -30,7 +30,7 @@ const getProcess = async (req: any, res: any) => {
     // const parampath = result?.meta_process_default_get[0]?.parampath;
 
     const parameters = {
-      filterCustomerId: crmsssssssssss,
+      filterCustomerId: crmsssssssssss || "",
     };
 
     const resultsss = await getProcessData(
@@ -38,6 +38,7 @@ const getProcess = async (req: any, res: any) => {
       parameters
     );
     getData = resultsss.result;
+    console.log("resultsss :>> ", resultsss);
   }
 
   res.status(200).json({ result, getData });

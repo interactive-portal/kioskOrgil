@@ -156,10 +156,10 @@ export const FormMetaContextProvider: FC<PropsType> = ({
 
     let ddata: any = localStorage.getItem("memberData") || {};
     let prrr: any = localStorage.getItem("price");
-    let formLocalDatasss: any = JSON.parse(ddata);
-    let pp: any = JSON.parse(prrr);
+    let formLocalDatasss: any = ddata ? JSON.parse(ddata) : {};
+    let pp: any = prrr ? JSON.parse(prrr) : {};
 
-    // console.log("formLocalDatasss :>> ", formLocalDatasss);
+    console.log("formLocalDatasss :>> ", ddata);
 
     let defaulData = {
       contractTypeId: price?.contracttypeid,

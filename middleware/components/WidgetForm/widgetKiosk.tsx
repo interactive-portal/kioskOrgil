@@ -66,7 +66,7 @@ const WidgetKiosk: FC<PropsType> = ({
       `/api/get-process-config?command=META_BUSINESS_PROCESS_LINK_BP_GET_004${parameters}`
     );
     processParamsvar = await processTransform(data.result, "");
-    localStorage?.setItem("memberData", JSON.stringify(getData));
+    localStorage?.setItem("memberData", JSON.stringify(getData || {}));
     formDataInitDatavar = getData
       ? await _.merge(processParamsvar.__dataElement, getData)
       : processParamsvar?.__dataElement;
