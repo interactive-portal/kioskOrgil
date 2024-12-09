@@ -29,6 +29,7 @@ const AddMember = () => {
   const [processParam, setProcessParam] = useState<any>();
   const [formResult, setFormResult] = useState();
   const [birthday, setBirthday] = useState("");
+  const [mem, setMember] = useState();
   const [openLogin, setOpenLogin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -92,15 +93,6 @@ const AddMember = () => {
       formTitleWrapperClass: "hidden ",
     },
   };
-  const settings2 = {
-    widgetnemgooReady: {
-      labelPosition: "top",
-      submitButtonName: "Гишүүн нэмэх",
-      submitButtonWrapperClass: "w-full flex ",
-      submitButtonClass: "bg-[#A68B5C] ",
-      formTitleWrapperClass: "hidden ",
-    },
-  };
 
   useEffect(() => {
     let birthdays: any;
@@ -110,7 +102,17 @@ const AddMember = () => {
       setBirthday(birthdays?.date);
     }
     setProductId(router.query.i as string);
+
+    if (localStorage) {
+      let prrr: any = localStorage.getItem("price");
+      let pp: any = prrr ? JSON.parse(prrr) : {};
+      setMember(pp?.maxqty);
+    }
   }, [methods.watch()]);
+
+  const Mm = router?.query?.member;
+
+  // console.log("formLocalDatasss :>> ", pp);
 
   const checkIfSignedIn = async () => {
     try {
@@ -134,6 +136,7 @@ const AddMember = () => {
   return (
     <Layout>
       <Title title="Гишүүн нэмэх "></Title>
+      <span> Гишүүн </span>/{mem - Mm}/
       <BlockDiv className="py-2 text-[32px] text-white">
         <WidgetKiosk
           listConfig={{

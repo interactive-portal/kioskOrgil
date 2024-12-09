@@ -159,7 +159,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     let formLocalDatasss: any = ddata ? JSON.parse(ddata) : {};
     let pp: any = prrr ? JSON.parse(prrr) : {};
 
-    console.log("formLocalDatasss :>> ", ddata);
+    // console.log("formLocalDatasss :>> ", ddata);
 
     let defaulData = {
       contractTypeId: price?.contracttypeid,
@@ -222,14 +222,14 @@ export const FormMetaContextProvider: FC<PropsType> = ({
             }
           )}`
         );
-        console.log("prrr :>> ", datsssssa);
+        // console.log("prrr :>> ", datsssssa);
         // if (pp.maxqty > 0) {
         //   window.location.href = `/page/form/addMember?conId=${data.result.id}member=`;
 
         // }
         if (datsssssa.status === "success") {
           if (datsssssa.result.cnt > 0) {
-            window.location.href = `/page/form/addMember?conId=${data.result.id}member=${datsssssa.result.cnt}`;
+            window.location.href = `/page/form/addMember?conId=${data.result.id}&member=${datsssssa.result.cnt}`;
           }
         }
 
