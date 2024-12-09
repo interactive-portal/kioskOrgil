@@ -173,7 +173,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       dateOfBirth: localStorage.getItem("dateOfBirth"),
       dateofbirth: localStorage.getItem("dateOfBirth"),
       birthdate: localStorage.getItem("dateOfBirth"),
-      phonenumber: formDataInitData.firstphone || formLocalDatasss.firstphone,
+      phonenumber: formDataInitData.phonenumber || formLocalDatasss.phonenumber,
       image: localStorage.getItem("imgStr"),
       gender: localStorage.getItem("gender"),
       customerid: localStorage.getItem("cmrid"),
