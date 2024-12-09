@@ -159,9 +159,9 @@ const PopUpSearch: FC<PropsType> = ({
           : fieldHideShow(config, processExpression) && "hidden"
       }`}
     >
-      <span className="relative bg-red-400">
+      <span className="relative -top-4">
         <>
-          <div className="w-full mt-4 ">
+          <div className="w-full  ">
             <div className="relative px-2">
               <input
                 className="rounded border-gray-400 text-[14px] focus:ring-0 kiosk "

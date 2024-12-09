@@ -32,7 +32,7 @@ const Header: FC<PropsType> = ({
       </>
     );
   return processConfig ? (
-    <div className={`grid gap-8 grid-cols-2 px-6`}>
+    <div className={`grid grid-flow-row-dense grid-cols-2 gap-8`}>
       {header?.map((item: any, index: number) => {
         if (!item.tabname && item.datatype !== "group") {
           // console.log("🚀 ~ {header?.map ~ item", item);

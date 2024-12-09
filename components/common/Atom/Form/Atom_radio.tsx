@@ -70,7 +70,7 @@ const Atom_radio: FC<PropsType> = ({
         className={`${labelClassName}`}
       />
       <div className="mt-2 flex flex-col ">
-        <Radio.Group onChange={onChange} value={value}>
+        {/* <Radio.Group onChange={onChange} value={value}>
           {data &&
             data.map((item: any, index: any) => {
               let displayfield = item[config.displayfield.toLowerCase()];
@@ -83,14 +83,15 @@ const Atom_radio: FC<PropsType> = ({
                 </Radio>
               );
             })}
-        </Radio.Group>
-        {addMember == 1 ? (
+        </Radio.Group> */}
+        <PopUpSearch />
+
+        {/* {addMember == 1 ? (
           <>
-            <PopUpSearch />
           </>
         ) : (
           <></>
-        )}
+        )} */}
       </div>
     </div>
   );

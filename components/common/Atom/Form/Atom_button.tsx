@@ -98,7 +98,7 @@ const Atom_button: FC<PropsType> = ({
   return (
     <>
       <div
-        className={`${
+        className={`col-span-2 ${
           sectionConfig?.widgetnemgooReady?.labelPosition == "top"
             ? `flex flex-col`
             : `grid grid-cols-2 gap-4`

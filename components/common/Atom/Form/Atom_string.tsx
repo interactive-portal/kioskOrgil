@@ -112,7 +112,7 @@ const Atom_string: FC<PropsType> = ({
 
       return (
         <div
-          className={`${
+          className={` ${
             sectionConfig?.widgetnemgooReady?.labelPosition == "top"
               ? `flex flex-col`
               : ` ${
