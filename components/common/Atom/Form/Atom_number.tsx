@@ -108,6 +108,7 @@ const Atom_number: FC<PropsType> = ({
           decimalSeparator="."
           displayType={processConfig.actiontype === "view" ? "text" : "input"}
           type="text"
+          autoComplete="off"
           thousandSeparator={true}
           allowNegative={true}
           name={config.paramrealpath}

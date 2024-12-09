@@ -150,6 +150,7 @@ const Atom_string: FC<PropsType> = ({
               <input
                 type="text"
                 id={config.paramname}
+                autoComplete="off"
                 name={config.paramname}
                 className={twMerge(
                   ` rounded border-gray-400 text-[14px] focus:ring-0  ${className}  ${
