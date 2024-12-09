@@ -29,7 +29,6 @@ const AddMember = () => {
   const [processParam, setProcessParam] = useState<any>();
   const [formResult, setFormResult] = useState();
   const [birthday, setBirthday] = useState("");
-  const [mem, setMember] = useState();
   const [openLogin, setOpenLogin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -110,8 +109,6 @@ const AddMember = () => {
     }
   }, [methods.watch()]);
 
-  const Mm = router?.query?.member;
-
   // console.log("formLocalDatasss :>> ", pp);
 
   const checkIfSignedIn = async () => {
@@ -132,6 +129,8 @@ const AddMember = () => {
       </Layout>
     );
   }
+  const Mm: any = router?.query?.member;
+  const [mem, setMember] = useState<any>();
 
   return (
     <Layout>
