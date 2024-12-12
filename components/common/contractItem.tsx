@@ -38,9 +38,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
             pageSize: 20,
           })}`
         );
-
         // console.log("data :>> ", data);
-
         if (data.result.length > 0) {
           setErr(false);
           setUser(data.result);
@@ -53,7 +51,6 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        // alert("An error occurred while searching.");
         setErr(true);
       } finally {
         setLoading(false);
@@ -78,11 +75,8 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
         <MemberChange dataSrc={mergeData} setOpenModal={setContent} />
       </>
     );
-
     setOpenModal(true);
   };
-
-  // console.log("user :>> ", user);
 
   // console.log("data :>> ", data);
   return (
@@ -140,6 +134,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
           </span>
         </div>
       </div>
+
       {user && (
         <div className="flex flex-col">
           <span className="text-2xl text-white text-start uppercase">
@@ -160,7 +155,6 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
                   РЕГИСТЕР: <span>{item?.firstname}</span>
                 </p>
                 <div className="">
-                  {" "}
                   <span
                     // onClick={() => setOpenModal(true)}
                     onClick={(e) => handlerChangeEvent(e, item)}

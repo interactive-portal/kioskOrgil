@@ -1,12 +1,15 @@
-import { notification, Spin, Statistic } from "antd";
+import ReportTemplate from "@/middleware/ReportTemplate/ReportTemplate";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin, Statistic } from "antd";
 import axios from "axios";
 import _ from "lodash";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Payment from "@/components/project/riverclub/v1/payment/payment";
-import Payed from "./payed";
-import BankIpTerminalTransfer from "./terminal";
-export default function PosTerminal({
+import useSWR from "swr";
+// import SuccessCard from "../../card/successCard";
+// import {Statistic} from "antd";
+
+export default function EbarimtPrint({
   item,
   close,
   status,
@@ -21,8 +24,6 @@ export default function PosTerminal({
   setPay?: any;
   setModalContent?: any;
 }) {
-  console.log("item :>> ", item);
-
   const [printOptions, setPrintOptions] = useState({
     lang: {
       mn: "",
@@ -101,6 +102,8 @@ export default function PosTerminal({
     }
   };
 
+  console.log("content :>> ", content);
+
   const printEbarimt = () => {
     var content: any = document.getElementById("portraid");
     const pri: any = (document.getElementById("content") as HTMLIFrameElement)
@@ -110,33 +113,73 @@ export default function PosTerminal({
     pri.document.close();
     pri.focus();
     pri.print();
-    setModalContent("pay");
+    // Cookies.remove("customer");
+    // if (setModal) {
+    //   setModal("date");
+    // }
   };
 
-  BankIpTerminalTransfer(
-    Number("50"),
-    // Number(item?.amount),
-    process.env.NEXT_PUBLIC_TERMINAL_ID,
-    process.env.NEXT_PUBLIC_DEVICE_TYPE,
-    function (res: any) {
-      console.log("payment result", item);
-      paymentProcess(res, "pos");
-      if (item?.status == "success") {
-        // setPaymentResult(item);
-        console.log("item :>> pos  ", item);
-        Payed(item, "pos");
-      } else {
-        notification.error({
-          message: item?.text,
-        });
-      }
-    }
-  );
+  console.log("item :>> ", item);
 
   return (
     <>
-      <div className="min-h-[900px] flex items-center justify-center mt-[250px]">
-        <p className="text-white text-[64px]">ТА КАРТАА УНШУУЛНА УУ !</p>
+      <div className="flex items-center border rounded-xl justify-center h-full">
+        <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
+          <iframe id="content" className="h-0 w-0 absolute"></iframe>
+          <div id={"portraid"}>
+            <ReportTemplate
+              options={printOptions}
+              data={{
+                contractId: item.contractcode,
+                // contractId:
+                //   "170174683396510" ||
+                //   "17022810222312" ||
+                //   "170174688727410",
+              }}
+            />
+          </div>
+          <p className="text-[20px] px-4 txt">Та баримтаа хэвлэж авна уу</p>
+          <div className="py-[20px] w-full flex gap-[16px] px-[64px] cursor-pointer button">
+            <div
+              className="px-6 py-1 float-right bg-white border-[#A68B5C] border text-[#A68B5C]   justify-center text-[18px] w-[200px] rounded-full mx-auto"
+              onClick={() => {
+                printEbarimt();
+              }}
+            >
+              Баримт хэвлэх
+            </div>
+          </div>
+        </div>
+        <style>
+          {`
+              @media print {
+                body {
+                  font-family: Arial, sans-serif;
+                  font-size: 12pt;
+                  color: black;
+                  padding:40px;
+                }
+
+                  #portraid {
+                    page-break-before: always;
+                    page-break-inside: avoid;
+                    padding:30px;
+                  }
+
+                  .button {
+                    display: none;
+                  }
+
+                  .txt {
+                    display: none;
+                  }
+                  img :{
+                    display: none;
+                  }
+                }
+
+      `}
+        </style>
       </div>
     </>
   );

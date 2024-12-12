@@ -7,6 +7,7 @@ import SocialPay from "@/components/project/riverclub/v1/qpay/socailpay";
 import axios from "axios";
 import Payment from "@/components/project/riverclub/v1/payment/payment";
 import PosTerminal from "@/components/project/riverclub/v1/qpay/posTerminal";
+import EbarimtPrint from "@/components/project/riverclub/v1/qpay/ebarimt";
 
 const Ebarimt = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const Ebarimt = () => {
   const LOCAL_STORAGE_KEY = "orderInfo";
 
   const [order, setOrder] = useState<any>();
+  const [paymentProcess, setPaymentProcess] = useState<any>();
 
   useEffect(() => {
     const orderData = localStorage.getItem("orderInfo");
@@ -23,7 +25,7 @@ const Ebarimt = () => {
 
   const jsonData = order ? JSON.parse(order) : {};
 
-  console.log("jsonData :>> ", jsonData);
+  // console.log("jsonData :>> ", jsonData);
 
   if (!jsonData)
     return (
@@ -110,7 +112,7 @@ const Ebarimt = () => {
 
   const renderReceiptView = () => (
     <div className="min-h-[900px] flex items-center justify-center mt-[250px]">
-      <p className="text-white text-[64px]">ТА ТӨЛБӨРИЙН БАРИМТАА АВНА УУ!</p>
+      <p className="text-white text-[64px]">ТА ТӨЛБӨРИЙН БАРИМТАА АВНА УУ!</p>ss
     </div>
   );
 
@@ -152,8 +154,17 @@ const Ebarimt = () => {
         {view === "organization" && renderOrganizationView()}
         {view === "payment" && renderPaymentView()}
         {view === "receipt" && renderReceiptView()}
+        {view === "ebarimt" && (
+          <EbarimtPrint item={jsonData} content={paymentProcess} />
+        )}
         {view === "card" && <PosTerminal item={jsonData} />}
-        {view === "qpay" && <Qpay item={jsonData} />}
+        {view === "qpay" && (
+          <Qpay
+            item={jsonData}
+            setModalContent={setView}
+            setPay={setPaymentProcess}
+          />
+        )}
         {view === "socialPay" && <SocialPay item={jsonData} />}
       </div>
 

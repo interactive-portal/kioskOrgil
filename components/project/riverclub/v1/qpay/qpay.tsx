@@ -29,7 +29,7 @@ export default function Qpay({
 
   const { Countdown } = Statistic;
 
-  console.log("item :>> ", item);
+  // console.log("item :>> ", item);
 
   const [res, setDatasrc] = useState<any>({});
   const [statusPay, setStatusPayment] = useState<any>();
@@ -100,9 +100,9 @@ export default function Qpay({
 
   if (!_.isEmpty(statusPayment?.result?.rows)) {
     // alert("tolbor tologdlosadasdasdasdasdsao");
-    // console.log(statusPayment?.rows);
+    console.log(statusPayment?.rows);
     setModalContent("ebarimt");
-    paymentProcess(res, "qpay");
+    // paymentProcess(res, "qpay");
   }
 
   const onClickScan = (link: any) => {

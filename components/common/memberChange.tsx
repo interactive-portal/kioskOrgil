@@ -25,14 +25,14 @@ const MemberChange: React.FC<TitleProps> = ({ dataSrc, setOpenModal }) => {
   const [val, setVal] = useState<any>();
 
   const handleChangeV = (e: any) => {
-    // console.log("e :>> ", e);
     setSearchValue(e);
   };
   const handleChange = (e: any, item: any) => {
     e.preventDefault();
     // const linkPath = item?.position3?.valsetVal
 
-    // setVal(item.name)
+    setVal(item.name);
+
     setNewMember(item);
     setSearchValue("");
   };
@@ -62,22 +62,25 @@ const MemberChange: React.FC<TitleProps> = ({ dataSrc, setOpenModal }) => {
     fetchData();
   }, [searchValue]);
 
-  //   console.log("newMember :>> ", newMember);
   const onSubmit = async (data: any) => {
     setLoading(true);
 
     try {
-      //   const datadd = await axios.post(`/api/post-process`, {
-      //     processcode: "fitKioskChangeCustomerMain_DV_006",
-      //     parameters: {
-      //       contractId: dataSrc?.contractid,
-      //       oldCustomerId: dataSrc?.item?.id,
-      //       newCustomerId: newMember?.id,
-      //       description: "",
-      //     },
-      //   });
+      const { data } = await axios.post(`/api/post-process`, {
+        processcode: "fitKioskChangeCustomerMain_DV_006",
+        parameters: {
+          contractId: dataSrc?.contractcode,
+          oldCustomerId: dataSrc?.item?.id,
+          newCustomerId: newMember?.id,
+          description: "",
+        },
+      });
 
-      console.log("dataSrcdataSrcdataSrc :>> ", dataSrc);
+      if (data?.status == "success") {
+        setLoading(false);
+        setOpenModal(false);
+      }
+      // console.log("newMember :>> ", newMember);
     } catch (error) {
       console.error("Error in saved function", error);
       notification.error({
@@ -116,6 +119,19 @@ const MemberChange: React.FC<TitleProps> = ({ dataSrc, setOpenModal }) => {
                 <span className="relative -top-2">
                   <>
                     <div className="w-full  ">
+                      {val && (
+                        <div className="relative px-2 my-4">
+                          <input
+                            readOnly
+                            className="rounded-3xl border-black text-[18px] focus:ring-0  border text-black w-full px-10 py-3 "
+                            type="text"
+                            value={val}
+                          />
+                          <i className="fa-sharp fa-light fa-magnifying-glass  absolute text-base top-2 right-5 cursor-pointer text-black"></i>
+                        </div>
+                      )}
+                    </div>
+                    <div className="w-full  ">
                       <div className="relative px-2">
                         <input
                           className="rounded-3xl border-black text-[18px] focus:ring-0  border text-black w-full px-10 py-3 "
@@ -131,7 +147,7 @@ const MemberChange: React.FC<TitleProps> = ({ dataSrc, setOpenModal }) => {
                     </div>
                   </>
                   {searchValue?.length > 0 && (
-                    <div className="absolute  top-10    w-[400px] rounded-2xl border bg-[#2e343f] text-black mt-10 overflow-hidden z-[9999]  shadow  text-left">
+                    <div className="absolute  top-20 w-[400px] rounded-2xl border bg-[#2e343f] text-black mt-10 overflow-hidden z-[9999]  shadow  text-left">
                       <div className="relative rounded-xl overflow-auto ">
                         <div className="overflow-y-scroll  h-[350px] relative max-w-sm mx-auto   shadow-lg ring-1 ring-black/5 rounded-xl flex flex-col divide-y dark:divide-slate-200/5 scrollbar-thumb-gray-500 scrollbar-track-gray-100 scrollbar-thin hover:scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full ">
                           {resultList?.length > 0 ? (
