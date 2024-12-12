@@ -1,8 +1,11 @@
 // components/WelcomeTitle.tsx
+import WidgetKiosk from "@/middleware/components/WidgetForm/widgetKiosk";
 import fetchJson from "@/util/helper";
+import { Modal } from "antd";
 import moment from "moment";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import MemberChange from "./memberChange";
 
 interface TitleProps {
   data: any;
@@ -11,6 +14,7 @@ interface TitleProps {
 const ContractItem: React.FC<TitleProps> = ({ data }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
+  const [content, setContent] = useState<any>();
   const [searchQuery, setSearchQuery] = useState(""); // State for search input
   const [loading, setLoading] = useState(false); // State for loading
   const [user, setUser] = useState<any>(); // State for loading
@@ -57,11 +61,26 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
     }
   };
 
+  const onClose = () => {
+    setOpenModal(false);
+  };
+
   useEffect(() => {
     if (data) {
       fetchData(data?.contractid);
     }
   }, [customerId]);
+
+  const handlerChangeEvent = (e: any, item: any) => {
+    const mergeData = { ...data, item };
+    setContent(
+      <>
+        <MemberChange dataSrc={mergeData} setOpenModal={setContent} />
+      </>
+    );
+
+    setOpenModal(true);
+  };
 
   // console.log("user :>> ", user);
 
@@ -128,7 +147,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
           </span>
           <div className="flex flex-col my-2">
             {user.map((item: any, itemIndex: any) => (
-              <div className=" text-lg bg-[#d9d9d94f] text-white px-6 py-2 rounded-3xl mt-2 text-left">
+              <div className=" text-lg bg-[#d9d9d94f] text-white px-6 py-2 rounded-3xl mt-2 text-left relative">
                 <p key={itemIndex} className="flex ">
                   ОВОГ: <span>{item?.firstname}</span>
                 </p>
@@ -140,11 +159,22 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
                   {" "}
                   РЕГИСТЕР: <span>{item?.firstname}</span>
                 </p>
+                <div className="">
+                  {" "}
+                  <span
+                    // onClick={() => setOpenModal(true)}
+                    onClick={(e) => handlerChangeEvent(e, item)}
+                    className=" bg-[#A68B5C] cursor-pointer text-white px-6 py-1 rounded-full mt-5  hover:bg-white hover:text-[#A68B5C] absolute right-5 top-5"
+                  >
+                    Cолих
+                  </span>{" "}
+                </div>
               </div>
             ))}
           </div>
         </div>
       )}
+
       <button
         className=" bg-[#A68B5C] text-white px-6 py-2 rounded-full mt-5  hover:bg-white hover:text-[#A68B5C]"
         onClick={() =>
@@ -156,6 +186,16 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
       >
         Cунгалт хийх
       </button>
+      <Modal
+        open={openModal}
+        width={600}
+        title="Бүртгэлтэй гишүүн солих"
+        // centered
+        footer={false}
+        onCancel={onClose}
+      >
+        <div> {content}</div>
+      </Modal>
     </div>
   );
 };

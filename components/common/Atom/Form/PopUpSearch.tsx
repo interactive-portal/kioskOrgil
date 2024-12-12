@@ -106,14 +106,15 @@ const PopUpSearch: FC<PropsType> = ({
 
   const fetchData = async () => {
     let criteria = {
-      name: [
+      filterPath: [
         {
-          operator: "like",
-          operand: `%${searchValue}%`,
+          operator: "=",
+          operand: searchValue,
         },
       ],
     };
 
+    // console.log("criteria :>> ", criteria);
     const data = await fetchJson(
       `/api/get-data?metaid=${metadataId}&criteria=${JSON.stringify(criteria)}`
     );
