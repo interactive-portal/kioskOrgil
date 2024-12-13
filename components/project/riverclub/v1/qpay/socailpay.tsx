@@ -56,13 +56,60 @@ export default function SocialPay({
     }
   };
 
+  // console.log("res :>> ", res);
+
+  const paramsCheck = {
+    id: res?.invoiceId,
+    amount: Number(item?.amount),
+    terminalId: 19198148,
+  };
+
+  const {
+    data: statusPayment,
+    error,
+    mutate: socailMutate,
+  } = useSWR(
+    `/api/get-process?command=checkInvoiceSocialPay&parameters=${JSON.stringify(
+      paramsCheck
+    )}`,
+    {
+      refreshInterval: 3000,
+      revalidateOnFocus: false,
+    }
+  );
+
+  const checkInvoiceSocialPay = async (invoice: any) => {
+    let params = {
+      id: invoice,
+      terminalId: 19198148,
+      amount: Number(item?.amount),
+    };
+    const { data } = await axios.post(`/api/post-process`, {
+      processcode: "checkInvoiceSocialPay",
+      parameters: params,
+    });
+
+    if (data.status == "success") {
+      console.log("object :>> ", data);
+      // setDatasrc(data.result);
+      // setResponce(data?.result?.response?.desc);
+      // setModalContent("ebarimt");
+
+      //   qpayMutate();
+    } else {
+      // setResError(data.text);
+    }
+  };
+
   useEffect(() => {
-    setInterval(() => {
-      if (_.isEmpty(res)) qpayInfoData();
-    }, 10000);
+    if (_.isEmpty(res)) qpayInfoData();
+
+    // setInterval(() => {
+    //   if (_.isEmpty(res)) qpayInfoData();
+    // }, 3000);
   }, [res]);
   //
-  console.log("statusPayment :>> ", res);
+  console.log("statusPayment :>> ", statusPayment);
 
   const Qwin = () => {
     const urlScan = _.values(res?.urls);
@@ -74,6 +121,10 @@ export default function SocialPay({
           <Spin indicator={antIcon} />
         </div>
       );
+
+    if (statusPayment?.status == "success") {
+      setModalContent("ebarimt");
+    }
     return (
       <>
         <div className="flex place-items-center justify-center my-4 flex-col">
@@ -98,6 +149,9 @@ export default function SocialPay({
               // viewBox={`0 0 256 256`}
             />
           )}
+        </div>
+        <div className="flex justify-center py-4 text-sm text-red-400 border-t  border-gray-300 ">
+          {statusPayment?.text}
         </div>
         <div className="flex justify-center py-4 text-lg border-t  border-gray-300 text-white">
           QR код уншуулна уу
