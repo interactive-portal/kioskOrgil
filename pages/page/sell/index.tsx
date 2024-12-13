@@ -35,15 +35,16 @@ const Sell = () => {
     const result = await fetchJson(
       `/api/get-process?command=fitKioskContractDtlData_GET_004&parameters=${params}`
     );
-    // console.log("result :>> ", result);
     if (result?.status == "success") {
       const res = await axios.post(`/api/post-process`, {
         processcode: "fitKioskContractIsConfirm_DV_001",
         parameters: {
-          id: contractId,
+          id: cid,
           isComfirm: "1",
         },
       });
+
+      console.log("res :>> ", res);
 
       localStorage.setItem("orderInfo", JSON.stringify(result.result));
       setItem(result.result);
@@ -74,7 +75,7 @@ const Sell = () => {
     );
   }
 
-  // console.log("itemParent :>> ", itemParent);
+  // console.log("itemParent :>> ", cid);
 
   return (
     <>
@@ -106,7 +107,16 @@ const Sell = () => {
           </div>
           <div
             className="bg-[#A68B5C] text-white text-[60px] rounded-[87px] mx-10 mt-[50px] py-4 cursor-pointer"
-            onClick={() => router.push("/page/sell/payment ")}
+            // onClick={() => router.push("/page/sell/payment")}
+
+            onClick={() =>
+              router.push({
+                pathname: "/page/sell/payment",
+                query: {
+                  selid: cid,
+                },
+              })
+            }
           >
             ТӨЛБӨР ТӨЛӨХ
           </div>

@@ -47,13 +47,15 @@ export default function EbarimtPrint({
     },
   });
 
+  const [loading, setLoading] = useState(false);
+
   const paymentProcess = async (payment: any) => {
     const param = {
       subTotal: Number(item?.amount),
       total: Number(item?.amount),
       customerId: localStorage.getItem("cmrid"),
       vat: Number(item?.vat),
-      contractId: item.contractcode,
+      contractId: item.id,
       fitKioskSalesDtlNew_DV: {
         productId: item?.id,
         sectionId: item?.sectionid,
@@ -77,25 +79,27 @@ export default function EbarimtPrint({
       },
     };
 
-    const res = await axios.post(`/api/post-process`, {
+    const { data } = await axios.post(`/api/post-process`, {
       processcode: "fitKioskSalesNew_DV_001",
       parameters: param,
     });
 
-    console.log("param", param);
+    // console.log("param", data);
 
-    if (res?.data?.status == "success") {
-      console.log("processoos irsen resposne", res);
+    if (data?.status == "success") {
+      console.log("processoos irsen resposne", data);
+      setLoading(true);
 
       const ebarimtResult = await axios.post(`/api/post-process`, {
         processcode: "kiosk_Ebarimt_Send",
         parameters: {
-          id: res?.data?.result?.id,
+          id: data?.result?.id,
         },
       });
 
       if (ebarimtResult?.data?.status == "success") {
-        console.log("object :>> ");
+        console.log("ebarimt  :>> ", ebarimtResult);
+        setLoading(true);
       }
     } else {
       // console.log("aldaaa", res);
@@ -125,41 +129,56 @@ export default function EbarimtPrint({
     if (item) paymentProcess(item);
   }, []);
 
-  console.log("item :>> ", item);
+  console.log("item :>> ", loading);
+  if (loading == true)
+    return (
+      <>
+        {" "}
+        <div className="flex items-center border rounded-xl justify-center w-[500px] min-h-[400px]  h-[350px] flex-col">
+          <Spin
+            className="text-[#BAD405] full-screen"
+            fullscreen
+            size="large"
+          />
+          <p> түр хүлээнэ үү ...</p>{" "}
+        </div>
+      </>
+    );
 
   return (
     <>
       <div className="flex items-center border rounded-xl justify-center h-full">
-        <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
-          <iframe id="content" className="h-0 w-0 absolute"></iframe>
-          <div id={"portraid"} className="min-h-[400px]">
-            <ReportTemplate
-              options={printOptions}
-              data={{
-                contractId: item.contractcode,
-                // contractId:
-                //   "170174683396510" ||
-                //   "17022810222312" ||
-                //   "170174688727410",
-              }}
-            />
-          </div>
-          <p className="text-[20px] px-4 text-white">
-            Та баримтаа хэвлэж авна уу
-          </p>
-          <div className="py-[20px] w-full flex gap-[16px] px-[64px] cursor-pointer button">
-            <div
-              className="px-6 py-1 float-right bg-white border-[#A68B5C] border text-[#A68B5C]   justify-center text-[18px] w-[200px] rounded-full mx-auto"
-              onClick={() => {
-                printEbarimt();
-              }}
-            >
-              Баримт хэвлэх
+        <>
+          <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
+            <iframe id="content" className="h-0 w-0 absolute"></iframe>
+            <div id={"portraid"} className="min-h-[400px]">
+              <ReportTemplate
+                options={printOptions}
+                data={{
+                  contractId: item.id,
+                  // contractId:
+                  //   "170174683396510" ||
+                  //   "17022810222312" ||
+                  //   "170174688727410",
+                }}
+              />
+            </div>
+            <p className="text-[20px] px-4 text-white">
+              Та баримтаа хэвлэж авна уу
+            </p>
+            <div className="py-[20px] w-full flex gap-[16px] px-[64px] cursor-pointer button">
+              <div
+                className="px-6 py-1 float-right bg-white border-[#A68B5C] border text-[#A68B5C]   justify-center text-[18px] w-[200px] rounded-full mx-auto"
+                onClick={() => {
+                  printEbarimt();
+                }}
+              >
+                Баримт хэвлэх
+              </div>
             </div>
           </div>
-        </div>
-        <style>
-          {`
+          <style>
+            {`
               @media print {
                 body {
                   font-family: Arial, sans-serif;
@@ -187,7 +206,8 @@ export default function EbarimtPrint({
                 }
 
       `}
-        </style>
+          </style>
+        </>
       </div>
     </>
   );
