@@ -48,6 +48,7 @@ export default function EbarimtPrint({
   });
 
   const [loading, setLoading] = useState(false);
+  const [conId, setConId] = useState();
 
   const paymentProcess = async (payment: any) => {
     const param = {
@@ -55,9 +56,9 @@ export default function EbarimtPrint({
       total: Number(item?.amount),
       customerId: localStorage.getItem("cmrid"),
       vat: Number(item?.vat),
-      contractId: item.id,
+      contractId: item.contractcode,
       fitKioskSalesDtlNew_DV: {
-        productId: item?.contracttypeid,
+        productId: content?.itemid,
         sectionId: item?.sectionid,
         unitPrice: Number(item?.amount),
         lineTotalPrice: Number(item?.amount),
@@ -88,18 +89,21 @@ export default function EbarimtPrint({
 
     if (data?.status == "success") {
       console.log("processoos irsen resposne", data);
-      setLoading(true);
 
-      const ebarimtResult = await axios.post(`/api/post-process`, {
+      const { data: ebarimtResult } = await axios.post(`/api/post-process`, {
         processcode: "kiosk_Ebarimt_Send",
         parameters: {
           id: data?.result?.id,
         },
       });
+      setLoading(true);
+      console.log("ebarimt  :>> ", ebarimtResult);
+      if (ebarimtResult?.status == "success") {
+        setLoading(false);
+        // setLoading(true);
+        setConId(ebarimtResult?.result?.id);
 
-      if (ebarimtResult?.data?.status == "success") {
-        console.log("ebarimt  :>> ", ebarimtResult);
-        setLoading(true);
+        // setLoading(true);
       }
     } else {
       // console.log("aldaaa", res);
@@ -130,20 +134,20 @@ export default function EbarimtPrint({
   }, []);
 
   console.log("item :>> ", loading);
-  if (loading == false)
-    return (
-      <>
-        {" "}
-        <div className="flex items-center border rounded-xl justify-center w-[500px] min-h-[400px]  h-[350px] flex-col">
-          <Spin
-            className="text-[#BAD405] full-screen"
-            fullscreen
-            size="large"
-          />
-          <p> түр хүлээнэ үү ...</p>{" "}
-        </div>
-      </>
-    );
+  // if (loading == false)
+  //   return (
+  //     <>
+  //       {" "}
+  //       <div className="flex items-center border rounded-xl justify-center w-[500px] min-h-[400px]  h-[350px] flex-col">
+  //         <Spin
+  //           className="text-[#BAD405] full-screen"
+  //           fullscreen
+  //           size="large"
+  //         />
+  //         <p> түр хүлээнэ үү ...</p>{" "}
+  //       </div>
+  //     </>
+  //   );
 
   return (
     <>
@@ -155,7 +159,7 @@ export default function EbarimtPrint({
               <ReportTemplate
                 options={printOptions}
                 data={{
-                  contractId: item.id,
+                  contractId: 17304644342443, // || "17304644323913",
                   // contractId:
                   //   "170174683396510" ||
                   //   "17022810222312" ||

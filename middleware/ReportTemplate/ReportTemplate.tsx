@@ -18,7 +18,7 @@ const ReportTemplate: FC<PropsType> = ({ data, options }) => {
       ...options,
       datarow: [
         {
-          id: data?.contractId,
+          id: "17304644352673",
         },
       ],
     },

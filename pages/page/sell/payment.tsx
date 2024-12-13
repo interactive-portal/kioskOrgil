@@ -11,20 +11,26 @@ import EbarimtPrint from "@/components/project/riverclub/v1/qpay/ebarimt";
 
 const Ebarimt = () => {
   const router = useRouter();
-  const [view, setView] = useState("default");
+  const [view, setView] = useState("ebarimt");
   const LOCAL_STORAGE_KEY = "orderInfo";
 
   const [order, setOrder] = useState<any>();
+  const [product, setProduct] = useState<any>();
   const [paymentProcess, setPaymentProcess] = useState<any>();
 
   useEffect(() => {
     const orderData = localStorage.getItem("orderInfo");
     if (orderData) setOrder(localStorage.getItem("orderInfo"));
+
+    const product = localStorage.getItem("price");
+    if (product) setProduct(localStorage.getItem("price"));
     // console.log("object :>> ", localStorage.getItem("orderInfo"));
   }, [order]);
 
   const jsonData = order ? JSON.parse(order) : {};
+  const jsonDataProduct = product ? JSON.parse(product) : {};
 
+  console.log("jsonDataProduct :>> ", jsonDataProduct);
   // console.log("jsonData :>> ", jsonData);
 
   if (!jsonData)
@@ -155,7 +161,7 @@ const Ebarimt = () => {
         {view === "payment" && renderPaymentView()}
         {view === "receipt" && renderReceiptView()}
         {view === "ebarimt" && (
-          <EbarimtPrint item={jsonData} content={paymentProcess} />
+          <EbarimtPrint item={jsonData} content={jsonDataProduct} />
         )}
         {view === "card" && <PosTerminal item={jsonData} />}
         {view === "qpay" && (
