@@ -47,13 +47,13 @@ export default function EbarimtPrint({
     },
   });
 
-  const paymentProcess = async (payment: any, type: any) => {
+  const paymentProcess = async (payment: any) => {
     const param = {
       subTotal: Number(item?.amount),
       total: Number(item?.amount),
-      customerId: 12, // customerid
+      customerId: localStorage.getItem("cmrid"),
       vat: Number(item?.vat),
-      contractId: "11",
+      contractId: item.contractcode,
       fitKioskSalesDtlNew_DV: {
         productId: item?.id,
         sectionId: item?.sectionid,
@@ -102,7 +102,8 @@ export default function EbarimtPrint({
     }
   };
 
-  console.log("content :>> ", content);
+  // console.log("item :>> ", item);
+  console.log("item :>> ", item);
 
   const printEbarimt = () => {
     var content: any = document.getElementById("portraid");
@@ -119,6 +120,11 @@ export default function EbarimtPrint({
     // }
   };
 
+  useEffect(() => {
+    // checkFile(value);
+    if (item) paymentProcess(item);
+  }, []);
+
   console.log("item :>> ", item);
 
   return (
@@ -126,7 +132,7 @@ export default function EbarimtPrint({
       <div className="flex items-center border rounded-xl justify-center h-full">
         <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
           <iframe id="content" className="h-0 w-0 absolute"></iframe>
-          <div id={"portraid"}>
+          <div id={"portraid"} className="min-h-[400px]">
             <ReportTemplate
               options={printOptions}
               data={{
@@ -138,7 +144,9 @@ export default function EbarimtPrint({
               }}
             />
           </div>
-          <p className="text-[20px] px-4 txt">Та баримтаа хэвлэж авна уу</p>
+          <p className="text-[20px] px-4 text-white">
+            Та баримтаа хэвлэж авна уу
+          </p>
           <div className="py-[20px] w-full flex gap-[16px] px-[64px] cursor-pointer button">
             <div
               className="px-6 py-1 float-right bg-white border-[#A68B5C] border text-[#A68B5C]   justify-center text-[18px] w-[200px] rounded-full mx-auto"
