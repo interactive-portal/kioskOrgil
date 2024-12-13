@@ -188,7 +188,8 @@ export default function EbarimtPrint({
                     page-break-before: always;
                     page-break-inside: avoid;
                     padding:30px;
-                    background:#918f8f;
+                    background:#fff;
+                    color:#000;
                   }
               @media print {
                 body {

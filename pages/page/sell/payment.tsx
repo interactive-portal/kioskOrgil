@@ -171,7 +171,13 @@ const Ebarimt = () => {
             setPay={setPaymentProcess}
           />
         )}
-        {view === "socialPay" && <SocialPay item={jsonData} />}
+        {view === "socialPay" && (
+          <SocialPay
+            item={jsonData}
+            setModalContent={setView}
+            setPay={setPaymentProcess}
+          />
+        )}
       </div>
 
       {/* {view === "qpay" && <Qpay onPaymentSuccess={handleQpayPayment} />} */}

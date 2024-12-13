@@ -48,6 +48,8 @@ export default function SocialPay({
     if (data.status == "success") {
       setDatasrc(data.result);
       setResponce(data?.result?.response?.desc);
+      // setModalContent("ebarimt");
+
       //   qpayMutate();
     } else {
       // setResError(data.text);
@@ -55,10 +57,12 @@ export default function SocialPay({
   };
 
   useEffect(() => {
-    if (_.isEmpty(res)) qpayInfoData();
+    setInterval(() => {
+      if (_.isEmpty(res)) qpayInfoData();
+    }, 10000);
   }, [res]);
 
-  console.log("statusPayment :>> ", response);
+  console.log("statusPayment :>> ", res);
 
   const Qwin = () => {
     const urlScan = _.values(res?.urls);
