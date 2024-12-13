@@ -101,12 +101,12 @@ const Ebarimt = () => {
       >
         Карт
       </button>
-      <button
+      {/* <button
         className=" uppercase h-[174px]  text-[#525050] bg-white rounded-full text-[64px] mt-[50px] px-10"
         onClick={() => setView("socialPay")}
       >
         Social Pay
-      </button>
+      </button> */}
       <button
         className="uppercase h-[174px] text-[#525050]  bg-white rounded-full text-[64px] mt-[50px] px-10"
         onClick={() => setView("qpay")}

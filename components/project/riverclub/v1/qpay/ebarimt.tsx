@@ -56,7 +56,7 @@ export default function EbarimtPrint({
       total: Number(item?.amount),
       customerId: localStorage.getItem("cmrid"),
       vat: Number(item?.vat),
-      contractId: item.contractcode,
+      contractId: item.id,
       fitKioskSalesDtlNew_DV: {
         productId: content?.itemid,
         sectionId: item?.sectionid,
