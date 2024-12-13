@@ -155,11 +155,11 @@ export default function EbarimtPrint({
         <>
           <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
             <iframe id="content" className="h-0 w-0 absolute"></iframe>
-            <div id={"portraid"} className="min-h-[400px]">
+            <div id={"portraid"} className="min-h-[400px] w-[350px] mx-auto">
               <ReportTemplate
                 options={printOptions}
                 data={{
-                  contractId: 17304644342443, // || "17304644323913",
+                  contractId: conId, // || "17304644323913",
                   // contractId:
                   //   "170174683396510" ||
                   //   "17022810222312" ||
@@ -183,6 +183,13 @@ export default function EbarimtPrint({
           </div>
           <style>
             {`
+
+                  #portraid {
+                    page-break-before: always;
+                    page-break-inside: avoid;
+                    padding:30px;
+                    background:#918f8f;
+                  }
               @media print {
                 body {
                   font-family: Arial, sans-serif;
@@ -195,6 +202,7 @@ export default function EbarimtPrint({
                     page-break-before: always;
                     page-break-inside: avoid;
                     padding:30px;
+                    background:#fff;
                   }
 
                   .button {
