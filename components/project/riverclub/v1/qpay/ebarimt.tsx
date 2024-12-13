@@ -155,7 +155,7 @@ export default function EbarimtPrint({
         <>
           <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
             <iframe id="content" className="h-0 w-0 absolute"></iframe>
-            <div id={"portraid"} className="min-h-[400px] w-[350px] mx-auto">
+            <div id={"portraid"} className="h- w-[260px] mx-auto">
               <ReportTemplate
                 options={printOptions}
                 data={{
@@ -167,7 +167,7 @@ export default function EbarimtPrint({
                 }}
               />
             </div>
-            <p className="text-[20px] px-4 text-white">
+            <p className="text-[20px] mt-6 px-4 text-white">
               Та баримтаа хэвлэж авна уу
             </p>
             <div className="py-[20px] w-full flex gap-[16px] px-[64px] cursor-pointer button">
