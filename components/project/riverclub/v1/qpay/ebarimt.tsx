@@ -111,7 +111,7 @@ export default function EbarimtPrint({
   };
 
   // console.log("item :>> ", item);
-  console.log("item :>> ", item);
+  console.log("con :>> ", conId);
 
   const printEbarimt = () => {
     var content: any = document.getElementById("portraid");
