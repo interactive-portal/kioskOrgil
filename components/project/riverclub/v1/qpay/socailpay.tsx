@@ -61,7 +61,7 @@ export default function SocialPay({
       if (_.isEmpty(res)) qpayInfoData();
     }, 10000);
   }, [res]);
-
+  //
   console.log("statusPayment :>> ", res);
 
   const Qwin = () => {
