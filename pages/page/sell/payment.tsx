@@ -96,7 +96,7 @@ const Ebarimt = () => {
   const renderPaymentView = () => (
     <div className="flex flex-col">
       <button
-        className="h-[174px]  bg-white rounded-full text-[#525050] text-[64px] uppercase px-10"
+        className="h-[174px]  bg-white w-[450px] rounded-full text-[#525050] text-[64px] uppercase px-10"
         onClick={() => setView("card")}
       >
         Карт
@@ -108,7 +108,7 @@ const Ebarimt = () => {
         Social Pay
       </button> */}
       <button
-        className="uppercase h-[174px] text-[#525050]  bg-white rounded-full text-[64px] mt-[50px] px-10"
+        className="uppercase h-[174px] text-[#525050]  w-[450px]  bg-white rounded-full text-[64px] mt-[50px] px-10"
         onClick={() => setView("qpay")}
       >
         QPay
