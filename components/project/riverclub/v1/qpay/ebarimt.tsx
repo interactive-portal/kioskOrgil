@@ -57,7 +57,7 @@ export default function EbarimtPrint({
       vat: Number(item?.vat),
       contractId: item.id,
       fitKioskSalesDtlNew_DV: {
-        productId: item?.id,
+        productId: item?.contracttypeid,
         sectionId: item?.sectionid,
         unitPrice: Number(item?.amount),
         lineTotalPrice: Number(item?.amount),
@@ -130,7 +130,7 @@ export default function EbarimtPrint({
   }, []);
 
   console.log("item :>> ", loading);
-  if (loading == true)
+  if (loading == false)
     return (
       <>
         {" "}
