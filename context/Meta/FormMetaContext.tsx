@@ -159,7 +159,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
     let formLocalDatasss: any = ddata ? JSON.parse(ddata) : {};
     let pp: any = prrr ? JSON.parse(prrr) : {};
 
-    // console.log("formLocalDatasss :>> ", ddata);
+    console.log("formLocalDatasss :>> ", formDataInitData);
 
     let defaulData = {
       contractTypeId: price?.contracttypeid,
@@ -182,7 +182,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       stateregnumber:
         formDataInitData.stateregnumber || formLocalDatasss.stateregnumber,
       lastname: formDataInitData.lastname || formLocalDatasss.lastname,
-      firstemail: formDataInitData.firstemail || formLocalDatasss.firstemail,
+      firstemail: formDataInitData.firstemail || formLocalDatasss.email,
     };
 
     let formdata = mergedFormData ? mergedFormData : formDataInitData;
