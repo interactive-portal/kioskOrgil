@@ -11,7 +11,7 @@ import EbarimtPrint from "@/components/project/riverclub/v1/qpay/ebarimt";
 
 const Ebarimt = () => {
   const router = useRouter();
-  const [view, setView] = useState("default");
+  const [view, setView] = useState("ebarimt");
   const LOCAL_STORAGE_KEY = "orderInfo";
 
   const [order, setOrder] = useState<any>();

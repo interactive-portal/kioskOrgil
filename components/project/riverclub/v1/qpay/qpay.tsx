@@ -127,9 +127,10 @@ export default function Qpay({
       <>
         <div className="flex place-items-center justify-center my-4 flex-col">
           {/* <pre> {JSON.stringify(res, null, 2)}</pre> */}
-          <div className="flex justify-center text-center py-1 text-2xl border-b border-gray-300 text-white">
+          <div className="flex  flex-col justify-center text-center py-1 text-2xl border-b border-gray-300 text-white py-4">
+            <h3 className="text-white">Нэхэмжлэхийн дуусах хугацаа</h3>
             <Countdown
-              title="Нэхэмжлэхийн дуусах хугацаа"
+              title=""
               value={deadline}
               onFinish={onFinish}
               style={{
