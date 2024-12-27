@@ -7,6 +7,7 @@ import fetchJson from "@/util/helper";
 import { LoadingOutlined } from "@ant-design/icons";
 import Title from "@/components/common/Title";
 import Contract from "@/components/common/contract";
+import _ from "lodash";
 
 const Extend = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -23,7 +24,7 @@ const Extend = () => {
       setLoading(true);
       try {
         // const data = await fetchData(searchQuery);
-        const data = await fetchJson(
+        let data = await fetchJson(
           `/api/get-data?metaid=1722853892303075&criteria=${JSON.stringify({
             filterRegNumber: [
               {
@@ -37,12 +38,17 @@ const Extend = () => {
           })}`
         );
 
-        // console.log("data :>> ", data);
+        delete data.result.aggregatecolumns;
+        delete data.result.paging;
 
-        if (data.result.length > 0) {
+        data = _.values(data.result);
+
+        // console.log("data ddd :>> ", data);
+
+        if (data.length > 0) {
           setErr(false);
-          setUser(data.result);
-          setCustomerId(data.result[0]?.customerid);
+          setUser(data);
+          setCustomerId(data[0]?.customerid);
           setLoading(false);
         } else {
           // alert("No user found for the given register number.");
