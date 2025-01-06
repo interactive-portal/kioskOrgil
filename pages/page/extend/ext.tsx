@@ -27,7 +27,7 @@ const Ext = () => {
       let data = await fetchJson(
         `/api/get-process?command=kioskContractMainGET_3_004&parameters=${JSON.stringify(
           {
-            id: 1, // router.query.contractid, //"1", ///|| router.query.contractid,
+            id: router.query.contractid, //"1", ///|| router.query.contractid,
           }
         )}`
       );
