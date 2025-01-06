@@ -40,7 +40,6 @@ const Extend = () => {
 
         delete data.result.aggregatecolumns;
         delete data.result.paging;
-
         data = _.values(data.result);
 
         // console.log("data ddd :>> ", data);

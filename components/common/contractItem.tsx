@@ -64,6 +64,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
 
   useEffect(() => {
     if (data) {
+      localStorage.clear();
       fetchData(data?.contractid);
     }
   }, [customerId]);
@@ -173,7 +174,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
         className=" bg-[#A68B5C] text-white px-6 py-2 rounded-full mt-5  hover:bg-white hover:text-[#A68B5C]"
         onClick={() =>
           router.push({
-            pathname: "/page/register",
+            pathname: "/page/extend/ext",
             query: { crm: data.customerid, contractid: data?.contractid },
           })
         }
