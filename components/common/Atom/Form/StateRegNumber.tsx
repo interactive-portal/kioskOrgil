@@ -52,6 +52,7 @@ const StateRegNumber: FC<PropsType> = ({
     });
     localStorage?.setItem("dateOfBirth", dateOfBirth);
     localStorage?.setItem("gender", gender);
+    localStorage?.setItem("cmrid", "");
   };
 
   const handlerKey = (e: any) => {
