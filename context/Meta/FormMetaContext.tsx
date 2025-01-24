@@ -177,6 +177,7 @@ export const FormMetaContextProvider: FC<PropsType> = ({
       image: localStorage.getItem("imgStr"),
       gender: localStorage.getItem("gender"),
       customerid: localStorage.getItem("cmrid"),
+      filtercustomerid: router.query.conId ? localStorage.getItem("cmrid") : "",
       contractid: router.query.conId || localStorage.getItem("conId"),
       firstname: formDataInitData.firstname || formLocalDatasss.firstname,
       stateregnumber:
