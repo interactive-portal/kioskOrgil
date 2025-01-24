@@ -155,7 +155,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
                   {" "}
                   РЕГИСТЕР: <span>{item?.firstname}</span>
                 </p>
-                <div className="">
+                {/* <div className="">
                   <span
                     // onClick={() => setOpenModal(true)}
                     onClick={(e) => handlerChangeEvent(e, item)}
@@ -163,7 +163,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
                   >
                     Cолих
                   </span>{" "}
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
