@@ -22,6 +22,9 @@ export default function bankIpTerminalTransfer(
     if (deviceType == "khanbank") {
       dvctype = "databank";
     }
+    if (deviceType == "golomtbank") {
+      dvctype = "GLMT";
+    }
     bankCheckIpTerminal(terminalId, deviceType, function () {
       //   console.log("as");
     });
