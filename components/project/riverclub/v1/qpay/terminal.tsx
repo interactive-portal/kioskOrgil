@@ -351,7 +351,7 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
 
       if (jsonData.status == "success") {
         let getParse: any = JSON.parse(jsonData.details[0].value);
-        var resultIpTerminal: any = { status: "success" };
+        var resultIpTerminal: any = {};
         console.log("resultIpTerminal", getParse);
           resultIpTerminal["rrn"] = getParse["RRN"];
           resultIpTerminal["pan"] = getParse["PAN"];
