@@ -84,7 +84,7 @@ const Payed: FC<PropsType> = ({ item, payment, type }) => {
             total: Number(item?.saleprice),
             customerId: 12, // customerid
             vat: Number(item?.vat),
-            contractId: contract,
+            contractId:Number(item?.contracttypeid),
             fitKioskSalesDtlNew_DV: {
               productId: item?.id,
               sectionId: item?.sectionid,
