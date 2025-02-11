@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Payment from "@/components/project/riverclub/v1/payment/payment";
 import Payed from "./payed";
 import BankIpTerminalTransfer from "./terminal";
+
 export default function PosTerminal({
   item,
   close,
@@ -50,7 +51,7 @@ export default function PosTerminal({
     const param = {
       subTotal: Number(item?.amount),
       total: Number(item?.amount),
-      customerId: 12, // customerid
+      customerId: localStorage.getItem("cmrid"),
       vat: Number(item?.vat),
       contractId:Number(item?.contracttypeid),
       fitKioskSalesDtlNew_DV: {
@@ -119,11 +120,9 @@ export default function PosTerminal({
     process.env.NEXT_PUBLIC_TERMINAL_ID,
     process.env.NEXT_PUBLIC_DEVICE_TYPE,
     function (res: any) {
-      console.log("payment result", item);
-      paymentProcess(res, "pos");
+      console.log("payment result", res);
       if (item?.status == "success") {
-        // setPaymentResult(item);
-        console.log("item :>> pos  ", item);
+        paymentProcess(res, "pos");
         Payed(item, "pos");
       } else {
         notification.error({

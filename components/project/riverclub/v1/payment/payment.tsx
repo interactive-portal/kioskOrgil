@@ -162,7 +162,7 @@ export default function bankIpTerminalTransfer(
           }
         }
 
-        if (dvctype === "glmt") {
+        if (dvctype === "GLMT") {
           resultIpTerminal["rrn"] = getParse["RRN"];
           resultIpTerminal["pan"] = getParse["PAN"];
           resultIpTerminal["authcode"] = getParse["AuthCode"];
