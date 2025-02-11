@@ -24,22 +24,9 @@ export default function BankIpTerminalTransfer(
     }
     bankCheckIpTerminal(terminalId, deviceType, function () {
       console.log("as");
-
-      ws.onopen = function () {
-        var currentDateTime = moment.now();
-        ws.send(
-          '{"command":"bank_terminal_pos_sale", "dateTime":"' +
-            currentDateTime +
-            '", details: [{"key": "devicetype", "value": "' +
-            dvctype +
-            '"},{"key": "terminalid", "value": "' +
-            terminalId +
-            '"},{"key": "totalamount", "value": "' +
-            amount +
-            '"}]}'
-        );
-      };
     });
+
+    console.log('callback :>> ', callback);
     // else if (deviceType == "golomtbank") {
     //   dvctype = "glmt";
     // } else if (deviceType == "xacbank") {
@@ -81,6 +68,21 @@ export default function BankIpTerminalTransfer(
     // 	tdbPosSale(amount, callback);
     // 	return;
     //   }
+
+    ws.onopen = function () {
+      var currentDateTime = moment.now();
+      ws.send(
+        '{"command":"bank_terminal_pos_sale", "dateTime":"' +
+          currentDateTime +
+          '", details: [{"key": "devicetype", "value": "' +
+          dvctype +
+          '"},{"key": "terminalid", "value": "' +
+          terminalId +
+          '"},{"key": "totalamount", "value": "' +
+          amount +
+          '"}]}'
+      );
+    };
 
 
     let isAcceptPrintPos = false;
@@ -207,7 +209,11 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
     if (deviceType == "khanbank") {
       dvctype = "databank";
     } else if (deviceType == "golomtbank") {
-      dvctype = "glmt";
+      dvctype = "GLMT";
+      callback({
+        status: "success",
+        text: "IPPOS terminal холболт амжилттай хийгдлээ. [" + deviceType + "]",
+      });
     } else if (deviceType == "xacbank") {
       dvctype = "khas_paxA35";
       terminalId = "123";
@@ -263,6 +269,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
       console.log("received_msg", evt);
 
       if (jsonData.status == "success") {
+
         callback({
           status: "success",
           text:
