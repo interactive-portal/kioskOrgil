@@ -361,6 +361,12 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
           resultIpTerminal["terminalid"] = getParse["TerminalId"];
           resultIpTerminal["traceno"] = "";
           callback(resultIpTerminal);
+        }else{
+          callback({
+            status: "error",
+            text:
+              "Bank terminal error [" + deviceType + "]: " + jsonData.description,
+          });
         }
       
     };
