@@ -52,9 +52,9 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
         ? {
             subTotal: Number(item?.saleprice),
             total: Number(item?.saleprice),
-            customerId: 12, // customerid
+            customerId: localStorage.getItem("cmrid"),
             vat: Number(item?.vat),
-            contractId: contract,
+            contractId:Number(item?.contracttypeid),
             fitKioskSalesDtlNew_DV: {
               productId: item?.id,
               sectionId: item?.sectionid,

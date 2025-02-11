@@ -34,28 +34,28 @@ export default function BankIpTerminalTransfer(
     //   dvctype = "tdb_paxs300";
     // }
 
-    if (typeof callback === "undefined") {
-      return { status: "error", text: "Not found callback function!" };
-    }
+    // if (typeof callback === "undefined") {
+    //   return { status: "error", text: "Not found callback function!" };
+    // }
 
-    if (!amount) {
-      callback({ status: "error", code: "", text: "Дүн хоосон байна!" });
-      return;
-    }
+    // if (!amount) {
+    //   callback({ status: "error", code: "", text: "Дүн хоосон байна!" });
+    //   return;
+    // }
 
-    if (!terminalId) {
-      callback({ status: "error", code: "", text: "TerminalId хоосон байна!" });
-      return;
-    }
+    // if (!terminalId) {
+    //   callback({ status: "error", code: "", text: "TerminalId хоосон байна!" });
+    //   return;
+    // }
 
-    if (!dvctype) {
-      callback({
-        status: "error",
-        code: "",
-        text: "Банкны төрөл хоосон байна!",
-      });
-      return;
-    }
+    // if (!dvctype) {
+    //   callback({
+    //     status: "error",
+    //     code: "",
+    //     text: "Банкны төрөл хоосон байна!",
+    //   });
+    //   return;
+    // }
 
 
   
@@ -267,15 +267,14 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, amount:any,callba
       var jsonData = JSON.parse(received_msg);
 
       if (jsonData.status == "success") {
-
-         console.log("received_msg", evt);
-         bankPosSend(terminalId, deviceType, amount,callback)
-
+        console.log("received_msg", evt);
         callback({
           status: "success",
           text:
             "IPPOS terminal холболт амжилттай хийгдлээ. [" + deviceType + "]",
         });
+        bankPosSend(terminalId, deviceType, amount,callback)
+
         return;
       } else {
         callback({
@@ -319,6 +318,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, amount:any,callba
 
 
 function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any) {
+
   if ("WebSocket" in window) {
     var dvctype = "";
     var ws = new WebSocket("ws://localhost:58324/socket");
@@ -361,7 +361,7 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
           callback(resultIpTerminal);
         }else{
           callback({
-            status: "error",
+            status: "refund",
             text:
               "Bank terminal error [" + deviceType + "]: " + jsonData.description,
           });

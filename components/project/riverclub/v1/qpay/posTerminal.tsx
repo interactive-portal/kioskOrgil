@@ -123,12 +123,14 @@ export default function PosTerminal({
       // 
       if (res?.status == "success") {
         // paymentProcess(res, "pos");
-        console.log("paymentProcesspaymentProcesspaymentProcess result", res);
+
+        if(res?.command =="bank_terminal_pos_sale"){
+          paymentProcess(item, "pos");
+        }
         // Payed(item, "pos");
-        paymentProcess(res, "pos");
       } else {
         notification.error({
-          message: item?.text,
+          message: res?.text,
         });
       }
     }
