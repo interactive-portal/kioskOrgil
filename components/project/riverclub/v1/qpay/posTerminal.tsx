@@ -53,9 +53,9 @@ export default function PosTerminal({
       total: Number(item?.amount),
       customerId: localStorage.getItem("cmrid"),
       vat: Number(item?.vat),
-      contractId:Number(item?.contracttypeid),
+      contractId: item?.id,
       fitKioskSalesDtlNew_DV: {
-        productId: item?.id,
+        productId: item?.contracttypeid,
         sectionId: item?.sectionid,
         unitPrice: Number(item?.amount),
         lineTotalPrice: Number(item?.amount),
