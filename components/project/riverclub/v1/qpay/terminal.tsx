@@ -18,14 +18,27 @@ export default function BankIpTerminalTransfer(
     // Let us open a web socket
     var ws = new WebSocket("ws://localhost:58324/socket");
     var dvctype = "";
-
+    
     if (deviceType == "golomtbank") {
       dvctype = "GLMT";
     }
     bankCheckIpTerminal(terminalId, deviceType, function () {
-      console.log("terminalId",terminalId);
-      console.log("deviceType",deviceType);
       console.log("as");
+
+      ws.onopen = function () {
+        var currentDateTime = moment.now();
+        ws.send(
+          '{"command":"bank_terminal_pos_sale", "dateTime":"' +
+            currentDateTime +
+            '", details: [{"key": "devicetype", "value": "' +
+            dvctype +
+            '"},{"key": "terminalid", "value": "' +
+            terminalId +
+            '"},{"key": "totalamount", "value": "' +
+            amount +
+            '"}]}'
+        );
+      };
     });
     // else if (deviceType == "golomtbank") {
     //   dvctype = "glmt";
@@ -69,20 +82,7 @@ export default function BankIpTerminalTransfer(
     // 	return;
     //   }
 
-    ws.onopen = function () {
-      var currentDateTime = moment.now();
-      ws.send(
-        '{"command":"bank_terminal_pos_sale", "dateTime":"' +
-          currentDateTime +
-          '", details: [{"key": "devicetype", "value": "' +
-          dvctype +
-          '"},{"key": "terminalid", "value": "' +
-          terminalId +
-          '"},{"key": "totalamount", "value": "' +
-          amount +
-          '"}]}'
-      );
-    };
+
     let isAcceptPrintPos = false;
 
     ws.onmessage = function (evt) {
@@ -161,7 +161,7 @@ export default function BankIpTerminalTransfer(
           }
         }
 
-        if (dvctype === "GLMT") {
+        if (dvctype === "glmt") {
           resultIpTerminal["rrn"] = getParse["RRN"];
           resultIpTerminal["pan"] = getParse["PAN"];
           resultIpTerminal["authcode"] = getParse["AuthCode"];
@@ -185,7 +185,7 @@ export default function BankIpTerminalTransfer(
         Status: "Error",
         Error: event.code,
       };
-      console.log("err",JSON.stringify(resultJson));
+      console.log(JSON.stringify(resultJson));
     };
 
     ws.onclose = function () {
@@ -207,7 +207,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
     if (deviceType == "khanbank") {
       dvctype = "databank";
     } else if (deviceType == "golomtbank") {
-      dvctype = "GLMT";
+      dvctype = "glmt";
     } else if (deviceType == "xacbank") {
       dvctype = "khas_paxA35";
       terminalId = "123";
@@ -240,11 +240,10 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
 
     console.log("WebSocket is supported by your Browser!");
     // Let us open a web socket
-    let ws = new WebSocket("ws://localhost:58324/socket");
+    var ws = new WebSocket("ws://localhost:58324/socket");
 
     ws.onopen = function () {
-      let currentDateTime = moment.now();
-      console.log('currentDateTime :>> ', currentDateTime);
+      var currentDateTime = moment.now();
       ws.send(
         '{"command":"bank_terminal_pos_connect", "dateTime":"' +
           currentDateTime +
@@ -261,7 +260,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
       var received_msg = evt.data;
       var jsonData = JSON.parse(received_msg);
 
-      console.log("received_msg", jsonData);
+      console.log("received_msg", evt);
 
       if (jsonData.status == "success") {
         callback({
