@@ -23,7 +23,7 @@ export default function BankIpTerminalTransfer(
       dvctype = "databank";
     }
     if (deviceType == "golomtbank") {
-      dvctype = "glmt";
+      dvctype = "GLMT";
     }
     bankCheckIpTerminal(terminalId, deviceType, function () {
       console.log("as");
@@ -162,7 +162,7 @@ export default function BankIpTerminalTransfer(
           }
         }
 
-        if (dvctype === "glmt") {
+        if (dvctype === "GLMT") {
           resultIpTerminal["rrn"] = getParse["RRN"];
           resultIpTerminal["pan"] = getParse["PAN"];
           resultIpTerminal["authcode"] = getParse["AuthCode"];
