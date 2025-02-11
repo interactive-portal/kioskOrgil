@@ -125,13 +125,14 @@ export default function PosTerminal({
         // paymentProcess(res, "pos");
 
         if(res?.command =="bank_terminal_pos_sale"){
-          paymentProcess(item, "pos");
+          paymentProcess(res, "pos");
         }
         // Payed(item, "pos");
       } else {
         notification.error({
           message: res?.text,
         });
+
       }
     }
   );
