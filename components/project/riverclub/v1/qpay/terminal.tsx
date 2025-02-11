@@ -241,10 +241,10 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
 
     console.log("WebSocket is supported by your Browser!");
     // Let us open a web socket
-    var ws = new WebSocket("ws://localhost:58324/socket");
+    let ws = new WebSocket("ws://localhost:58324/socket");
 
     ws.onopen = function () {
-      var currentDateTime = moment.now();
+      let currentDateTime = moment.now();
       ws.send(
         '{"command":"bank_terminal_pos_connect", "dateTime":"' +
           currentDateTime +

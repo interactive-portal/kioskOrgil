@@ -120,6 +120,7 @@ export default function PosTerminal({
     process.env.NEXT_PUBLIC_DEVICE_TYPE,
     function (res: any) {
       console.log("payment result", res);
+      paymentProcess(res, "pos");
       if (res?.status == "success") {
         // paymentProcess(res, "pos");
         Payed(item, "pos");
