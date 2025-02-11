@@ -80,12 +80,12 @@ export default function PosTerminal({
       },
     };
 
-    const res = await axios.post(`/api/post-process`, {
+    const {data} = await axios.post(`/api/post-process`, {
       processcode: "fitKioskSalesNew_DV_001",
       parameters: param,
     });
 
-    console.log("paramvposssss", res);
+    console.log("paramvposssss", data);
 
     if (data?.status == "success") {
       console.log("processoos irsen resposne", data);
