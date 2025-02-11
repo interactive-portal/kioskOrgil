@@ -19,13 +19,12 @@ export default function BankIpTerminalTransfer(
     var ws = new WebSocket("ws://localhost:58324/socket");
     var dvctype = "";
 
-    if (deviceType == "khanbank") {
-      dvctype = "databank";
-    }
     if (deviceType == "golomtbank") {
       dvctype = "GLMT";
     }
     bankCheckIpTerminal(terminalId, deviceType, function () {
+      console.log("terminalId",terminalId);
+      console.log("deviceType",deviceType);
       console.log("as");
     });
     // else if (deviceType == "golomtbank") {
@@ -186,7 +185,7 @@ export default function BankIpTerminalTransfer(
         Status: "Error",
         Error: event.code,
       };
-      console.log(JSON.stringify(resultJson));
+      console.log("err",JSON.stringify(resultJson));
     };
 
     ws.onclose = function () {
@@ -245,6 +244,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
 
     ws.onopen = function () {
       let currentDateTime = moment.now();
+      console.log('currentDateTime :>> ', currentDateTime);
       ws.send(
         '{"command":"bank_terminal_pos_connect", "dateTime":"' +
           currentDateTime +
@@ -261,7 +261,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
       var received_msg = evt.data;
       var jsonData = JSON.parse(received_msg);
 
-      console.log("received_msg", evt);
+      console.log("received_msg", jsonData);
 
       if (jsonData.status == "success") {
         callback({

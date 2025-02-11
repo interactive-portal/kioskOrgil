@@ -82,7 +82,7 @@ export default function PosTerminal({
       parameters: param,
     });
 
-    console.log("paramvposssss", param);
+    console.log("paramvposssss", res);
 
     if (res?.data?.status == "success") {
       console.log("processoos irsen resposne", res);
@@ -120,11 +120,11 @@ export default function PosTerminal({
     process.env.NEXT_PUBLIC_DEVICE_TYPE,
     function (res: any) {
       console.log("payment result", res);
-      paymentProcess(res, "pos");
+      // paymentProcess(res, "pos");
       if (res?.status == "success") {
         // paymentProcess(res, "pos");
         console.log("paymentProcesspaymentProcesspaymentProcess result", res);
-        Payed(item, "pos");
+        // Payed(item, "pos");
       } else {
         notification.error({
           message: item?.text,
