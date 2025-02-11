@@ -358,7 +358,6 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
           resultIpTerminal["authcode"] = getParse["AuthCode"];
           resultIpTerminal["terminalid"] = getParse["TerminalId"];
           resultIpTerminal["traceno"] = "";
-          callback({});
           callback({
             status: "funded",
             text: "funded",
