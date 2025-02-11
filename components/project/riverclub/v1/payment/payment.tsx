@@ -8,6 +8,7 @@ export default function bankIpTerminalTransfer(
   deviceType: any,
   callback: any
 ) {
+
   if ("WebSocket" in window) {
     console.log(
       "WebSocket is supported by your Browser!",
@@ -19,9 +20,9 @@ export default function bankIpTerminalTransfer(
     var ws = new WebSocket("ws://localhost:58324/socket");
     var dvctype = "";
 
-    if (deviceType == "khanbank") {
-      dvctype = "databank";
-    }
+    // if (deviceType == "khanbank") {
+    //   dvctype = "databank";
+    // }
     if (deviceType == "golomtbank") {
       dvctype = "GLMT";
     }
@@ -200,9 +201,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
   if ("WebSocket" in window) {
     var dvctype = "";
 
-    if (deviceType == "khanbank") {
-      dvctype = "databank";
-    } else if (deviceType == "golomtbank") {
+    if (deviceType == "golomtbank") {
       dvctype = "GLMT";
     } else if (deviceType == "xacbank") {
       dvctype = "khas_paxA35";
@@ -293,7 +292,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
     };
 
     ws.onclose = function () {
-      console.log("Connection is closed...");
+      console.log("Connection is closed... golomt");
     };
   } else {
     var resultJson = {
@@ -301,6 +300,6 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
       Error: "WebSocket NOT supported by your Browser!",
     };
 
-    console.log(JSON.stringify(resultJson));
+    console.log("baack",JSON.stringify(resultJson));
   }
 }
