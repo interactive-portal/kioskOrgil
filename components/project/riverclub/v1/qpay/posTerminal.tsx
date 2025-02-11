@@ -21,7 +21,7 @@ export default function PosTerminal({
   setPay?: any;
   setModalContent?: any;
 }) {
-  console.log("item :>> ", item);
+  console.log("item  pos:>> ", item);
 
   const [printOptions, setPrintOptions] = useState({
     lang: {
@@ -52,7 +52,7 @@ export default function PosTerminal({
       total: Number(item?.amount),
       customerId: 12, // customerid
       vat: Number(item?.vat),
-      contractId: "11",
+      contractId:Number(item?.contracttypeid),
       fitKioskSalesDtlNew_DV: {
         productId: item?.id,
         sectionId: item?.sectionid,
@@ -81,7 +81,7 @@ export default function PosTerminal({
       parameters: param,
     });
 
-    console.log("param", param);
+    console.log("paramvposssss", param);
 
     if (res?.data?.status == "success") {
       console.log("processoos irsen resposne", res);
@@ -114,8 +114,8 @@ export default function PosTerminal({
   };
 
   BankIpTerminalTransfer(
-    Number("50"),
-    // Number(item?.amount),
+    // Number("50"),
+    Number(item?.amount),
     process.env.NEXT_PUBLIC_TERMINAL_ID,
     process.env.NEXT_PUBLIC_DEVICE_TYPE,
     function (res: any) {

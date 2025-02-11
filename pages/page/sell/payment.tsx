@@ -30,7 +30,7 @@ const Ebarimt = () => {
   const jsonData = order ? JSON.parse(order) : {};
   const jsonDataProduct = product ? JSON.parse(product) : {};
 
-  console.log("jsonDataProduct :>> ", jsonDataProduct);
+  // console.log("jsonDataProduct :>> ", jsonDataProduct);
   // console.log("jsonData :>> ", jsonData);
 
   if (!jsonData)
