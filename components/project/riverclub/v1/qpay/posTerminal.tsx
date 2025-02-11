@@ -123,6 +123,7 @@ export default function PosTerminal({
 
       if (res?.status == "funded") {
         // paymentProcess(res, "pos");
+        console.log("payment fundedfu ndedfund edfu ndedfundedfunded", res);
         Payed(item, res);
       } else if (res?.status == "refund") {
         notification.error({
