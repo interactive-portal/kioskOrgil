@@ -125,12 +125,10 @@ export default function PosTerminal({
 
       if (res?.status == "success") {
         // paymentProcess(res, "pos");
-
         if(res?.authcode !=""){
           Payed(item, res);
           // paymentProcess(res, "pos");
         }
-    
       } else {
         notification.error({
           message: res?.text,
