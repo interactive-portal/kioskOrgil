@@ -69,20 +69,20 @@ export default function BankIpTerminalTransfer(
     // 	return;
     //   }
 
-    ws.onopen = function () {
-      var currentDateTime = moment.now();
-      ws.send(
-        '{"command":"bank_terminal_pos_sale", "dateTime":"' +
-          currentDateTime +
-          '", details: [{"key": "devicetype", "value": "' +
-          dvctype +
-          '"},{"key": "terminalid", "value": "' +
-          terminalId +
-          '"},{"key": "totalamount", "value": "' +
-          amount +
-          '"}]}'
-      );
-    };
+    // ws.onopen = function () {
+    //   var currentDateTime = moment.now();
+    //   ws.send(
+    //     '{"command":"bank_terminal_pos_sale", "dateTime":"' +
+    //       currentDateTime +
+    //       '", details: [{"key": "devicetype", "value": "' +
+    //       dvctype +
+    //       '"},{"key": "terminalid", "value": "' +
+    //       terminalId +
+    //       '"},{"key": "totalamount", "value": "' +
+    //       amount +
+    //       '"}]}'
+    //   );
+    // };
 
 
     let isAcceptPrintPos = false;
@@ -163,7 +163,7 @@ export default function BankIpTerminalTransfer(
           }
         }
 
-        if (dvctype === "glmt") {
+        if (dvctype === "GLMT") {
           resultIpTerminal["rrn"] = getParse["RRN"];
           resultIpTerminal["pan"] = getParse["PAN"];
           resultIpTerminal["authcode"] = getParse["AuthCode"];
