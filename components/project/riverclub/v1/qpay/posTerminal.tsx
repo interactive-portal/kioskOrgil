@@ -121,13 +121,16 @@ export default function PosTerminal({
     function (res: any) {
       console.log("payment result", res);
       // 
+
+
       if (res?.status == "success") {
         // paymentProcess(res, "pos");
 
-        if(res?.command =="bank_terminal_pos_sale"){
-          paymentProcess(res, "pos");
+        if(res?.authcode !=""){
+          Payed(item, res);
+          // paymentProcess(res, "pos");
         }
-        // Payed(item, "pos");
+    
       } else {
         notification.error({
           message: res?.text,

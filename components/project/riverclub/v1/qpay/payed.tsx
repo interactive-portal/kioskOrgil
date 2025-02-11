@@ -8,11 +8,11 @@ import Qpay from "../qpay/qpay";
 
 type PropsType = {
   item?: any;
-  contract?: any;
+  payment?: any;
   type?: any;
 };
 
-const Payed: FC<PropsType> = ({ item, contract, type }) => {
+const Payed: FC<PropsType> = ({ item, payment, type }) => {
   const [modalContent, setModalContent] = useState("pos");
   const [selectDateModal, setSelectDateModal] = useState<any>(false);
   const [paymentResult, setPaymentResult] = useState<any>();
@@ -43,6 +43,7 @@ const Payed: FC<PropsType> = ({ item, contract, type }) => {
   const [contractId, setContractId] = useState();
   const [loading, setLoading] = useState(false);
 
+  console.log("payment", payment);
   console.log("contract", item);
 
   const paymentProcess = async (payment: any, type: any) => {
