@@ -210,9 +210,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, amount:any,callba
   if ("WebSocket" in window) {
     var dvctype = "";
 
-    if (deviceType == "khanbank") {
-      dvctype = "databank";
-    } else if (deviceType == "golomtbank") {
+    if (deviceType == "golomtbank") {
       dvctype = "GLMT";
       callback({
         status: "success",
@@ -329,26 +327,12 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
   if ("WebSocket" in window) {
     var dvctype = "";
     var ws = new WebSocket("ws://localhost:58324/socket");
-    ws.onmessage = function (evt) {
-      // Core.unblockUI();
-      var received_msg = evt.data;
-      var jsonData = JSON.parse(received_msg);
+    if (deviceType == "golomtbank") {
+      dvctype = "GLMT";
+    }
 
-      console.log("smsm", jsonData);
+    console.log('amount :>> ', amount);
 
-      if (jsonData.status == "success") {
-        let getParse: any = JSON.parse(jsonData.details[0].value);
-        var resultIpTerminal: any = { status: "success" };
-        console.log("resultIpTerminal", getParse);
-          resultIpTerminal["rrn"] = getParse["RRN"];
-          resultIpTerminal["pan"] = getParse["PAN"];
-          resultIpTerminal["authcode"] = getParse["AuthCode"];
-          resultIpTerminal["terminalid"] = getParse["TerminalId"];
-          resultIpTerminal["traceno"] = "";
-          callback(resultIpTerminal);
-        }
-      
-    };
       ws.onopen = function () {
       var currentDateTime = moment.now();
       ws.send(
@@ -362,6 +346,26 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
           "10" +
           '"}]}'
       );
+    };
+
+    ws.onmessage = function (evt) {
+      var received_msg = evt.data;
+      var jsonData = JSON.parse(received_msg);
+
+      console.log("terminal", jsonData);
+
+      if (jsonData.status == "success") {
+        let getParse: any = JSON.parse(jsonData.details[0].value);
+        var resultIpTerminal: any = { status: "success" };
+        console.log("resultIpTerminal", getParse);
+          resultIpTerminal["rrn"] = getParse["RRN"];
+          resultIpTerminal["pan"] = getParse["PAN"];
+          resultIpTerminal["authcode"] = getParse["AuthCode"];
+          resultIpTerminal["terminalid"] = getParse["TerminalId"];
+          resultIpTerminal["traceno"] = "";
+          callback(resultIpTerminal);
+        }
+      
     };
 
   }
