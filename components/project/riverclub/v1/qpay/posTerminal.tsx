@@ -96,7 +96,7 @@ export default function PosTerminal({
 
       if (ebarimtResult?.data?.status == "success") {
         console.log("object :>> ");
-        setModalContent("pay");
+        setModalContent("ebarimt");
       }
     } else {
       // console.log("aldaaa", res);
