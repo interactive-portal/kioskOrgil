@@ -122,9 +122,6 @@ export default function PosTerminal({
     //   setModal("date");
     // }
   };
-
-
-
   BankIpTerminalTransfer(
     Number(item?.amount),
     process.env.NEXT_PUBLIC_TERMINAL_ID,
@@ -153,7 +150,7 @@ export default function PosTerminal({
   return (
     <>
       <div className="min-h-[900px] flex items-center justify-center mt-[250px] flex-col">
-        {conId&&<> <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
+        {conId==""?<> <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
           <iframe id="content" className="h-0 w-0 absolute"></iframe>
           <div id={"portraid"} className="h- w-[260px] mx-auto">
             <ReportTemplate
@@ -219,8 +216,8 @@ export default function PosTerminal({
               }
 
     `}
-        </style></>}
-        <p className="text-white text-[64px]">ТА КАРТАА УНШУУЛНА УУ !</p>
+        </style></>:
+        <p className="text-white text-[64px]">ТА КАРТАА УНШУУЛНА УУ !</p>}
       </div>
     </>
   );
