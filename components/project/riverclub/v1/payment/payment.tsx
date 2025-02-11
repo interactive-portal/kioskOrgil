@@ -27,6 +27,8 @@ export default function bankIpTerminalTransfer(
     }
     bankCheckIpTerminal(terminalId, deviceType, function () {
       //   console.log("as");
+       console.log("deviceType",deviceType);
+       console.log("terminalId",terminalId);
     });
     // else if (deviceType == "golomtbank") {
     //   dvctype = "glmt";
@@ -201,7 +203,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
     if (deviceType == "khanbank") {
       dvctype = "databank";
     } else if (deviceType == "golomtbank") {
-      dvctype = "glmt";
+      dvctype = "GLMT";
     } else if (deviceType == "xacbank") {
       dvctype = "khas_paxA35";
       terminalId = "123";
@@ -254,7 +256,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
       var received_msg = evt.data;
       var jsonData = JSON.parse(received_msg);
 
-      console.log("received_msg", evt);
+      console.log("received_msg", received_msg);
 
       if (jsonData.status == "success") {
         callback({
