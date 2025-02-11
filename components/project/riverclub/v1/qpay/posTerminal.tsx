@@ -96,6 +96,7 @@ export default function PosTerminal({
 
       if (ebarimtResult?.data?.status == "success") {
         console.log("object :>> ");
+        setModalContent("pay");
       }
     } else {
       // console.log("aldaaa", res);
@@ -124,7 +125,7 @@ export default function PosTerminal({
       if (res?.status == "funded") {
         // paymentProcess(res, "pos");
         console.log("payment fundedfu ndedfund edfu ndedfundedfunded", res);
-        Payed(item, res);
+        paymentProcess(res, "pos");
       } else if (res?.status == "refund") {
         notification.error({
           message: res?.text,
