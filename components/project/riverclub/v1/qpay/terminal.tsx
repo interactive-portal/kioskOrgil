@@ -22,11 +22,11 @@ export default function BankIpTerminalTransfer(
     if (deviceType == "golomtbank") {
       dvctype = "GLMT";
     }
-    bankCheckIpTerminal(terminalId, deviceType, function () {
+    bankCheckIpTerminal(terminalId, deviceType, amount, function () {
       console.log("as");
     });
 
-    console.log('callback :>> ', callback);
+    // console.log('callback :>> ', callback);
     // else if (deviceType == "golomtbank") {
     //   dvctype = "glmt";
     // } else if (deviceType == "xacbank") {
@@ -58,6 +58,10 @@ export default function BankIpTerminalTransfer(
       });
       return;
     }
+
+
+  
+
 
     //   Core.blockUI({
     // 	message: "МЭДЭЭЛЭЛ ДАМЖУУЛЖ БАЙНА...",
@@ -202,7 +206,7 @@ export default function BankIpTerminalTransfer(
   }
 }
 
-function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
+function bankCheckIpTerminal(terminalId: any, deviceType: any, amount:any,callback: any) {
   if ("WebSocket" in window) {
     var dvctype = "";
 
@@ -266,9 +270,13 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
       var received_msg = evt.data;
       var jsonData = JSON.parse(received_msg);
 
-      console.log("received_msg", evt);
+     
 
       if (jsonData.status == "success") {
+
+
+         console.log("received_msg", evt);
+         bankPosSend(terminalId, deviceType, amount,callback)
 
         callback({
           status: "success",
@@ -313,5 +321,48 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
     };
 
     console.log(JSON.stringify(resultJson));
+  }
+}
+
+
+function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any) {
+  if ("WebSocket" in window) {
+    var dvctype = "";
+    var ws = new WebSocket("ws://localhost:58324/socket");
+    ws.onmessage = function (evt) {
+      // Core.unblockUI();
+      var received_msg = evt.data;
+      var jsonData = JSON.parse(received_msg);
+
+      console.log("smsm", jsonData);
+
+      if (jsonData.status == "success") {
+        let getParse: any = JSON.parse(jsonData.details[0].value);
+        var resultIpTerminal: any = { status: "success" };
+        console.log("resultIpTerminal", getParse);
+          resultIpTerminal["rrn"] = getParse["RRN"];
+          resultIpTerminal["pan"] = getParse["PAN"];
+          resultIpTerminal["authcode"] = getParse["AuthCode"];
+          resultIpTerminal["terminalid"] = getParse["TerminalId"];
+          resultIpTerminal["traceno"] = "";
+          callback(resultIpTerminal);
+        }
+      
+    };
+      ws.onopen = function () {
+      var currentDateTime = moment.now();
+      ws.send(
+        '{"command":"bank_terminal_pos_sale", "dateTime":"' +
+          currentDateTime +
+          '", details: [{"key": "devicetype", "value": "' +
+          dvctype +
+          '"},{"key": "terminalid", "value": "' +
+          terminalId +
+          '"},{"key": "totalamount", "value": "' +
+          "10" +
+          '"}]}'
+      );
+    };
+
   }
 }
