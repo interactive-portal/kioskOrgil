@@ -143,9 +143,9 @@ export default function PosTerminal({
         window.location.reload();
       }
       else {
-        notification.info({
-          message: res?.text,
-        });
+        // notification.info({
+        //   message: res?.text,
+        // });
       }
     }
   );
