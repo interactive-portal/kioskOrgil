@@ -143,7 +143,7 @@ export default function PosTerminal({
         window.location.reload();
       }
       else {
-        notification.error({
+        notification.info({
           message: res?.text,
         });
       }
