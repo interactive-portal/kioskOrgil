@@ -115,7 +115,6 @@ export default function PosTerminal({
   };
 
   BankIpTerminalTransfer(
-    // Number("50"),
     Number(item?.amount),
     process.env.NEXT_PUBLIC_TERMINAL_ID,
     process.env.NEXT_PUBLIC_DEVICE_TYPE,

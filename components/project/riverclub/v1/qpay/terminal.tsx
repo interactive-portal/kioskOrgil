@@ -208,7 +208,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, callback: any) {
     if (deviceType == "khanbank") {
       dvctype = "databank";
     } else if (deviceType == "golomtbank") {
-      dvctype = "glmt";
+      dvctype = "GLMT";
     } else if (deviceType == "xacbank") {
       dvctype = "khas_paxA35";
       terminalId = "123";
