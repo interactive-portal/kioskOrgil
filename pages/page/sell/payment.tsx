@@ -163,7 +163,7 @@ const Ebarimt = () => {
         {view === "ebarimt" && (
           <EbarimtPrint item={jsonData} content={jsonDataProduct} />
         )}
-        {view === "card" && <PosTerminal item={jsonData} setModalContent={setView} />  }
+        {view === "card" && <PosTerminal item={jsonData} setModalContent={setView} content={jsonDataProduct} />   }
         {view === "qpay" && (
           <Qpay
             item={jsonData}

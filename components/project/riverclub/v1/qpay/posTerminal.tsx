@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Payment from "@/components/project/riverclub/v1/payment/payment";
 import Payed from "./payed";
 import BankIpTerminalTransfer from "./terminal";
+import ReportTemplate from "@/middleware/ReportTemplate/ReportTemplate";
 
 export default function PosTerminal({
   item,
@@ -23,6 +24,7 @@ export default function PosTerminal({
   setModalContent?: any;
 }) {
   console.log("item  pos:>> ", item);
+  console.log("content  pos:>> ", content);
 
   const [printOptions, setPrintOptions] = useState({
     lang: {
@@ -46,6 +48,7 @@ export default function PosTerminal({
       templateIds: "170174656028110",
     },
   });
+  const [conId, setConId] = useState();
 
   const paymentProcess = async (payment: any, type: any) => {
     const param = {
@@ -53,9 +56,9 @@ export default function PosTerminal({
       total: Number(item?.amount),
       customerId: localStorage.getItem("cmrid"),
       vat: Number(item?.vat),
-      contractId: item?.id,
+      contractId:localStorage.getItem("conId") || item.id,
       fitKioskSalesDtlNew_DV: {
-        productId: item?.contracttypeid,
+        productId: content?.itemid,
         sectionId: item?.sectionid,
         unitPrice: Number(item?.amount),
         lineTotalPrice: Number(item?.amount),
@@ -84,24 +87,26 @@ export default function PosTerminal({
 
     console.log("paramvposssss", res);
 
-    if (res?.data?.status == "success") {
-      console.log("processoos irsen resposne", res);
+    if (data?.status == "success") {
+      console.log("processoos irsen resposne", data);
 
-      const ebarimtResult = await axios.post(`/api/post-process`, {
+      const { data: ebarimtResult } = await axios.post(`/api/post-process`, {
         processcode: "kiosk_Ebarimt_Send",
         parameters: {
-          id: res?.data?.result?.id,
+          id: data?.result?.id,
         },
       });
+      console.log("ebarimt  :>> ", ebarimtResult);
+      if (ebarimtResult?.status == "success") {
+        setConId(ebarimtResult?.result?.id);
 
-      if (ebarimtResult?.data?.status == "success") {
-        console.log("object :>> ");
-        setModalContent("ebarimt");
+        // setLoading(true);
       }
     } else {
-      // console.log("aldaaa", res);
+      //
     }
   };
+
 
   const printEbarimt = () => {
     var content: any = document.getElementById("portraid");
@@ -112,8 +117,13 @@ export default function PosTerminal({
     pri.document.close();
     pri.focus();
     pri.print();
-    setModalContent("pay");
+    // Cookies.remove("customer");
+    // if (setModal) {
+    //   setModal("date");
+    // }
   };
+
+
 
   BankIpTerminalTransfer(
     Number(item?.amount),
@@ -142,7 +152,74 @@ export default function PosTerminal({
 
   return (
     <>
-      <div className="min-h-[900px] flex items-center justify-center mt-[250px]">
+      <div className="min-h-[900px] flex items-center justify-center mt-[250px] flex-col">
+        {conId&&<> <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
+          <iframe id="content" className="h-0 w-0 absolute"></iframe>
+          <div id={"portraid"} className="h- w-[260px] mx-auto">
+            <ReportTemplate
+              options={printOptions}
+              data={{
+                contractId: conId, // || "17304644323913",
+                // contractId:
+                //   "170174683396510" ||
+                //   "17022810222312" ||
+                //   "170174688727410",
+              }}
+            />
+          </div>
+          <p className="text-[20px] mt-6 px-4 text-white">
+            Та баримтаа хэвлэж авна уу
+          </p>
+          <div className="py-[20px] w-full flex gap-[16px] px-[64px] cursor-pointer button">
+            <div
+              className="px-6 py-1 float-right bg-white border-[#A68B5C] border text-[#A68B5C]   justify-center text-[18px] w-[200px] rounded-full mx-auto"
+              onClick={() => {
+                printEbarimt();
+              }}
+            >
+              Баримт хэвлэх
+            </div>
+          </div>
+        </div>
+        <style>
+          {`
+
+                #portraid {
+                  page-break-before: always;
+                  page-break-inside: avoid;
+                  padding:30px;
+                  background:#fff;
+                  color:#000;
+                }
+            @media print {
+              body {
+                font-family: Arial, sans-serif;
+                font-size: 12pt;
+                color: black;
+                padding:40px;
+              }
+
+                #portraid {
+                  page-break-before: always;
+                  page-break-inside: avoid;
+                  padding:30px;
+                  background:#fff;
+                }
+
+                .button {
+                  display: none;
+                }
+
+                .txt {
+                  display: none;
+                }
+                img :{
+                  display: none;
+                }
+              }
+
+    `}
+        </style></>}
         <p className="text-white text-[64px]">ТА КАРТАА УНШУУЛНА УУ !</p>
       </div>
     </>
