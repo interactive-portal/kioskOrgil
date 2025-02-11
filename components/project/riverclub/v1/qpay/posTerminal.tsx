@@ -123,6 +123,7 @@ export default function PosTerminal({
       paymentProcess(res, "pos");
       if (res?.status == "success") {
         // paymentProcess(res, "pos");
+        console.log("paymentProcesspaymentProcesspaymentProcess result", res);
         Payed(item, "pos");
       } else {
         notification.error({
