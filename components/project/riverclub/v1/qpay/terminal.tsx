@@ -22,9 +22,7 @@ export default function BankIpTerminalTransfer(
     if (deviceType == "golomtbank") {
       dvctype = "GLMT";
     }
-    bankCheckIpTerminal(terminalId, deviceType, amount, function () {
-      console.log("as");
-    });
+    bankCheckIpTerminal(terminalId, deviceType, amount, callback);
 
     // console.log('callback :>> ', callback);
     // else if (deviceType == "golomtbank") {
