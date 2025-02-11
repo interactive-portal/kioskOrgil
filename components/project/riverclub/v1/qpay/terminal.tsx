@@ -268,10 +268,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, amount:any,callba
       var received_msg = evt.data;
       var jsonData = JSON.parse(received_msg);
 
-     
-
       if (jsonData.status == "success") {
-
 
          console.log("received_msg", evt);
          bankPosSend(terminalId, deviceType, amount,callback)
@@ -343,7 +340,7 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
           '"},{"key": "terminalid", "value": "' +
           terminalId +
           '"},{"key": "totalamount", "value": "' +
-          "10" +
+          amount +
           '"}]}'
       );
     };
