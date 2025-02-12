@@ -7,7 +7,7 @@ import ReportTemplate from "@/middleware/ReportTemplate/ReportTemplate";
 import { useRouter } from "next/router";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin, Statistic } from "antd";
-
+import Layout from "../kioskLayout";
 export default function Ebilling({
   item,
   content,
@@ -69,6 +69,7 @@ export default function Ebilling({
       </div>
     );
   return (
+    <Layout>
       <div className="min-h-[900px] flex items-center justify-center mt-[250px] flex-col">
         <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10 border  items-center  text-center">
         <iframe id="content" className="h-0 w-0 absolute"></iframe>
@@ -134,5 +135,6 @@ export default function Ebilling({
     `}
         </style>
       </div>
+      </Layout>
   );
 }
