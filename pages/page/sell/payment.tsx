@@ -9,7 +9,7 @@ import Payment from "@/components/project/riverclub/v1/payment/payment";
 import PosTerminal from "@/components/project/riverclub/v1/qpay/posTerminal";
 import EbarimtPrint from "@/components/project/riverclub/v1/qpay/ebarimt";
 
-const Ebarimt = () => {
+const PaymentPage = () => {
   const router = useRouter();
   const [view, setView] = useState("default");
   const LOCAL_STORAGE_KEY = "orderInfo";
@@ -185,4 +185,4 @@ const Ebarimt = () => {
   );
 };
 
-export default Ebarimt;
+export default PaymentPage;

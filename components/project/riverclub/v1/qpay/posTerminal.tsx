@@ -48,6 +48,9 @@ export default function PosTerminal({
       templateIds: "170174656028110",
     },
   });
+
+  const [loading, setLoading] = useState(true);
+
   const [conId, setConId] = useState();
 
   const paymentProcess = async (payment: any, type: any) => {
@@ -84,9 +87,6 @@ export default function PosTerminal({
       processcode: "fitKioskSalesNew_DV_001",
       parameters: param,
     });
-
-    console.log("paramvposssss", data);
-
     if (data?.status == "success") {
       console.log("processoos irsen resposne", data);
 
@@ -98,15 +98,14 @@ export default function PosTerminal({
       });
       console.log("ebarimt  :>> ", ebarimtResult);
       if (ebarimtResult?.status == "success") {
-        setConId(ebarimtResult?.result?.id);
-
-        // setLoading(true);
+          setConId(ebarimtResult?.result?.id);
+          window.location.href = "/page/sell/ebilling?id="+ebarimtResult?.result?.id
+          setLoading(false);
       }
     } else {
       //
     }
   };
-
 
   const printEbarimt = () => {
     var content: any = document.getElementById("portraid");
@@ -131,7 +130,7 @@ export default function PosTerminal({
 
       if (res?.status == "funded") {
         // paymentProcess(res, "pos");
-        console.log("payment fundedfu ndedfund edfu ndedfundedfunded", res);
+        // console.log("payment fundedfu ndedfund edfu ndedfundedfunded", res);
         paymentProcess(res, "pos");
       } else if (res?.status == "refund") {
         notification.error({
@@ -150,74 +149,15 @@ export default function PosTerminal({
   return (
     <>
       <div className="min-h-[900px] flex items-center justify-center mt-[250px] flex-col">
-        {conId==""?<> <div className="w-[500px] min-h-[400px] rounded-lg printContent py-10">
-          <iframe id="content" className="h-0 w-0 absolute"></iframe>
-          <div id={"portraid"} className="h- w-[260px] mx-auto">
-            <ReportTemplate
-              options={printOptions}
-              data={{
-                contractId: conId, // || "17304644323913",
-                // contractId:
-                //   "170174683396510" ||
-                //   "17022810222312" ||
-                //   "170174688727410",
-              }}
-            />
-          </div>
-          <p className="text-[20px] mt-6 px-4 text-white">
-            Та баримтаа хэвлэж авна уу
-          </p>
-          <div className="py-[20px] w-full flex gap-[16px] px-[64px] cursor-pointer button">
-            <div
-              className="px-6 py-1 float-right bg-white border-[#A68B5C] border text-[#A68B5C]   justify-center text-[18px] w-[200px] rounded-full mx-auto"
-              onClick={() => {
-                printEbarimt();
-              }}
-            >
-              Баримт хэвлэх
-            </div>
-          </div>
+         <div className="">
+          <Spin
+            className="text-[#BAD405] full-screen"
+            fullscreen
+            spinning={loading}
+            size="large"
+          />
         </div>
-        <style>
-          {`
-
-                #portraid {
-                  page-break-before: always;
-                  page-break-inside: avoid;
-                  padding:30px;
-                  background:#fff;
-                  color:#000;
-                }
-            @media print {
-              body {
-                font-family: Arial, sans-serif;
-                font-size: 12pt;
-                color: black;
-                padding:40px;
-              }
-
-                #portraid {
-                  page-break-before: always;
-                  page-break-inside: avoid;
-                  padding:30px;
-                  background:#fff;
-                }
-
-                .button {
-                  display: none;
-                }
-
-                .txt {
-                  display: none;
-                }
-                img :{
-                  display: none;
-                }
-              }
-
-    `}
-        </style></>:
-        <p className="text-white text-[64px]">ТА КАРТАА УНШУУЛНА УУ !</p>}
+        <p className="text-white text-[64px]">ТА КАРТАА УНШУУЛНА УУ !</p>
       </div>
     </>
   );
