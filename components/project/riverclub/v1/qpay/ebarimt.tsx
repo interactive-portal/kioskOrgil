@@ -126,6 +126,7 @@ export default function EbarimtPrint({
     // if (setModal) {
     //   setModal("date");
     // }
+     window.location.href="/"
   };
 
   useEffect(() => {

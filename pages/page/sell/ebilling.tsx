@@ -17,7 +17,6 @@ export default function Ebilling({
 }) {
   console.log("item  pos:>> ", item);
   console.log("content  pos:>> ", content);
-
   const [printOptions, setPrintOptions] = useState({
     lang: {
       mn: "",
@@ -55,6 +54,9 @@ export default function Ebilling({
     pri.document.close();
     pri.focus();
     pri.print();
+
+    window.location.href="/"
+
   };
 
   const contractid = router?.query?.id;
