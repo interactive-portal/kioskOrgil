@@ -79,7 +79,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
     setOpenModal(true);
   };
 
-  // console.log("data :>> ", data);
+  console.log("data :>> ", data);
   return (
     <div className="border p-6 rounded-2xl space-y-8 mt-10 ">
       <h3 className="text-white text-[40px]"> {data.itemname || "--"}</h3>

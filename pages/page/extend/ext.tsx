@@ -45,6 +45,7 @@ const Ext = () => {
   };
 
   const cid: any = router.query.contractid;
+  // console.log('dataSrc :>> ', dataSrc);
 
   useEffect(() => {
     if (router.isReady) {
@@ -64,16 +65,18 @@ const Ext = () => {
       processcode: "kioskContractMainDV_3",
       parameters: param,
     });
-    // console.log(param);
+    console.log("param",res);
     if (res?.data?.status == "success") {
-      localStorage?.setItem("cid", cid);
-      window.location.href = `/page/sell?id=${cid}`;
+
+      const conid = res?.data?.result?.contractid
+      // localStorage?.setItem("cid", conid);
+      window.location.href = `/page/sell?id=${conid}`;
     } else {
       // console.log("aldaaa", res);
     }
   };
 
-  console.log("dataSrc :>> ", dataSrc);
+  // console.log("dataSrc :>> ", dataSrc);
   if (dataSrc.length == 0)
     return (
       <>

@@ -30,6 +30,7 @@ const Sell = () => {
   const fetchData = async () => {
     const params = JSON.stringify({
       id: cid,
+      // id: cid,
     });
 
     const result = await fetchJson(
