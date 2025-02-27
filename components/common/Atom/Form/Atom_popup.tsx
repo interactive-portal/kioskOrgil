@@ -113,7 +113,7 @@ const Atom_combo: FC<PropsType> = ({
       filterPath: [
         {
           operator: "like",
-          operand: `%${searchValue}%`,
+          operand: `%${searchValue}`,
         },
       ],
     };
