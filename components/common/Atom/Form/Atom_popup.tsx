@@ -110,7 +110,7 @@ const Atom_combo: FC<PropsType> = ({
 
   const fetchData = async () => {
     let criteria = {
-      name: [
+      filterPath: [
         {
           operator: "like",
           operand: `%${searchValue}%`,

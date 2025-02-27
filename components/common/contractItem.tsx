@@ -6,6 +6,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import MemberChange from "./memberChange";
+import _ from "lodash";
 
 interface TitleProps {
   data: any;
@@ -24,6 +25,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
   const fetchData = async (query: any) => {
     if (query) {
       setLoading(true);
+      console.log('query :>> ', query);
       try {
         const data = await fetchJson(
           `/api/get-data?metaid=17333082985953&criteria=${JSON.stringify({
@@ -38,10 +40,16 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
             pageSize: 20,
           })}`
         );
-        // console.log("data :>> ", data);
-        if (data.result.length > 0) {
+        console.log("datassssssssss :>> ", data);
+        if (data?.status =='success') {
+
+          let datas= data?.result;
+              delete datas.aggregatecolumns;
+                delete datas.paging;
+                datas = _.values(datas);
+                console.log('data.resultdata.result :>> ', datas);
           setErr(false);
-          setUser(data.result);
+          setUser(datas);
           setCustomerId(data.result[0]?.customerid);
           setLoading(false);
         } else {
@@ -79,6 +87,7 @@ const ContractItem: React.FC<TitleProps> = ({ data }) => {
     setOpenModal(true);
   };
 
+  console.log("user :>> ", user);
   console.log("data :>> ", data);
   return (
     <div className="border p-6 rounded-2xl space-y-8 mt-10 ">
