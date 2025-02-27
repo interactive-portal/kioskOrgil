@@ -119,6 +119,7 @@ const PopUpSearch: FC<PropsType> = ({
       `/api/get-data?metaid=${metadataId}&criteria=${JSON.stringify(criteria)}`
     );
     if (data.status == "success") {
+      console.log('data?.result :>> ', data?.result);
       setResultList(data?.result);
     }
   };
@@ -167,9 +168,10 @@ const PopUpSearch: FC<PropsType> = ({
               <input
                 className="rounded border-gray-400 text-[14px] focus:ring-0 kiosk "
                 type="text"
-                placeholder="Бүртгэлтэй гишүүн хайх"
+                placeholder="Бүртгэлтэй гишүүн хайх "
                 // value="val"
                 onChange={(event) => setSearchValue(event.target.value)}
+                
               />
               <i className="fa-sharp fa-light fa-magnifying-glass  absolute text-base top-2 right-5 cursor-pointer text-[#585858]"></i>
             </div>

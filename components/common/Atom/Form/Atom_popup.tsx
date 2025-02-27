@@ -108,12 +108,12 @@ const Atom_combo: FC<PropsType> = ({
     return data;
   };
 
-  const fetchData = async () => {
+  const fetchData = async (value:any) => {
     let criteria = {
-      filterPath: [
+      filterpath: [
         {
           operator: "like",
-          operand: `%${searchValue}`,
+          operand:`%${value}%`,
         },
       ],
     };
@@ -121,9 +121,13 @@ const Atom_combo: FC<PropsType> = ({
     const data = await fetchJson(
       `/api/get-data?metaid=${metadataId}&criteria=${JSON.stringify(criteria)}`
     );
+
     if (data.status == "success") {
       setResultList(data?.result);
+    }else{
+      setResultList("")
     }
+    
   };
 
   // console.log("config.lookupmetadataid :>> ", config.lookupmetadataid)dd
@@ -137,9 +141,9 @@ const Atom_combo: FC<PropsType> = ({
     if (itemParent) {
       setResultList(itemParent);
     }
-
-    fetchData();
+    fetchData(searchValue);
   }, [searchValue]);
+  console.log('object :>> ', searchValue);
 
   const handlerFocus = async (e: any, index: any) => {
     setLoading(true);
@@ -157,11 +161,12 @@ const Atom_combo: FC<PropsType> = ({
   };
 
   const handlerChange = (e: any) => {
-    handleChangeContext({
-      name: config.paramrealpath,
-      value: e.value,
-      rowIndex,
-    });
+    // handleChangeContext({
+    console.log('e.tara :>> ', e.target.value);
+    //   name: config.paramrealpath,
+    //   value: e.value,
+    //   rowIndex,
+    // });
   };
 
   return <></>;
@@ -194,7 +199,8 @@ const Atom_combo: FC<PropsType> = ({
                 type="text"
                 placeholder="Бүртгэлтэй гишүүн хайх"
                 // value="val"
-                onChange={(event) => setSearchValue(event.target.value)}
+                // onChange={(event) => setSearchValue(event.target.value)}
+                onChange={handlerChange}
               />
               <i className="fa-sharp fa-light fa-magnifying-glass  absolute text-base top-2 right-5 cursor-pointer text-[#585858]"></i>
             </div>
