@@ -47,9 +47,10 @@ export default function Qpay({
       invoice_receiver_code: item?.contractcode,
       invoice_description: item?.contracttypename,
       storeId: "1574647073339",
-      amount: "10", //|| Number(item?.amount),
+      amount: Number(item?.amount),
       callback_url: "http://localhost:4000/",
     };
+    console.log('params :>> ', params);
     const { data } = await axios.post(`/api/post-process`, {
       processcode: "QPAY_V2_CREATEINVOICE_SIMPLE",
       parameters: params,

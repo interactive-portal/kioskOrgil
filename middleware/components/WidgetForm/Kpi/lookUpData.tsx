@@ -22,6 +22,8 @@ const LookUpData: FC<PropsType> = ({ type, config }) => {
       },
     ],
   };
+
+// console.log('criteria :>> ', criteria);
   const { data: LoopdataSrc, error } = useSWR(
     `/api/get-data?metaid=${metaId}&criteria=${JSON.stringify(criteria)}`
   );
