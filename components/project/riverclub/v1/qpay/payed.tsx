@@ -43,8 +43,8 @@ const Payed: FC<PropsType> = ({ item, payment, type }) => {
   const [contractId, setContractId] = useState();
   const [loading, setLoading] = useState(false);
 
-  console.log("payment", payment);
-  console.log("contract", item);
+  // console.log("payment", payment);
+  // console.log("contract", item);
 
   const paymentProcess = async (payment: any, type: any) => {
     setLoading(true);
@@ -96,7 +96,6 @@ const Payed: FC<PropsType> = ({ item, payment, type }) => {
               unitAmount: Number(item?.saleprice),
               lineTotalAmount: Number(item?.saleprice),
             },
-
             fitKioskSalesPaymentNew_DV: {
               amount: Number(item?.saleprice),
               paymentTypeId: "40",
@@ -107,7 +106,7 @@ const Payed: FC<PropsType> = ({ item, payment, type }) => {
       processcode: "fitKioskSalesNew_DV_001",
       parameters: param,
     });
-    console.log(param);
+    // console.log(param);
     if (res?.data?.status == "success") {
       // console.log("processoos irsen resposne", res);
       setPrintOptions({

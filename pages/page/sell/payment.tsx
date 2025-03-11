@@ -11,11 +11,12 @@ import EbarimtPrint from "@/components/project/riverclub/v1/qpay/ebarimt";
 
 const PaymentPage = () => {
   const router = useRouter();
-  const [view, setView] = useState("default");
+  const [view, setView] = useState("payment");
   const LOCAL_STORAGE_KEY = "orderInfo";
 
   const [order, setOrder] = useState<any>();
   const [product, setProduct] = useState<any>();
+  const [payType, setPayType] = useState<any>(2);
   const [paymentProcess, setPaymentProcess] = useState<any>();
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const PaymentPage = () => {
   const jsonDataProduct = product ? JSON.parse(product) : {};
 
   // console.log("jsonDataProduct :>> ", jsonDataProduct);
-  // console.log("jsonData :>> ", jsonData);
+  console.log("jsonData :>> ", jsonData);
 
   if (!jsonData)
     return (
@@ -52,14 +53,12 @@ const PaymentPage = () => {
       <div className=" flex gap-6">
         <button
           className="h-[174px] bg-white text-[#525050] rounded-full text-[64px] w-full px-10"
-          onClick={() => setView("payment")}
-        >
+          onClick={() => setView("payment")}>
           ХУВЬ ХҮН
         </button>
         <button
           className="h-[174px]  bg-white text-[#525050] rounded-full text-[64px] w-full px-10"
-          onClick={() => setView("organization")}
-        >
+          onClick={() => setView("organization")}>
           БАЙГУУЛЛАГА
         </button>
       </div>
@@ -86,8 +85,7 @@ const PaymentPage = () => {
 
       <button
         className="h-[154px] text-white w-[744px] bg-[#A68B5C] rounded-full text-[64px] mt-[300px]"
-        onClick={() => setView("payment")}
-      >
+        onClick={() => setView("payment")}>
         БАТЛАХ
       </button>
     </div>
@@ -97,8 +95,7 @@ const PaymentPage = () => {
     <div className="flex flex-col">
       <button
         className="h-[174px]  bg-white w-[480px] rounded-full text-[#525050] text-[64px] uppercase px-10"
-        onClick={() => setView("card")}
-      >
+        onClick={() => setView("card")}>
         Карт
       </button>
       {/* <button
@@ -109,8 +106,7 @@ const PaymentPage = () => {
       </button> */}
       <button
         className="uppercase h-[174px] text-[#525050]  w-[480px]  bg-white rounded-full text-[64px] mt-[50px] px-10"
-        onClick={() => setView("qpay")}
-      >
+        onClick={() => setView("qpay")}>
         QPay
       </button>
     </div>
@@ -161,13 +157,24 @@ const PaymentPage = () => {
         {view === "payment" && renderPaymentView()}
         {view === "receipt" && renderReceiptView()}
         {view === "ebarimt" && (
-          <EbarimtPrint item={jsonData} content={jsonDataProduct} />
+          <EbarimtPrint
+            item={jsonData}
+            content={jsonDataProduct}
+            type={payType}
+          />
         )}
-        {view === "card" && <PosTerminal item={jsonData} setModalContent={setView} content={jsonDataProduct} />   }
+        {view === "card" && (
+          <PosTerminal
+            item={jsonData}
+            setModalContent={setView}
+            content={jsonDataProduct}
+          />
+        )}
         {view === "qpay" && (
           <Qpay
             item={jsonData}
             setModalContent={setView}
+            setPayType={payType}
             setPay={setPaymentProcess}
           />
         )}

@@ -14,6 +14,7 @@ export default function EbarimtPrint({
   close,
   status,
   content,
+  type,
   setPay,
   setModalContent,
 }: {
@@ -21,6 +22,7 @@ export default function EbarimtPrint({
   close?: any;
   status?: any;
   content?: any;
+  type?: any;
   setPay?: any;
   setModalContent?: any;
 }) {
@@ -72,7 +74,7 @@ export default function EbarimtPrint({
         paymentMethodCode: payment?.pan,
         bankId: 500000,
         amount: Number(item?.amount),
-        paymentTypeId: "2",
+        paymentTypeId: type || "40",
         confirmCode: payment?.authcode,
         refenceNumber: payment?.rrn,
         terminalNumber: payment?.terminalid,
@@ -126,7 +128,7 @@ export default function EbarimtPrint({
     // if (setModal) {
     //   setModal("date");
     // }
-     window.location.href="/"
+    window.location.href = "/";
   };
 
   useEffect(() => {
@@ -176,8 +178,7 @@ export default function EbarimtPrint({
                 className="px-6 py-1 float-right bg-white border-[#A68B5C] border text-[#A68B5C]   justify-center text-[18px] w-[200px] rounded-full mx-auto"
                 onClick={() => {
                   printEbarimt();
-                }}
-              >
+                }}>
                 Баримт хэвлэх
               </div>
             </div>

@@ -13,6 +13,7 @@ export default function Qpay({
   close,
   status,
   content,
+  setPayType,
   setPay,
   paymentProcess,
   setModalContent,
@@ -21,6 +22,7 @@ export default function Qpay({
   close?: any;
   status?: any;
   content?: any;
+  setPayType: any;
   setPay?: any;
   paymentProcess?: any;
   setModalContent?: any;
@@ -50,7 +52,7 @@ export default function Qpay({
       amount: Number(item?.amount),
       callback_url: "http://localhost:4000/",
     };
-    console.log('params :>> ', params);
+    // console.log('params :>> ', params);
     const { data } = await axios.post(`/api/post-process`, {
       processcode: "QPAY_V2_CREATEINVOICE_SIMPLE",
       parameters: params,
@@ -103,6 +105,7 @@ export default function Qpay({
     // alert("tolbor tologdlosadasdasdasdasdsao");
     console.log(statusPayment?.rows);
     setModalContent("ebarimt");
+    setPayType(40);
     // paymentProcess(res, "qpay");
   }
 
