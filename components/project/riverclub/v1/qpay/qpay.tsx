@@ -22,7 +22,7 @@ export default function Qpay({
   close?: any;
   status?: any;
   content?: any;
-  setPayType: any;
+  setPayType?: any;
   setPay?: any;
   paymentProcess?: any;
   setModalContent?: any;
@@ -105,7 +105,7 @@ export default function Qpay({
     // alert("tolbor tologdlosadasdasdasdasdsao");
     console.log(statusPayment?.rows);
     setModalContent("ebarimt");
-    setPayType(40);
+    setPayType("40");
     // paymentProcess(res, "qpay");
   }
 
