@@ -18,7 +18,7 @@ export default function BankIpTerminalTransfer(
     // Let us open a web socket
     var ws = new WebSocket("ws://localhost:58324/socket");
     var dvctype = "";
-    
+
     if (deviceType == "golomtbank") {
       dvctype = "GLMT";
     }
@@ -57,10 +57,6 @@ export default function BankIpTerminalTransfer(
     //   return;
     // }
 
-
-  
-
-
     //   Core.blockUI({
     // 	message: "МЭДЭЭЛЭЛ ДАМЖУУЛЖ БАЙНА...",
     // 	boxed: true,
@@ -85,7 +81,6 @@ export default function BankIpTerminalTransfer(
     //       '"}]}'
     //   );
     // };
-
 
     let isAcceptPrintPos = false;
 
@@ -204,7 +199,12 @@ export default function BankIpTerminalTransfer(
   }
 }
 
-function bankCheckIpTerminal(terminalId: any, deviceType: any, amount:any,callback: any) {
+function bankCheckIpTerminal(
+  terminalId: any,
+  deviceType: any,
+  amount: any,
+  callback: any
+) {
   if ("WebSocket" in window) {
     var dvctype = "";
 
@@ -273,7 +273,7 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, amount:any,callba
           text:
             "IPPOS terminal холболт амжилттай хийгдлээ. [" + deviceType + "]",
         });
-        bankPosSend(terminalId, deviceType, amount,callback)
+        bankPosSend(terminalId, deviceType, amount, callback);
 
         return;
       } else {
@@ -316,9 +316,12 @@ function bankCheckIpTerminal(terminalId: any, deviceType: any, amount:any,callba
   }
 }
 
-
-function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any) {
-
+function bankPosSend(
+  terminalId: any,
+  deviceType: any,
+  amount: any,
+  callback: any
+) {
   if ("WebSocket" in window) {
     var dvctype = "";
     var ws = new WebSocket("ws://localhost:58324/socket");
@@ -326,9 +329,9 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
       dvctype = "GLMT";
     }
 
-    console.log('amount :>> ', amount);
+    console.log("amount :>> ", amount);
 
-      ws.onopen = function () {
+    ws.onopen = function () {
       var currentDateTime = moment.now();
       ws.send(
         '{"command":"bank_terminal_pos_sale", "dateTime":"' +
@@ -353,25 +356,113 @@ function bankPosSend(terminalId: any, deviceType: any, amount:any, callback: any
         let getParse: any = JSON.parse(jsonData.details[0].value);
         var resultIpTerminal: any = {};
         console.log("resultIpTerminal", getParse);
-          resultIpTerminal["rrn"] = getParse["RRN"];
-          resultIpTerminal["pan"] = getParse["PAN"];
-          resultIpTerminal["authcode"] = getParse["AuthCode"];
-          resultIpTerminal["terminalid"] = getParse["TerminalId"];
-          resultIpTerminal["traceno"] = "";
-          callback({
-            status: "funded",
-            text: "funded",
-            ...resultIpTerminal
-          });
-        }else{
-          callback({
-            status: "refund",
-            text:
-              "Bank terminal error [" + deviceType + "]: " + jsonData.description,
-          });
-        }
-      
+        resultIpTerminal["rrn"] = getParse["RRN"];
+        resultIpTerminal["pan"] = getParse["PAN"];
+        resultIpTerminal["authcode"] = getParse["AuthCode"];
+        resultIpTerminal["terminalid"] = getParse["TerminalId"];
+        resultIpTerminal["traceno"] = "";
+        callback({
+          status: "funded",
+          text: "funded",
+          ...resultIpTerminal,
+        });
+      } else {
+        callback({
+          status: "refund",
+          text:
+            "Bank terminal error [" + deviceType + "]: " + jsonData.description,
+        });
+      }
     };
-
   }
 }
+
+// export default function printSetlement(
+//   terminalId: any,
+//   bankName: any,
+//   callback: any
+// ) {
+//   if (!terminalId) {
+//     PNotify.removeAll();
+//     new PNotify({
+//       title: "Bank terminal error",
+//       text: "Terminal ID хоосон байна!",
+//       type: "error",
+//       sticker: false,
+//       addclass: "pnotify-center",
+//     });
+//     return;
+//   }
+
+//   console.log("WebSocket is supported by your Browser!");
+//   // Let us open a web socket
+//   var ws = new WebSocket("ws://localhost:58324/socket");
+//   ws.onopen = function () {
+//     var currentDateTime = moment.now();
+//     ws.send(
+//       '{"command":"bank_terminal_pos_settlement", "dateTime":"' +
+//         currentDateTime +
+//         '", details: [{"key": "devicetype", "value": "glmt"},{"key": "terminalid", "value": "' +
+//         terminalId +
+//         '"}]}'
+//     );
+//   };
+//   ws.onmessage = function (evt) {
+//     var received_msg = evt.data;
+//     var jsonData = JSON.parse(received_msg);
+//     if (jsonData.status == "success") {
+//       var getParse = JSON.parse(jsonData.details[0].value);
+//       var $dialogName = "pos-preview-print-setlement";
+
+//       if (getParse.ReceiptData == "") {
+//         PNotify.removeAll();
+//         new PNotify({
+//           title: "Warning",
+//           text: "Нэгтгэл хийх гүйлгээ байхгүй",
+//           type: "warning",
+//           sticker: false,
+//           addclass: "pnotify-center",
+//         });
+//         return;
+//       }
+
+//       if (!$("#" + $dialogName).length) {
+//         $('<div id="' + $dialogName + '" class="hidden"></div>').appendTo(
+//           "body"
+//         );
+//       }
+//       var $dialog = $("#" + $dialogName);
+//       $dialog
+//         .html(getParse.ReceiptData.replace(/(?:\r\n|\r|\n)/g, "<br>"))
+//         .promise()
+//         .done(function () {
+//           $dialog.printThis({
+//             debug: false,
+//             importCSS: false,
+//             printContainer: false,
+//             dataCSS: data.css,
+//             removeInline: false,
+//           });
+//         });
+//     } else {
+//       PNotify.removeAll();
+//       new PNotify({
+//         title: "Bank terminal error",
+//         text: jsonData.description,
+//         type: "error",
+//         sticker: false,
+//         addclass: "pnotify-center",
+//       });
+//     }
+//   };
+//   ws.onerror = function (event) {
+//     var resultJson = {
+//       Status: "Error",
+//       Error: event.code,
+//     };
+//     console.log(JSON.stringify(resultJson));
+//   };
+//   ws.onclose = function () {
+//     console.log("Connection is closed...");
+//   };
+// }

@@ -1,0 +1,183 @@
+import { useRouter } from "next/router";
+import moment from "moment";
+import Layout from "../kioskLayout";
+import { useEffect, useState } from "react";
+import { Spin, notification } from "antd";
+import fetchJson from "@/util/helper";
+import Cookies from "js-cookie";
+import axios from "axios";
+import Title from "@/components/common/Title";
+import _ from "lodash";
+
+const Index = () => {
+  const [item, setItem] = useState<any>();
+  const [loading, setLoading] = useState(true);
+  const [templateId, setTemplateId] = useState("");
+  const [contractId, setContractId] = useState("");
+  const [info, setIfno] = useState<any>();
+  const router = useRouter();
+  const date = moment().format("YYYY-MM-DD");
+  const cid = router.query?.id;
+
+  const fetchData = async () => {
+    const params = JSON.stringify({
+      id: cid,
+      // id: cid,
+    });
+
+    const result = await fetchJson(
+      `/api/get-process?command=fitKioskContractDtlData_GET_004&parameters=${params}`
+    );
+    if (result?.status == "success") {
+      const res = await axios.post(`/api/post-process`, {
+        processcode: "fitKioskContractIsConfirm_DV_001",
+        parameters: {
+          id: cid,
+          isComfirm: "1",
+        },
+      });
+
+      console.log("res :>> ", res);
+
+      localStorage.setItem("orderInfo", JSON.stringify(result.result));
+      setItem(result.result);
+    }
+  };
+
+  function printSetlement(terminalId: any, deviceType: any, callback: any) {
+    if ("WebSocket" in window) {
+      var dvctype = "";
+      var ws = new WebSocket("ws://localhost:58324/socket");
+      if (deviceType == "golomtbank") {
+        dvctype = "GLMT";
+      }
+
+      ws.onopen = function () {
+        var currentDateTime = moment.now();
+        ws.send(
+          '{"command":"bank_terminal_pos_settlement", "dateTime":"' +
+            currentDateTime +
+            '", details: [{"key": "devicetype", "value": "glmt"},{"key": "terminalid", "value": "' +
+            terminalId +
+            '"}]}'
+        );
+      };
+
+      ws.onmessage = function (evt) {
+        var received_msg = evt.data;
+        var jsonData = JSON.parse(received_msg);
+        if (jsonData.status == "success") {
+          var getParse = JSON.parse(jsonData.details[0].value);
+          var $dialogName = "pos-preview-print-setlement";
+
+          if (getParse.ReceiptData == "") {
+            notification.error({
+              message: "Нэгтгэл хийх гүйлгээ байхгүй",
+            });
+            // PNotify.removeAll();
+            // new PNotify({
+            //   title: "Warning",
+            //   text: "Нэгтгэл хийх гүйлгээ байхгүй",
+            //   type: "warning",
+            //   sticker: false,
+            //   addclass: "pnotify-center",
+            // });
+            return;
+          }
+          callback({
+            status: "success",
+            text: "success",
+            ...getParse,
+          });
+
+          // if (!$("#" + $dialogName).length) {
+          //   $('<div id="' + $dialogName + '" class="hidden"></div>').appendTo(
+          //     "body"
+          //   );
+          // }
+          // var $dialog = $("#" + $dialogName);
+          // $dialog
+          //   .html(getParse.ReceiptData.replace(/(?:\r\n|\r|\n)/g, "<br>"))
+          //   .promise()
+          //   .done(function () {
+          //     $dialog.printThis({
+          //       debug: false,
+          //       importCSS: false,
+          //       printContainer: false,
+          //       dataCSS: data.css,
+          //       removeInline: false,
+          //     });
+          //   });
+        } else {
+          notification.error({
+            message: "Bank terminal error",
+          });
+        }
+      };
+
+      ws.onerror = function (event: any) {
+        var resultJson = {
+          Status: "Error",
+          Error: event.code,
+        };
+        console.log(JSON.stringify(resultJson));
+      };
+      ws.onclose = function () {
+        console.log("Connection is closed...");
+      };
+    }
+  }
+
+  const printSettlement = () => {
+    printSetlement(
+      process.env.NEXT_PUBLIC_TERMINAL_ID,
+      process.env.NEXT_PUBLIC_DEVICE_TYPE,
+      function (res: any) {
+        console.log("payment result", res);
+
+        if (res?.status == "funded") {
+          // paymentProcess(res, "pos");
+          // console.log("payment fundedfu ndedfund edfu ndedfundedfunded", res);
+          // paymentProcess(res, "pos");
+        } else if (res?.status == "refund") {
+          notification.error({
+            message: res?.text,
+          });
+          window.location.reload();
+        } else {
+          // notification.info({
+          //   message: res?.text,
+          // });
+        }
+      }
+    );
+  };
+
+  return (
+    <>
+      <Layout>
+        <div className="mx-auto  flex flex-col py-4 px-10">
+          <h2 className="text-4xl px-6">SETTLEMENT</h2>
+          <div
+            className="bg-[#A68B5C] text-white text-[60px] rounded-[87px] mx-10 mt-[50px] py-4 cursor-pointer px-10"
+            // onClick={() => router.push("/page/sell/payment")}
+            // onClick={() =>
+            //   router.push({
+            //     pathname: "/page/sell/payment",
+            //     query: {
+            //       selid: cid,
+            //     },
+            //   })
+            // }
+            onClick={() => {
+              printSettlement();
+            }}>
+            Хэвлэх
+          </div>
+        </div>
+      </Layout>
+    </>
+  );
+};
+
+export default Index;
