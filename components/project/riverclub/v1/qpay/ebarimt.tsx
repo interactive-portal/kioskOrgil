@@ -74,7 +74,7 @@ export default function EbarimtPrint({
         paymentMethodCode: payment?.pan,
         bankId: 500000,
         amount: Number(item?.amount),
-        paymentTypeId: type || "40",
+        paymentTypeId: type || "2",
         confirmCode: payment?.authcode,
         refenceNumber: payment?.rrn,
         terminalNumber: payment?.terminalid,

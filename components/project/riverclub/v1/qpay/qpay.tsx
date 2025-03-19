@@ -103,9 +103,9 @@ export default function Qpay({
 
   if (!_.isEmpty(statusPayment?.result?.rows)) {
     // alert("tolbor tologdlosadasdasdasdasdsao");
-    console.log(statusPayment?.rows);
+    // console.log(statusPayment?.rows);
     setModalContent("ebarimt");
-    setPayType("40");
+    // setPayType("40");
     // paymentProcess(res, "qpay");
   }
 

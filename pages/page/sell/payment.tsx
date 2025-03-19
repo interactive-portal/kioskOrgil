@@ -118,26 +118,6 @@ const PaymentPage = () => {
     </div>
   );
 
-  const checkPayment = (data: any) => {
-    Payment(
-      Number("111"),
-      process.env.NEXT_PUBLIC_TERMINAL_ID,
-      process.env.NEXT_PUBLIC_DEVICE_TYPE,
-      function (item: any) {
-        console.log("payment result backasdasdasd", item);
-        if (item?.status == "success") {
-          // setPaymentResult(item);
-          // paymentProcess(item, "pos");
-        } else {
-          // setSelectDateModal(false);
-          // notification.error({
-          //   message: item?.text,
-          // });
-        }
-      }
-    );
-  };
-
   const renderCardReceiptView = () => (
     <div className="min-h-[900px] flex items-center justify-center mt-[250px]">
       <p
