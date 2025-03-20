@@ -80,12 +80,12 @@ const Index = () => {
       var jsonData = JSON.parse(received_msg);
 
       if (jsonData.status == "success") {
-        console.log("received_msg", evt);
-        callback({
-          status: "success",
-          text:
-            "IPPOS terminal холболт амжилттай хийгдлээ. [" + deviceType + "]",
-        });
+        console.log("received_msg ne", evt);
+        // callback({
+        //   status: "success",
+        //   text:
+        //     "IPPOS terminal холболт амжилттай хийгдлээ. [" + deviceType + "]",
+        // });
         printSetlement(terminalId, deviceType, callback);
 
         return;
@@ -129,13 +129,14 @@ const Index = () => {
       if (deviceType == "golomtbank") {
         dvctype = "GLMT";
       }
+      console.log("terminalId", terminalId);
 
       ws.onopen = function () {
         var currentDateTime = moment.now();
         ws.send(
           '{"command":"bank_terminal_pos_settlement", "dateTime":"' +
             currentDateTime +
-            '", details: [{"key": "devicetype", "value": "glmt"},{"key": "terminalid", "value": "' +
+            '", details: [{"key": "devicetype", "value": "GLMT"},{"key": "terminalid", "value": "' +
             terminalId +
             '"}]}'
         );
@@ -144,6 +145,8 @@ const Index = () => {
       ws.onmessage = function (evt) {
         var received_msg = evt.data;
         var jsonData = JSON.parse(received_msg);
+
+        console.log("jsonDatajsonDatajsonDatajsonData", jsonData);
         if (jsonData.status == "success") {
           var getParse = JSON.parse(jsonData.details[0].value);
           var $dialogName = "pos-preview-print-setlement";
@@ -167,25 +170,6 @@ const Index = () => {
             text: "success",
             ...getParse,
           });
-
-          // if (!$("#" + $dialogName).length) {
-          //   $('<div id="' + $dialogName + '" class="hidden"></div>').appendTo(
-          //     "body"
-          //   );
-          // }
-          // var $dialog = $("#" + $dialogName);
-          // $dialog
-          //   .html(getParse.ReceiptData.replace(/(?:\r\n|\r|\n)/g, "<br>"))
-          //   .promise()
-          //   .done(function () {
-          //     $dialog.printThis({
-          //       debug: false,
-          //       importCSS: false,
-          //       printContainer: false,
-          //       dataCSS: data.css,
-          //       removeInline: false,
-          //     });
-          //   });
         } else {
           notification.error({
             message: "Bank terminal error",
@@ -198,10 +182,7 @@ const Index = () => {
           Status: "Error",
           Error: event.code,
         };
-        console.log(JSON.stringify(resultJson));
-      };
-      ws.onclose = function () {
-        console.log("Connection is closed...");
+        console.log("error", JSON.stringify(resultJson));
       };
     }
   }
@@ -212,21 +193,6 @@ const Index = () => {
       process.env.NEXT_PUBLIC_DEVICE_TYPE,
       function (res: any) {
         console.log("payment result", res);
-
-        if (res?.status == "funded") {
-          // paymentProcess(res, "pos");
-          // console.log("payment fundedfu ndedfund edfu ndedfundedfunded", res);
-          // paymentProcess(res, "pos");
-        } else if (res?.status == "refund") {
-          notification.error({
-            message: res?.text,
-          });
-          window.location.reload();
-        } else {
-          // notification.info({
-          //   message: res?.text,
-          // });
-        }
       }
     );
   };
