@@ -124,15 +124,24 @@ const Index = () => {
   function printSetlement(terminalId: any, deviceType: any, callback: any) {
     console.log("terminalId", terminalId);
     if ("WebSocket" in window) {
+      console.log("WebSocket  settle is supported by your Browser!");
+
       var dvctype = "";
       var ws = new WebSocket("ws://localhost:58324/socket");
       if (deviceType == "golomtbank") {
         dvctype = "GLMT";
       }
-      console.log("terminalId", terminalId);
 
       ws.onopen = function () {
         var currentDateTime = moment.now();
+
+        const param = {
+          dateTime: currentDateTime,
+          terminalid: terminalId,
+        };
+
+        console.log("param", param);
+
         ws.send(
           '{"command":"bank_terminal_pos_settlement", "dateTime":"' +
             currentDateTime +
