@@ -207,7 +207,7 @@ const Index = () => {
   }
 
   const printSettlement = () => {
-    printSetlement(
+    sendSetlement(
       process.env.NEXT_PUBLIC_TERMINAL_ID,
       process.env.NEXT_PUBLIC_DEVICE_TYPE,
       function (res: any) {
