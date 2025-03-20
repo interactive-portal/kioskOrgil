@@ -133,7 +133,9 @@ const Index = () => {
       }
 
       ws.onopen = function () {
-        var currentDateTime = moment.now();
+        let nowDate = moment();
+
+        let currentDateTime = nowDate.format("YYYY-MM-DD HH:mm:ss");
 
         const param = {
           dateTime: currentDateTime,
