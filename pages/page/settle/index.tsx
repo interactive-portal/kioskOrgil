@@ -44,7 +44,85 @@ const Index = () => {
     }
   };
 
+  function sendSetlement(terminalId: any, deviceType: any, callback: any) {
+    var dvctype = "GLMT";
+
+    if (!terminalId) {
+      callback({ status: "error", text: "TerminalId хоосон байна!" });
+      return;
+    }
+
+    if (!dvctype) {
+      callback({ status: "error", text: "Банкны төрөл хоосон байна!" });
+      return;
+    }
+
+    console.log("WebSocket is supported by your Browser!");
+    // Let us open a web socket
+    var ws = new WebSocket("ws://localhost:58324/socket");
+
+    ws.onopen = function () {
+      var currentDateTime = moment.now();
+      ws.send(
+        '{"command":"bank_terminal_pos_connect", "dateTime":"' +
+          currentDateTime +
+          '", details: [{"key": "devicetype", "value": "' +
+          dvctype +
+          '"},{"key": "terminalid", "value": "' +
+          terminalId +
+          '"}]}'
+      );
+    };
+
+    ws.onmessage = function (evt) {
+      // Core.unblockUI();
+      var received_msg = evt.data;
+      var jsonData = JSON.parse(received_msg);
+
+      if (jsonData.status == "success") {
+        console.log("received_msg", evt);
+        callback({
+          status: "success",
+          text:
+            "IPPOS terminal холболт амжилттай хийгдлээ. [" + deviceType + "]",
+        });
+        printSetlement(terminalId, deviceType, callback);
+
+        return;
+      } else {
+        callback({
+          status: "error",
+          text:
+            "Bank terminal error [" + deviceType + "]: " + jsonData.description,
+        });
+        return;
+      }
+    };
+
+    ws.onerror = function (event: any) {
+      var resultJson = {
+        Status: "Error",
+        Error: event.code,
+      };
+
+      //   Core.unblockUI();
+      callback({
+        status: "error",
+        text:
+          "Bank terminal error [" +
+          deviceType +
+          "]: pos Client асаагүй байна!!!",
+      });
+      return;
+    };
+
+    ws.onclose = function () {
+      console.log("Connection is closed...");
+    };
+  }
+
   function printSetlement(terminalId: any, deviceType: any, callback: any) {
+    console.log("terminalId", terminalId);
     if ("WebSocket" in window) {
       var dvctype = "";
       var ws = new WebSocket("ws://localhost:58324/socket");
