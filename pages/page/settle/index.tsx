@@ -122,9 +122,9 @@ const Index = () => {
   }
 
   function printSetlement(terminalId: any, deviceType: any, callback: any) {
-    console.log("terminalId", terminalId);
+    // console.log("terminalId", terminalId);
     if ("WebSocket" in window) {
-      console.log("WebSocket  settle is supported by your Browser!");
+      //console.log("WebSocket  settle is supported by your Browser!");
 
       var dvctype = "";
       var ws = new WebSocket("ws://localhost:58324/socket");
@@ -142,7 +142,7 @@ const Index = () => {
           terminalid: terminalId,
         };
 
-        console.log("param", param);
+        // console.log("param", param);
 
         ws.send(
           '{"command":"bank_terminal_pos_settlement", "dateTime":"' +
@@ -157,10 +157,12 @@ const Index = () => {
         var received_msg = evt.data;
         var jsonData = JSON.parse(received_msg);
 
-        console.log("jsonDatajsonDatajsonDatajsonData", jsonData);
+        // console.log("jsonDatajsonDatajsonDatajsonData", jsonData);
         if (jsonData.status == "success") {
           var getParse = JSON.parse(jsonData.details[0].value);
           var $dialogName = "pos-preview-print-setlement";
+
+          console.log("getParse", getParse);
 
           if (getParse.ReceiptData == "") {
             notification.error({
@@ -199,7 +201,7 @@ const Index = () => {
   }
 
   const printSettlement = () => {
-    sendSetlement(
+    printSetlement(
       process.env.NEXT_PUBLIC_TERMINAL_ID,
       process.env.NEXT_PUBLIC_DEVICE_TYPE,
       function (res: any) {
@@ -236,3 +238,17 @@ const Index = () => {
 };
 
 export default Index;
+// {
+//   "command": "bank_terminal_pos_settlement",
+//   "dateTime": "2025/03/26 12:30:58",
+//   "status": "success",
+//   "description": null,
+//   "planText": null,
+//   "cypherText": null,
+//   "details": [
+//       {
+//           "key": "result",
+//           "value": "{\"RRN\":null,\"PAN\":null,\"TerminalId\":\"13175351\",\"MerchantId\":\"000009733998991\",\"AuthCode\":null,\"Amount\":null,\"TransactionDate\":\"20250326120126\",\"Operation\":\"SALE\",\"ReceiptData\":\"\",\"Status\":1,\"ResponseHostCode\":\"ER3\",\"TextResponse\":\"\"}"
+//       }
+//   ]
+// }
