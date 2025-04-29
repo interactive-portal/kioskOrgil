@@ -1,6 +1,6 @@
 import Layout from "../kioskLayout";
 import { useEffect, useState } from "react";
-import { Modal, Spin } from "antd";
+import { DatePicker, DatePickerProps, Modal, Spin } from "antd";
 import CheckUser from "./checkUser";
 import { useRouter } from "next/router";
 import fetchJson, { numberWithCommas } from "@/util/helper";
@@ -18,7 +18,7 @@ const Ext = () => {
   const [customerId, setCustomerId] = useState<any>(); // State for loading
   const [err, setErr] = useState<any>(false); // State for loading
   const router = useRouter();
-
+  const [val, setVal] = useState<any>();
   // SWR fetcher function for search
   const fetchData = async () => {
     setLoading(true);
@@ -59,16 +59,16 @@ const Ext = () => {
     const param = {
       contractId: cid,
       itemId: item?.itemid,
+      startDate: val,
       customerId: router.query.crm,
     };
     const res = await axios.post(`/api/post-process`, {
       processcode: "kioskContractMainDV_3",
       parameters: param,
     });
-    console.log("param",res);
+    console.log("param", res);
     if (res?.data?.status == "success") {
-
-      const conid = res?.data?.result?.contractid
+      const conid = res?.data?.result?.contractid;
       // localStorage?.setItem("cid", conid);
       window.location.href = `/page/sell?id=${conid}`;
     } else {
@@ -89,24 +89,47 @@ const Ext = () => {
       </>
     );
 
+  const onchange: DatePickerProps["onChange"] = (date, dateString) => {
+    setVal(dateString);
+    // console.log("obj?.pathname :>> ", obj?.pathname);
+  };
+
   return (
     <Layout>
       <div className="mx-auto  flex flex-col ">
         <Title title="Сунгалт"></Title>
         <div className="relative mx-auto w-full  inline-block">
           <div className="flex flex-col space-y-6 ">
-            {dataSrc?.map((item: any) => (
-              <div
-                key={item.id}
-                onClick={() => paymentProcess(item)}
-                className="rounded-full text-[35px] xs:text-[30px] py-3 xs:px-6 cursor-pointer obtn px-10  "
-              >
-                {item?.itemname || item?.name}
-                {item.price && (
-                  <p className="p-0 m-0"> {numberWithCommas(item.price)}₮</p>
-                )}
-              </div>
-            ))}
+            <div className="flex flex-col gap-8">
+              <p className="text-2xl">Эхлэх огноог оруулна уу</p>
+              <DatePicker
+                placeholder={`Эхлэх огноо сонгох`}
+                className=" placeholder:text-white rounded-full xl text-white"
+                onChange={onchange}
+                // // onSelect={field.value}
+                // // defaultValue={value}
+                // value={val}
+                style={{
+                  border: "1px solid #e5e7eb",
+                  padding: "17px 16px 17px 16px",
+                  color: "#fff",
+                  backgroundColor: "#D9D9D94F",
+                }}
+              />
+            </div>
+
+            {val &&
+              dataSrc?.map((item: any) => (
+                <div
+                  key={item.id}
+                  onClick={() => paymentProcess(item)}
+                  className="rounded-full text-[35px] xs:text-[30px] py-3 xs:px-6 cursor-pointer obtn px-10  ">
+                  {item?.itemname || item?.name}
+                  {item.price && (
+                    <p className="p-0 m-0"> {numberWithCommas(item.price)}₮</p>
+                  )}
+                </div>
+              ))}
           </div>
         </div>
       </div>
